@@ -4,32 +4,6 @@ local plugins = {
   { import = 'plugins.themes' },
 }
 
-local plugins_old = {
-  require 'plugins.bulblight',
-  require 'plugins.noice',
-  require 'plugins.trouble',
-  require 'plugins.mini-map',
-  require 'plugins.maximizer',
-  require 'plugins.code-actions',
-  require 'plugins.bufferline',
-  require 'plugins.dadbodui',
-  require 'plugins.barbecue',
-  require 'plugins.projectmgr',
-  require 'plugins.wakatime',
-  require 'plugins.git',
-  require 'plugins.treesitter',
-  require 'plugins.telescope',
-  require 'plugins.ibl',
-  require 'plugins.lualine',
-  require 'plugins.lsp',
-  require 'plugins.nvim-cmp',
-  require 'plugins.neotree',
-  require 'plugins.whichkey',
-  require 'plugins.none-ls',
-  require 'plugins.themes.tokyonight',
-  require 'plugins.other',
-}
-
 local options = {
   performance = {
     cache = {
@@ -37,7 +11,7 @@ local options = {
     },
     rtp = {
       disabled_plugins = {
-          -- "netrw",
+          "netrw",
       },
     },
   },

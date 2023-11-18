@@ -12,9 +12,13 @@ return {
         b.diagnostics.eslint,
         b.formatting.eslint,
         b.completion.spell,
+        b.formatting.prettierd,
 
-        -- b.formatting.phpcsfixer,
-        b.diagnostics.psalm.with { command = './vendor/bin/psalm' },
+        b.diagnostics.markdownlint,
+        b.formatting.phpcsfixer,
+        b.diagnostics.phpcs,
+        -- b.diagnostics.psalm,
+        -- b.diagnostics.psalm.with { command = './vendor/bin/psalm' },
       },
     }
   end,

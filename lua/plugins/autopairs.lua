@@ -1,5 +1,6 @@
 return {
   'windwp/nvim-autopairs',
+  event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
   opts = {
     fast_wrap = {},
     disable_filetype = { 'TelescopePrompt', 'vim' },

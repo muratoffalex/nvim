@@ -15,6 +15,8 @@ return {
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/neodev.nvim',
   },
+  event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
+  -- event = { 'BufEnter' },
   config = function()
     local on_attach = function(_, bufnr)
       local nmap = function(keys, func, desc)
@@ -68,12 +70,13 @@ return {
     --  If you want to override the default filetypes that your language server will attach to you can
     --  define the property 'filetypes' to the map in question.
     local servers = {
-      -- clangd = {},
-      -- gopls = {},
-      -- pyright = {},
-      -- rust_analyzer = {},
-      -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-      phpactor = {},
+      pyright = {},
+      rust_analyzer = {},
+      html = { filetypes = { 'html', 'twig', 'hbs'} },
+      marksman = {},
+      tailwindcss = { filetypes = { 'html', 'twig', 'css', 'jsx', 'vue' } },
+      gopls = {},
+      intelephense = {},
       tsserver = {},
       lua_ls = {
         Lua = {

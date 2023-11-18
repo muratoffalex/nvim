@@ -7,10 +7,10 @@ vim.g.maplocalleader = ' '
 
 local o = vim.o
 local wo = vim.wo
+local opt = vim.opt
 
--- [[ Setting options ]]
--- See `:help vim.o`
--- NOTE: You can change these options as you wish!
+opt.cursorline = true
+opt.colorcolumn = '86'
 
 -- Set highlight on search
 o.hlsearch = true
@@ -59,9 +59,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-
-for i = 1, 9, 1 do
-  vim.keymap.set("n", string.format("<A-%s>", i), function()
-    vim.api.nvim_set_current_buf(vim.t.bufs[i])
-  end)
-end
