@@ -9,6 +9,10 @@ local o = vim.o
 local wo = vim.wo
 local opt = vim.opt
 
+-- Indent size
+vim.opt_local.shiftwidth = 2
+vim.opt_local.tabstop = 2
+
 opt.cursorline = true
 opt.colorcolumn = '86'
 
@@ -48,14 +52,3 @@ o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 o.termguicolors = true
-
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
