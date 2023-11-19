@@ -36,7 +36,16 @@ return {
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
         auto_install = true,
 
-        highlight = { enable = true },
+        highlight = {
+          enable = true,
+          -- chezmoi plugin
+          disable = function()
+            -- check if 'filetype' option includes 'chezmoitmpl'
+            if string.find(vim.bo.filetype, 'chezmoitmpl') then
+              return true
+            end
+          end,
+        },
         indent = { enable = true },
         incremental_selection = {
           enable = true,
