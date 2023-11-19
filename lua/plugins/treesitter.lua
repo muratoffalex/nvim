@@ -4,6 +4,7 @@ return {
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'JoosepAlviste/nvim-ts-context-commentstring',
+    'windwp/nvim-ts-autotag',
   },
   event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
   build = ':TSUpdate',
@@ -13,7 +14,24 @@ return {
       require('ts_context_commentstring').setup {}
       require('nvim-treesitter.configs').setup {
         -- Add languages to be installed here that you want installed for treesitter
-        ensure_installed = { 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'php', 'html', 'css', 'markdown', 'markdown_inline' },
+        ensure_installed = {
+          'go',
+          'lua',
+          'python',
+          'rust',
+          'vue',
+          'tsx',
+          'javascript',
+          'typescript',
+          'vimdoc',
+          'vim',
+          'bash',
+          'php',
+          'html',
+          'css',
+          'markdown',
+          'markdown_inline',
+        },
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
         auto_install = true,
@@ -29,6 +47,11 @@ return {
             node_decremental = '<M-space>',
           },
         },
+
+        autotag = {
+          enable = true,
+        },
+
         textobjects = {
           select = {
             enable = true,
