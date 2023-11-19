@@ -19,6 +19,10 @@ return {
       return '{…}' .. vim.fn['codeium#GetStatusString']()
     end
 
+    local function package_info()
+      return require('package-info').get_status()
+    end
+
     require('lualine').setup {
       options = {
         globalstatus = true,
@@ -31,7 +35,7 @@ return {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
         lualine_c = { 'filename' },
-        lualine_x = { codeium, 'encoding', lsp_clients, 'filetype' },
+        lualine_x = { package_info, codeium, 'encoding', lsp_clients, 'filetype' },
         -- lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },

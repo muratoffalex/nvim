@@ -15,6 +15,7 @@ return {
       ['<leader>p'] = { name = 'Projects', _ = 'which_key_ignore' },
       ['<leader>t'] = { name = 'Trouble', _ = 'which_key_ignore' },
       ['<leader>u'] = { name = 'Autopairs', _ = 'which_key_ignore' },
+      ['<leader>n'] = { name = 'Package.json deps', _ = 'which_key_ignore' },
     }
   end,
   opts = {}
