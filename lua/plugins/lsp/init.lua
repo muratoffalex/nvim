@@ -18,7 +18,7 @@ return {
   event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
   -- event = { 'BufEnter' },
   config = function()
-    local on_attach = function(_, bufnr)
+    local on_attach = function(client, bufnr)
       local nmap = function(keys, func, desc)
         if desc then
           desc = 'LSP: ' .. desc
@@ -50,9 +50,21 @@ return {
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
       end, '[W]orkspace [L]ist Folders')
 
+      -- disable formatting
+      -- client.resolved_capabilities.document_formatting = false
       -- Create a command `:Format` local to the LSP buffer
       vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-        vim.lsp.buf.format()
+        vim.lsp.buf.format {
+          bufnr = bufnr,
+          timeout_ms = 2000,
+          filter = function(c)
+            -- volar conflict with null-ls eslint formatter
+            if (c.name == 'volar' or c.name == 'tsserver') and c.name ~= 'null-ls' then
+              return false
+            end
+            return true
+          end,
+        }
       end, { desc = 'Format current buffer with LSP' })
     end
 
@@ -70,9 +82,11 @@ return {
     --  If you want to override the default filetypes that your language server will attach to you can
     --  define the property 'filetypes' to the map in question.
     local servers = {
+      volar = {},
+      jsonls = {},
       pyright = {},
       rust_analyzer = {},
-      html = { filetypes = { 'html', 'twig', 'hbs'} },
+      html = { filetypes = { 'html', 'twig', 'hbs' } },
       marksman = {},
       tailwindcss = { filetypes = { 'html', 'twig', 'css', 'jsx', 'vue' } },
       gopls = {},

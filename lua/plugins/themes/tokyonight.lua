@@ -5,7 +5,7 @@ return {
   priority = 1000,
   opts = function()
     return {
-      transparent = true,
+      transparent = false,
       on_highlights = function(hl, c)
         local prompt = '#2d3149'
         hl.TelescopeNormal = {

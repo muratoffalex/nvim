@@ -6,19 +6,36 @@ return {
 
     null_ls.setup {
       sources = {
-        -- b.code_actions.gitsigns,
-        b.code_actions.eslint,
+        -- Lua
         b.formatting.stylua,
+
+        -- Go
+        b.formatting.gofmt,
+        b.diagnostics.golangci_lint,
+        -- b.diagnostics.revive,
+        -- b.diagnostics.staticcheck,
+
+        -- JS/TS/JSX/Vue
+        b.code_actions.eslint,
         b.diagnostics.eslint,
         b.formatting.eslint,
-        b.completion.spell,
+
+        -- Typescript and Markdown
         b.formatting.prettierd,
 
+        -- Markdown
         b.diagnostics.markdownlint,
+
+        -- PHP
         b.formatting.phpcsfixer,
         b.diagnostics.phpcs,
+
+        -- Other
+        -- b.code_actions.gitsigns,
         -- b.diagnostics.psalm,
-        -- b.diagnostics.psalm.with { command = './vendor/bin/psalm' },
+        --[[ -- run with project specific psalm
+        b.diagnostics.psalm.with { command = './vendor/bin/psalm' },
+        ]]
       },
     }
   end,
