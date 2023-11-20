@@ -1,3 +1,4 @@
+-- syntax highlight for chezmoi templates
 return {
   'alker0/chezmoi.vim',
   lazy = false,
