@@ -16,6 +16,8 @@ return {
       ['<leader>t'] = { name = 'Trouble', _ = 'which_key_ignore' },
       ['<leader>u'] = { name = 'Autopairs', _ = 'which_key_ignore' },
       ['<leader>n'] = { name = 'Package.json deps', _ = 'which_key_ignore' },
+      ['w'] = { name = 'Split windows', _ = 'which_key_ignore' },
+      ['<leader>q'] = { name = 'Sessions', _ = 'which_key_ignore' },
     }
   end,
   opts = {}
