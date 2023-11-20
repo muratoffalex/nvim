@@ -1,5 +1,6 @@
 return {
   "charludo/projectmgr.nvim",
+  enabled = false,
   keys = {
     { '<leader>pp', '<cmd>ProjectMgr<cr>', desc = 'Open project manager' }
   },
