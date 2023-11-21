@@ -5,6 +5,8 @@
 - make
 - fzf
 - ripgrep
+- node
+- fd
 - ...
 
 ## Notes

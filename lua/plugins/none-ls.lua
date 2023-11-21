@@ -12,8 +12,6 @@ return {
         -- Go
         b.formatting.gofmt,
         b.diagnostics.golangci_lint,
-        -- b.diagnostics.revive,
-        -- b.diagnostics.staticcheck,
 
         -- JS/TS/JSX/Vue
         b.code_actions.eslint,
@@ -29,13 +27,6 @@ return {
         -- PHP
         b.formatting.phpcsfixer,
         b.diagnostics.phpcs,
-
-        -- Other
-        -- b.code_actions.gitsigns,
-        -- b.diagnostics.psalm,
-        --[[ -- run with project specific psalm
-        b.diagnostics.psalm.with { command = './vendor/bin/psalm' },
-        ]]
       },
     }
   end,
