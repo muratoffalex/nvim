@@ -5,11 +5,15 @@ return {
   'neovim/nvim-lspconfig',
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
-    'williamboman/mason.nvim',
+    {
+      'williamboman/mason.nvim',
+      dependencies = {
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
+      },
+    },
     'williamboman/mason-lspconfig.nvim',
 
     -- Useful status updates for LSP
-    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
     -- Additional lua configuration, makes nvim stuff amazing!
@@ -109,9 +113,24 @@ return {
 
     -- Ensure the servers above are installed
     local mason_lspconfig = require 'mason-lspconfig'
+    local mason_tool_installer = require 'mason-tool-installer'
 
     mason_lspconfig.setup {
       ensure_installed = vim.tbl_keys(servers),
+    }
+    mason_tool_installer.setup {
+      ensure_installed = {
+        'stylua',        -- lua formatter
+        'eslint',        -- js/ts formatter/linter
+        'php-cs-fixer',  -- php formatter
+        'prettierd',     -- general formatter (markdown, json, etc)
+        'markdownlint',  -- markdown linter
+        'golangci-lint', -- go linter
+        'phpcs',         -- php linter
+
+        -- include in gopls lsp
+        -- 'gofmt',
+      },
     }
 
     mason_lspconfig.setup_handlers {
