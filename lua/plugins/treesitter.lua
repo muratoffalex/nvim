@@ -50,10 +50,10 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = '<c-space>',
-            node_incremental = '<c-space>',
-            scope_incremental = '<c-s>',
-            node_decremental = '<M-space>',
+            init_selection = '<A-Up>',
+            node_incremental = '<A-Up>',
+            scope_incremental = '<leader>ss', -- TODO: add keybind for scope_incremental
+            node_decremental = '<A-Down>',
           },
         },
 
