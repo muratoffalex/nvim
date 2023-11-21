@@ -20,6 +20,7 @@ map.set('n', '<Esc>', '<cmd> noh <CR>', { desc = 'Clear highlights' })
 map.set('n', '<C-s>', '<cmd> w <CR>', { desc = 'Save file' })
 map.set('n', '<C-c>', '<cmd> %y+ <CR>', { desc = 'Copy whole file' })
 map.set('n', '<leader>x', '<cmd>bd<cr>', { desc = 'Close current buffer' })
+map.set('n', '<A-n>', '<cmd>set relativenumber!<cr>', { desc = 'Toggle relative number' })
 
 -- Terminal
 map.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Switch to normal mode' })
