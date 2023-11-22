@@ -22,6 +22,14 @@ map.set('n', '<C-c>', '<cmd> %y+ <CR>', { desc = 'Copy whole file' })
 map.set('n', '<leader>x', '<cmd>bd<cr>', { desc = 'Close current buffer' })
 map.set('n', '<A-n>', '<cmd>set relativenumber!<cr>', { desc = 'Toggle relative number' })
 
+-- Move lines
+map.set('n', '<S-Up>', '<cmd>m-2<cr>', { desc = 'Move line up' })
+map.set('n', '<S-Down>', '<cmd>m+<cr>', { desc = 'Move line down' })
+map.set('i', '<S-Up>', '<Esc><cmd>m .-2<CR>==gi', { desc = 'Move line up' })
+map.set('i', '<S-Down>', '<Esc><cmd>m .+1<CR>==gi', { desc = 'Move line down' })
+map.set('v', '<S-Up>', ":m '<-2<CR>gv=gv", { desc = 'Move line or block up' })
+map.set('v', '<S-Down>', ":m '>+1<CR>gv=gv", { desc = 'Move line or block down' })
+
 -- Terminal
 map.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Switch to normal mode' })
 

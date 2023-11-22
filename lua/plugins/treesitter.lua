@@ -53,7 +53,7 @@ return {
           keymaps = {
             init_selection = '<A-Up>',
             node_incremental = '<A-Up>',
-            scope_incremental = '<leader>ss', -- TODO: add keybind for scope_incremental
+            scope_incremental = '<A-Right>',
             node_decremental = '<A-Down>',
           },
         },
