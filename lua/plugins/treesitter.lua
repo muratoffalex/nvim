@@ -5,6 +5,7 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'JoosepAlviste/nvim-ts-context-commentstring',
     'windwp/nvim-ts-autotag',
+    'gbprod/php-enhanced-treesitter.nvim',
   },
   event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
   build = ':TSUpdate',
