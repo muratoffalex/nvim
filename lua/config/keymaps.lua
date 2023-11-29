@@ -34,12 +34,12 @@ map.set('v', '<S-Down>', ":m '>+1<CR>gv=gv", { desc = 'Move line or block down' 
 map.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Switch to normal mode' })
 
 -- Split windows
-map.set('n', 'ws', '<cmd>split<cr>', { desc = 'Split window horizontally' })
-map.set('n', 'wv', '<cmd>vsplit<cr>', { desc = 'Split window vertically' })
-map.set('n', 'wq', '<C-w>q', { desc = 'Close window' })
-map.set('n', 'wh', '<C-w>h', { desc = 'Go to left window' })
-map.set('n', 'wj', '<C-w>j', { desc = 'Go to bottom window' })
-map.set('n', 'wk', '<C-w>k', { desc = 'Go to top window' })
-map.set('n', 'wl', '<C-w>l', { desc = 'Go to right window' })
+map.set('n', 'ss', '<cmd>split<cr>', { desc = 'Split window horizontally', noremap = true })
+map.set('n', 'sv', '<cmd>vsplit<cr>', { desc = 'Split window vertically', noremap = true })
+map.set('n', 'sq', '<C-w>q', { desc = 'Close window' })
+map.set('n', 'sh', '<C-w>h', { desc = 'Go to left window' })
+map.set('n', 'sj', '<C-w>j', { desc = 'Go to bottom window' })
+map.set('n', 'sk', '<C-w>k', { desc = 'Go to top window' })
+map.set('n', 'sl', '<C-w>l', { desc = 'Go to right window' })
 
 -- TODO: Move workspace keymaps to <leader>dw ?
