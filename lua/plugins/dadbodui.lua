@@ -8,6 +8,7 @@ return {
   lazy = true,
   cmd = {
     "DBUI",
+    "DBUIClose",
     "DBUIToggle",
     "DBUIAddConnection",
     "DBUIFindBuffer",

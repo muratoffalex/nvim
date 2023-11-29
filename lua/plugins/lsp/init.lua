@@ -14,7 +14,7 @@ return {
     'williamboman/mason-lspconfig.nvim',
 
     -- Useful status updates for LSP
-    { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+    -- { 'j-hui/fidget.nvim', opts = {} },
 
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/neodev.nvim',
@@ -35,7 +35,19 @@ return {
       -- nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
       -- nmap('<leader>ca', '<cmd>CodeActionMenu<cr>', '[C]ode [A]ction')
 
-      nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+      -- Move to definition and center cursor on screen
+      nmap('gd', function()
+        require('telescope.builtin').lsp_definitions()
+        -- local a = require 'plenary.async'
+        -- local tx, rx = a.control.channel.oneshot()
+        --
+        -- -- run function require('telescope.builtin').lsp_definitions() in async thread and wait for it to finish with plenary, after run vim.api.nvim_input 'zz' to center cursor on screen
+        -- a.util.scheduler().await_resume(a.util.async_await(function()
+        --   require('telescope.builtin').lsp_definitions()
+        --   tx:send(true)
+        -- end))
+        -- vim.api.nvim_input 'zz'
+      end, '[G]oto [D]efinition')
       nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
       nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
       nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
@@ -140,6 +152,12 @@ return {
           on_attach = on_attach,
           settings = servers[server_name],
           filetypes = (servers[server_name] or {}).filetypes,
+          handlers = {
+            ['textDocument/definition'] = function(err, method, params, client_id)
+              print 'definition'
+              vim.api.nvim_input 'zz'
+            end,
+          },
         }
       end,
     }

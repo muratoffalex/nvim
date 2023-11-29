@@ -21,10 +21,12 @@ return {
         style_preset = bufferline.style_preset.no_italic,
         separator_style = { '', '' },
         -- -- stylua: ignore
-        -- close_command = function(n) require("mini.bufremove").delete(n, false) end,
+        close_command = function(n) require("mini.bufremove").delete(n, false) end,
         -- -- stylua: ignore
-        -- right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
         diagnostics = 'nvim_lsp',
+        show_close_icon = false,
+        show_buffer_close_icons = false,
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
           local icons = {

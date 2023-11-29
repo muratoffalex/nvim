@@ -14,7 +14,7 @@ vim.opt_local.shiftwidth = 2
 vim.opt_local.tabstop = 2
 
 opt.cursorline = true
-opt.colorcolumn = '86'
+opt.colorcolumn = '81,121'
 
 -- Set highlight on search
 o.hlsearch = true
