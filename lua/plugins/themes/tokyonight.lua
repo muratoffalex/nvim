@@ -43,6 +43,6 @@ return {
     vim.opt.background = 'dark'
     vim.cmd.colorscheme 'tokyonight-storm'
 
-    -- vim.cmd 'hi ColorColumn ctermbg=0 guibg=darkgray'
+    -- vim.cmd 'hi ColorColumn ctermbg=0 guibg=gray'
   end,
 }

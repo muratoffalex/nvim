@@ -9,6 +9,8 @@ local o = vim.o
 local wo = vim.wo
 local opt = vim.opt
 
+vim.opt.background = 'dark'
+
 -- Indent size
 vim.opt_local.shiftwidth = 2
 vim.opt_local.tabstop = 2

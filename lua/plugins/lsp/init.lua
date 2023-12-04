@@ -13,9 +13,6 @@ return {
     },
     'williamboman/mason-lspconfig.nvim',
 
-    -- Useful status updates for LSP
-    -- { 'j-hui/fidget.nvim', opts = {} },
-
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/neodev.nvim',
   },
@@ -107,6 +104,8 @@ return {
       tailwindcss = { filetypes = { 'html', 'twig', 'css', 'jsx', 'vue' } },
       gopls = {},
       intelephense = {},
+      -- only for php 8.0+
+      -- phpactor = {},
       tsserver = {},
       lua_ls = {
         Lua = {
