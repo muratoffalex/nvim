@@ -23,6 +23,10 @@ vim.api.nvim_create_autocmd('User', {
   callback = function(e)
     vim.schedule(function()
       -- os.execute('~/.local/share/nvim/mason/bin/phpcs --config-set default_standard PSR12')
+      -- check if the table is empty before printing it
+      if next(e.data) == nil then
+        return
+      end
       print(vim.inspect(e.data)) -- print the table that lists the programs that were installed
     end)
   end,
