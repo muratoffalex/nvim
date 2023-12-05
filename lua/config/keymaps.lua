@@ -27,7 +27,7 @@ map.set('n', '<C-s>', '<cmd> w <CR>', { desc = 'Save file' })
 map.set('n', '<C-c>', '<cmd> %y+ <CR>', { desc = 'Copy whole file' })
 map.set('n', '<leader>x', '<cmd>bd<cr>', { desc = 'Close current buffer' })
 map.set('n', '<leader>X', '<cmd>bd!<cr>', { desc = 'Close current buffer force' })
-map.set('n', '<A-n>', '<cmd>set relativenumber!<cr>', { desc = 'Toggle relative number' })
+map.set('n', '<leader>n', '<cmd>set relativenumber!<cr>', { desc = 'Toggle relative number' })
 
 -- Move lines
 map.set('n', '<S-Up>', '<cmd>m-2<cr>', { desc = 'Move line up' })
@@ -49,3 +49,9 @@ map.set('n', 'sn', '<C-w>h', { desc = 'Go to left window' })
 map.set('n', 'se', '<C-w>j', { desc = 'Go to bottom window' })
 map.set('n', 'si', '<C-w>k', { desc = 'Go to top window' })
 map.set('n', 'so', '<C-w>l', { desc = 'Go to right window' })
+-- move split windows
+map.set('n', 'sN', '<C-w>H', { desc = 'Move window to left' })
+map.set('n', 'sE', '<C-w>J', { desc = 'Move window to bottom' })
+map.set('n', 'sI', '<C-w>K', { desc = 'Move window to top' })
+map.set('n', 'sO', '<C-w>L', { desc = 'Move window to right' })
+map.set('n', 'sr', '<C-w>r', { desc = 'Swap two windows' })

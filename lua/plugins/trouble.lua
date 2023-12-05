@@ -9,7 +9,6 @@ return {
     { '<leader>tl', "<cmd>lua require('trouble').toggle('loclist')<CR>", desc = 'Trouble toggle loclist'},
     { 'gr', "<cmd>lua require('trouble').toggle('lsp_references')<CR>", desc = 'Trouble lsp references'},
     { 'gi', "<cmd>lua require('trouble').toggle('lsp_implementations')<CR>", desc = 'Trouble lsp implementations'},
-    { '<leader>q', "<cmd>lua require('trouble').toggle('loclist')<CR>", desc = 'Trouble toggle loclist'},
   },
   opts = {},
 }

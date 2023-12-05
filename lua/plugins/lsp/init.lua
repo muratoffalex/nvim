@@ -28,24 +28,14 @@ return {
         vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
       end
 
-      nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+      nmap('<leader>cr', vim.lsp.buf.rename, 'Rename')
       -- nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
       -- nmap('<leader>ca', '<cmd>CodeActionMenu<cr>', '[C]ode [A]ction')
 
       -- Move to definition and center cursor on screen
-      nmap('gd', function()
-        require('telescope.builtin').lsp_definitions()
-        -- local a = require 'plenary.async'
-        -- local tx, rx = a.control.channel.oneshot()
-        --
-        -- -- run function require('telescope.builtin').lsp_definitions() in async thread and wait for it to finish with plenary, after run vim.api.nvim_input 'zz' to center cursor on screen
-        -- a.util.scheduler().await_resume(a.util.async_await(function()
-        --   require('telescope.builtin').lsp_definitions()
-        --   tx:send(true)
-        -- end))
-        -- vim.api.nvim_input 'zz'
-      end, '[G]oto [D]efinition')
-      nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+      -- NOTE: <cmd>lua vim.lsp.buf.definition()<CR>zz for centering after
+      nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+      nmap('gR', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
       nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
       nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
       nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
@@ -151,12 +141,6 @@ return {
           on_attach = on_attach,
           settings = servers[server_name],
           filetypes = (servers[server_name] or {}).filetypes,
-          handlers = {
-            ['textDocument/definition'] = function(err, method, params, client_id)
-              print 'definition'
-              vim.api.nvim_input 'zz'
-            end,
-          },
         }
       end,
     }
