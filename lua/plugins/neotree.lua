@@ -1,3 +1,5 @@
+local config = require('config')
+
 return {
   'nvim-neo-tree/neo-tree.nvim',
   branch = 'v3.x',
@@ -12,6 +14,7 @@ return {
   keys = {
     { '<C-e>', '<cmd>Neotree toggle<cr>', desc = 'Neotree toggle' },
     { '<leader>e', '<cmd>Neotree<cr>', desc = 'Neotree open' },
+    { '<leader>g', '<cmd>Neotree git_status<cr>', desc = 'Neotree git status' },
   },
   opts = {
     filesystem = {
@@ -20,5 +23,13 @@ return {
         leave_dirs_open = false,
       }
     },
+    default_component_configs = {
+      git_status = {
+        symbols = {
+          -- default unstaged icon not showing
+          unstaged = config.icons.git.unstaged,
+        }
+      },
+    }
   },
 }

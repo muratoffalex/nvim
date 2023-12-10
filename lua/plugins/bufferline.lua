@@ -15,28 +15,23 @@ return {
     { ']b',         '<cmd>BufferLineCycleNext<cr>',            desc = 'Next buffer' },
   },
   config = function()
+    local icons = require('config').icons.diagnostics
     local bufferline = require 'bufferline'
     bufferline.setup {
       options = {
         style_preset = bufferline.style_preset.no_italic,
         separator_style = { '', '' },
-        -- -- stylua: ignore
+        -- stylua: ignore
         close_command = function(n) require("mini.bufremove").delete(n, false) end,
-        -- -- stylua: ignore
+        -- stylua: ignore
         right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
         diagnostics = 'nvim_lsp',
         show_close_icon = false,
         show_buffer_close_icons = false,
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
-          local icons = {
-            Error = ' ',
-            Warn = ' ',
-            Hint = ' ',
-            Info = ' ',
-          }
-          local ret = (diag.error and icons.Error .. diag.error .. ' ' or '') ..
-          (diag.warning and icons.Warn .. diag.warning or '')
+          local ret = (diag.error and icons.error .. diag.error .. ' ' or '') ..
+          (diag.warning and icons.warn .. diag.warning or '')
           return vim.trim(ret)
         end,
         offsets = {
