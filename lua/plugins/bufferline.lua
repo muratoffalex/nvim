@@ -37,13 +37,11 @@ return {
         offsets = {
           {
             filetype = 'neo-tree',
-            text = 'Neo-tree',
-            highlight = 'Directory',
-            text_align = 'left',
           },
           {
             filetype = 'dbui',
-            text = 'DB UI',
+            text = 'Database manager',
+            text_align = 'left',
             highlight = 'Directory',
           },
         },

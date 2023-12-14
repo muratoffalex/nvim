@@ -20,6 +20,8 @@
 - _mdcat_ - fancy markdown preview
 - _bat_ - better cat
 
+## Mapping
+
 ## Notes
 
 Use { 'BufReadPost', 'BufWritePost', 'BufNewFile' } (LazyExtra from LazyVim) for

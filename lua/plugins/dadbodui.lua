@@ -23,6 +23,7 @@ return {
     -- vim.g.db_ui_win_position = 'right'
     vim.g.db_ui_show_database_icon = 1
     vim.g.db_ui_use_nvim_notify = 1
+    vim.g.db_ui_show_help = 0
 
     local cmp = require "cmp"
 

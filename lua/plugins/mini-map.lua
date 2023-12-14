@@ -1,6 +1,6 @@
 return {
   "echasnovski/mini.map",
-  version = "*",
+  version = false,
   keys = {
     { "<leader>mo", "<cmd>lua require('mini.map').open()<cr>", desc = 'Minimap: Open' },
     { "<leader>mt", "<cmd>lua require('mini.map').toggle()<cr>", desc = 'Minimap: Toggle' },
