@@ -23,7 +23,7 @@ map.set('n', '<leader>fm', '<cmd>Format<cr>', { desc = 'Format file' })
 
 -- Common keymaps
 map.set('n', '<Esc>', '<cmd> noh <CR>', { desc = 'Clear highlights' })
-map.set('n', '<C-s>', '<cmd> w <CR>', { desc = 'Save file' })
+map.set('n', '<C-s>', '<cmd> :silent w <CR>', { desc = 'Save file' })
 map.set('n', '<C-c>', '<cmd> %y+ <CR>', { desc = 'Copy whole file' })
 map.set('n', '<leader>x', '<cmd>bd<cr>', { desc = 'Close current buffer' })
 map.set('n', '<leader>X', '<cmd>bd!<cr>', { desc = 'Close current buffer force' })
@@ -39,6 +39,13 @@ map.set('v', '<S-Down>', ":m '>+1<CR>gv=gv", { desc = 'Move line or block down' 
 
 -- Terminal
 map.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Switch to normal mode' })
+
+-- Tabs
+map.set('n', '<leader>tN', '<cmd>tabnew<cr>', { desc = 'New tab' })
+map.set('n', '<leader>tC', '<cmd>tabclose<cr>', { desc = 'Close tab' })
+map.set('n', '<leader>to', '<cmd>tabonly<cr>', { desc = 'Close other tabs' })
+map.set('n', '<leader>tn', '<cmd>tabnext<cr>', { desc = 'Next tab' })
+map.set('n', '<leader>tp', '<cmd>tabprevious<cr>', { desc = 'Previous tab' })
 
 -- Split windows
 map.set('n', 'ss', '<cmd>split<cr>', { desc = 'Split window horizontally', noremap = true })

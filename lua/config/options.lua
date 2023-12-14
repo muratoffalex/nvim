@@ -4,6 +4,7 @@ vim.loader.enable()
 -- space as leader
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.g.startup_message = false
 
 local o = vim.o
 local wo = vim.wo
@@ -47,11 +48,13 @@ o.smartcase = true
 wo.signcolumn = 'yes'
 
 -- Decrease update time
-o.updatetime = 250
+o.updatetime = 100 -- faster completion
 o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 o.completeopt = 'menuone,noselect'
+
+o.wrap = true -- display long lines with wrap
 
 -- NOTE: You should make sure your terminal supports this
 o.termguicolors = true
