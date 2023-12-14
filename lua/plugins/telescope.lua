@@ -88,7 +88,8 @@ return {
     vim.keymap.set('n', '<leader>fc', require('telescope.builtin').grep_string, { desc = 'Search current word' })
     vim.keymap.set('n', '<leader>fw', require('telescope.builtin').live_grep, { desc = 'Live grep' })
     vim.keymap.set('n', '<leader>fW', ':LiveGrepGitRoot<cr>', { desc = 'Live grep on Git root' })
-    vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = ' Diagnostics' })
+    vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = 'Diagnostics' })
     vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = 'Search Resume' })
+    vim.keymap.set('n', '<leader>fs', require('telescope.builtin').git_status, { desc = 'Git status' })
   end
 }
