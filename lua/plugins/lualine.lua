@@ -1,5 +1,8 @@
 return {
   'nvim-lualine/lualine.nvim',
+  dependencies = {
+    'AndreM222/copilot-lualine'
+  },
   config = function()
     local utils = require 'utils'
 
@@ -19,6 +22,30 @@ return {
       return '{…}' .. vim.fn['codeium#GetStatusString']()
     end
 
+    local copilot = {
+      'copilot',
+      symbols = {
+        status = {
+          icons = {
+            enabled = '',
+            disabled = '',
+            warning = '',
+            unknown = '',
+          },
+          hl = {
+            enabled = '#41BC9C',
+            disabled = '#6272A4',
+            warning = '#FFB86C',
+            unknown = '#FF5555',
+          },
+        },
+        spinners = require('copilot-lualine.spinners').dots,
+        spinner_color = '#6272A4',
+      },
+      show_colors = true,
+      show_loading = true,
+    }
+
     local function package_info()
       return require('package-info').get_status()
     end
@@ -35,8 +62,7 @@ return {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
         lualine_c = { 'filename' },
-        lualine_x = { package_info, 'encoding', lsp_clients, 'filetype' },
-        -- lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_x = { package_info, copilot, 'encoding', lsp_clients, 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
       },
