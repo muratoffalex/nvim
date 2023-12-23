@@ -44,8 +44,6 @@ map.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Switch to normal mode' })
 map.set('n', '<leader>tN', '<cmd>tabnew<cr>', { desc = 'New tab' })
 map.set('n', '<leader>tC', '<cmd>tabclose<cr>', { desc = 'Close tab' })
 map.set('n', '<leader>to', '<cmd>tabonly<cr>', { desc = 'Close other tabs' })
-map.set('n', '<leader>tn', '<cmd>tabnext<cr>', { desc = 'Next tab' })
-map.set('n', '<leader>tp', '<cmd>tabprevious<cr>', { desc = 'Previous tab' })
 
 -- Split windows
 map.set('n', 'ss', '<cmd>split<cr>', { desc = 'Split window horizontally', noremap = true })

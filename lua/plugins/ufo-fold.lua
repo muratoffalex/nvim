@@ -3,7 +3,7 @@ return {
   enabled = true,
   event = 'VeryLazy',
   init = function()
-    vim.o.foldcolumn = '0'
+    vim.o.foldcolumn = 0
     vim.o.foldlevel = 99
     vim.o.foldlevelstart = 99
     vim.o.foldenable = true
@@ -24,9 +24,9 @@ return {
     --     require('statuscol').setup {
     --       relculright = true,
     --       segments = {
-    --         { text = { builtin.foldfunc, ' ' }, click = 'v:lua.ScFa' },
     --         { text = { '%s' },                  click = 'v:lua.ScSa' },
     --         { text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
+    --         { text = { builtin.foldfunc, ' ' }, click = 'v:lua.ScFa' },
     --       },
     --     }
     --   end,
