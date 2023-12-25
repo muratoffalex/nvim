@@ -55,8 +55,8 @@ return {
       -- requires  Alacritty Version 0.10.0 or higher
       -- uses `alacritty msg` subcommand to change font size
       alacritty = {
-        enabled = false,
-        font = '14', -- font size
+        enabled = true,
+        font = '20', -- font size
       },
       -- this will change the font size on wezterm when in zen mode
       -- See alse also the Plugins/Wezterm section in this projects README
@@ -67,7 +67,7 @@ return {
       },
     },
     -- callback where you can add custom code when the Zen window opens
-    on_open = function(win)
+    on_open = function(_)
       -- Disable noice, because messages are too large
       vim.cmd 'silent! NoiceDisable'
     end,
