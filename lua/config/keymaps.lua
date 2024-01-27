@@ -1,5 +1,3 @@
-local functions = require('config.functions')
-
 local map = vim.keymap
 
 map.set({ 'n', 'v' }, '<space>', '<nop>', { silent = true })
@@ -33,7 +31,13 @@ map.set('n', '<leader>nr', '<cmd>set relativenumber!<cr>', { desc = 'Toggle rela
 map.set('n', '<leader>nw', function ()
   vim.o.wrap = not vim.o.wrap
 end, { desc = 'Toggle lines wrap mode' })
-map.set('n', 'dd', functions.smart_dd, { desc = 'Only yank text with dd from non-empty lines'})
+-- https://nanotipsforvim.prose.sh/keeping-your-register-clean-from-dd
+map.set("n", "x", '"_x')
+map.set("n", "c", '"_c')
+map.set('n', 'dd', function ()
+  if vim.fn.getline(".") == "" then return '"_dd' end
+  return "dd"
+end, { expr = true, desc = 'Only yank text with dd from non-empty lines' })
 
 -- Move lines
 map.set('n', '<S-Up>', '<cmd>m-2<cr>', { desc = 'Move line up' })
