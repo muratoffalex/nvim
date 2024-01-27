@@ -1,3 +1,5 @@
+local functions = require('config.functions')
+
 local map = vim.keymap
 
 map.set({ 'n', 'v' }, '<space>', '<nop>', { silent = true })
@@ -27,7 +29,11 @@ map.set('n', '<C-s>', '<cmd> :silent w <CR>', { desc = 'Save file' })
 map.set('n', '<C-c>', '<cmd> %y+ <CR>', { desc = 'Copy whole file' })
 map.set('n', '<leader>x', '<cmd>bd<cr>', { desc = 'Close current buffer' })
 map.set('n', '<leader>X', '<cmd>bd!<cr>', { desc = 'Close current buffer force' })
-map.set('n', '<leader>n', '<cmd>set relativenumber!<cr>', { desc = 'Toggle relative number' })
+map.set('n', '<leader>nr', '<cmd>set relativenumber!<cr>', { desc = 'Toggle relative number' })
+map.set('n', '<leader>nw', function ()
+  vim.o.wrap = not vim.o.wrap
+end, { desc = 'Toggle lines wrap mode' })
+map.set('n', 'dd', functions.smart_dd, { desc = 'Only yank text with dd from non-empty lines'})
 
 -- Move lines
 map.set('n', '<S-Up>', '<cmd>m-2<cr>', { desc = 'Move line up' })

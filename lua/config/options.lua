@@ -54,7 +54,7 @@ o.timeoutlen = 300
 -- Set completeopt to have a better completion experience
 o.completeopt = 'menuone,noselect'
 
-o.wrap = true -- display long lines with wrap
+o.wrap = false -- display long lines with wrap
 
 -- NOTE: You should make sure your terminal supports this
 o.termguicolors = true

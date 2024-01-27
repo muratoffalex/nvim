@@ -6,6 +6,13 @@ local augroup = vim.api.nvim_create_augroup
 local general = augroup('General Settings', { clear = true })
 local highlight_group = augroup('YankHighlight', { clear = true })
 
+autocmd('BufReadPost', {
+  pattern = '*',
+  command = 'silent! normal! g`"zv',
+  group = general,
+  desc = 'Open file at the last position it was edited earlier',
+})
+
 autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
