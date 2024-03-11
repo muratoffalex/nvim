@@ -22,6 +22,13 @@ return {
       return '{…}' .. vim.fn['codeium#GetStatusString']()
     end
 
+    local xcode_test_plan = { "'󰙨 ' .. vim.g.xcodebuild_test_plan", color = { fg = "#a6e3a1", bg = "#161622" } }
+    local xcode_platform = {
+      "vim.g.xcodebuild_platform == 'macOS' and '  macOS' or"
+        .. " ' ' .. vim.g.xcodebuild_device_name .. ' (' .. vim.g.xcodebuild_os .. ')'",
+      color = { fg = "#f9e2af", bg = "#161622" },
+    }
+
     local copilot = {
       'copilot',
       symbols = {
@@ -54,7 +61,7 @@ return {
       options = {
         globalstatus = true,
         icons_enabled = true,
-        theme = require('plugins.lualine.theme').theme(),
+        -- theme = require('plugins.lualine.theme').theme(),
         component_separators = '|',
         section_separators = '',
       },
@@ -62,7 +69,7 @@ return {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
         lualine_c = { 'filename' },
-        lualine_x = { package_info, copilot, 'encoding', lsp_clients, 'filetype' },
+        lualine_x = { xcode_test_plan, xcode_platform, package_info, copilot, 'encoding', lsp_clients, 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
       },

@@ -19,6 +19,9 @@ return {
   event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
   -- event = { 'BufEnter' },
   config = function()
+    local lspconfig = require 'lspconfig'
+    local util = require 'lspconfig.util'
+
     local on_attach = function(client, bufnr)
       local nmap = function(keys, func, desc)
         if desc then
@@ -121,13 +124,13 @@ return {
     }
     mason_tool_installer.setup {
       ensure_installed = {
-        'stylua',        -- lua formatter
-        'eslint',        -- js/ts formatter/linter
-        'php-cs-fixer',  -- php formatter
-        'prettierd',     -- general formatter (markdown, json, etc)
-        'markdownlint',  -- markdown linter
-        'golangci-lint', -- go linter
-        'phpcs',         -- php linter
+        'stylua',            -- lua formatter
+        'eslint',            -- js/ts formatter/linter
+        'php-cs-fixer',      -- php formatter
+        'prettierd',         -- general formatter (markdown, json, etc)
+        'markdownlint',      -- markdown linter
+        'golangci-lint',     -- go linter
+        'phpcs',             -- php linter
 
         -- include in gopls lsp
         -- 'gofmt',
@@ -142,6 +145,22 @@ return {
           settings = servers[server_name],
           filetypes = (servers[server_name] or {}).filetypes,
         }
+      end,
+    }
+
+    lspconfig['sourcekit'].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      cmd = {
+        vim.trim(vim.fn.system 'xcrun -f sourcekit-lsp'),
+        -- NOTE: if not work, use full path
+        -- '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp',
+      },
+      root_dir = function(filename, _)
+        return util.root_pattern 'buildServer.json' (filename)
+            or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
+            or util.find_git_ancestor(filename)
+            or util.root_pattern 'Package.swift' (filename)
       end,
     }
   end,

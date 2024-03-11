@@ -20,6 +20,7 @@ map.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic
 map.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 map.set('n', '<leader>l', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 map.set('n', '<leader>fm', '<cmd>Format<cr>', { desc = 'Format file' })
+map.set('v', '<leader>fm', '<cmd>Format<cr>', { desc = 'Format file' })
 
 -- Common keymaps
 map.set('n', '<Esc>', '<cmd> noh <CR>', { desc = 'Clear highlights' })

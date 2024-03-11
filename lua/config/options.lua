@@ -9,8 +9,9 @@ vim.g.startup_message = false
 local o = vim.o
 local wo = vim.wo
 local opt = vim.opt
+local config = require('config')
 
-vim.opt.background = 'dark'
+opt.background = config.current_theme
 
 -- Indent size
 vim.opt_local.shiftwidth = 2
@@ -54,7 +55,7 @@ o.timeoutlen = 300
 -- Set completeopt to have a better completion experience
 o.completeopt = 'menuone,noselect'
 
-o.wrap = false -- display long lines with wrap
+o.wrap = true -- display long lines with wrap
 
 -- NOTE: You should make sure your terminal supports this
 o.termguicolors = true

@@ -22,4 +22,6 @@ M.icons = {
   },
 }
 
+M.current_theme = 'light'
+
 return M

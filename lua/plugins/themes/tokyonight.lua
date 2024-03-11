@@ -39,9 +39,8 @@ return {
     }
   end,
   config = function(_, opts)
+    local config = require 'config'
     require('tokyonight').setup(opts)
-    vim.opt.background = 'dark'
-    vim.cmd.colorscheme 'tokyonight-storm'
 
     -- vim.cmd 'hi ColorColumn ctermbg=0 guibg=gray'
   end,
