@@ -22,6 +22,7 @@ M.icons = {
   },
 }
 
-M.current_theme = 'light'
+M.background = os.getenv 'theme' or 'dark'
+M.theme = 'tokyonight'
 
 return M

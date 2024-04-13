@@ -12,8 +12,8 @@ return {
   lazy = true,
   cmd = { 'Neotree' },
   keys = {
-    { '<C-e>', '<cmd>Neotree toggle<cr>', desc = 'Neotree toggle' },
-    -- { '<leader>e', '<cmd>Neotree<cr>', desc = 'Neotree open' },
+    -- { '<C-e>', '<cmd>Neotree toggle<cr>', desc = 'Neotree toggle' },
+    { '<leader>e', '<cmd>Neotree toggle<cr>', desc = 'Neotree toggle' },
     { '<leader>g', '<cmd>Neotree git_status<cr>', desc = 'Neotree git status' },
   },
   opts = {

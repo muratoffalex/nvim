@@ -2,7 +2,7 @@ return {
   'folke/zen-mode.nvim',
   cmd = 'ZenMode',
   keys = {
-    { '<A-z>', '<cmd>ZenMode<cr>', desc = 'Zen Mode' },
+    { '<leader>mz', '<cmd>ZenMode<cr>', desc = 'Zen Mode' },
   },
   dependencies = {
     'folke/twilight.nvim',

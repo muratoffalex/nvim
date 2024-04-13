@@ -1,10 +1,11 @@
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = {
-    'AndreM222/copilot-lualine'
+    'AndreM222/copilot-lualine',
   },
   config = function()
     local utils = require 'utils'
+    local fn = vim.fn
 
     -- lsp clients
     local function lsp_clients()
@@ -22,11 +23,11 @@ return {
       return '{…}' .. vim.fn['codeium#GetStatusString']()
     end
 
-    local xcode_test_plan = { "'󰙨 ' .. vim.g.xcodebuild_test_plan", color = { fg = "#a6e3a1", bg = "#161622" } }
+    local xcode_test_plan = { "'󰙨 ' .. vim.g.xcodebuild_test_plan", color = { fg = '#a6e3a1', bg = '#161622' } }
     local xcode_platform = {
-      "vim.g.xcodebuild_platform == 'macOS' and '  macOS' or"
-        .. " ' ' .. vim.g.xcodebuild_device_name .. ' (' .. vim.g.xcodebuild_os .. ')'",
-      color = { fg = "#f9e2af", bg = "#161622" },
+      "vim.g.xcodebuild_platform == 'macOS' and '  macOS' or" ..
+      " ' ' .. vim.g.xcodebuild_device_name .. ' (' .. vim.g.xcodebuild_os .. ')'",
+      color = { fg = '#f9e2af', bg = '#161622' },
     }
 
     local copilot = {
@@ -57,11 +58,19 @@ return {
       return require('package-info').get_status()
     end
 
+    local function selectionCount()
+      local starts = fn.line 'v'
+      local ends = fn.line '.'
+      local lines = starts <= ends and ends - starts + 1 or starts - ends + 1
+      return tostring(lines) .. 'L:' .. tostring(fn.wordcount().visual_chars) .. 'C'
+    end
+
     require('lualine').setup {
       options = {
         globalstatus = true,
         icons_enabled = true,
         -- theme = require('plugins.lualine.theme').theme(),
+        theme = 'tokyonight',
         component_separators = '|',
         section_separators = '',
       },
@@ -71,7 +80,15 @@ return {
         lualine_c = { 'filename' },
         lualine_x = { xcode_test_plan, xcode_platform, package_info, copilot, 'encoding', lsp_clients, 'filetype' },
         lualine_y = { 'progress' },
-        lualine_z = { 'location' },
+        lualine_z = {
+          {
+            selectionCount,
+            cond = function()
+              return fn.mode():find '[Vv]' ~= nil
+            end,
+          },
+          'location',
+        },
       },
       extensions = {
         'neo-tree',

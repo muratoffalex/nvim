@@ -17,7 +17,7 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function (_, opts)
     require('oil').setup(opts)
-    vim.keymap.set('n', '<leader>e',
+    vim.keymap.set('n', '<leader>E',
       function()
         if vim.startswith(vim.fn.bufname(), 'oil://') then
           vim.cmd('bd')

@@ -27,7 +27,7 @@ autocmd('BufReadPost', {
 })
 
 autocmd('TextYankPost', {
-  callback = function()
+  callback = function ()
     vim.highlight.on_yank()
   end,
   group = highlight_group,
@@ -36,18 +36,28 @@ autocmd('TextYankPost', {
 })
 
 autocmd('FileType', {
-  pattern = 'go',
-  callback = function()
+  pattern = { 'go', 'php', 'sh' },
+  callback = function ()
     vim.opt_local.shiftwidth = 4
     vim.opt_local.tabstop = 4
   end,
   group = general,
-  desc = 'Go Filetype Settings',
+  desc = 'Filetype Settings',
+})
+
+autocmd('FileType', {
+  pattern = 'html',
+  callback = function ()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+  end,
+  group = general,
+  desc = 'Html Filetype Settings',
 })
 
 -- NOTE: 'BufWinLeave' - this event fires after every change... Why?
 autocmd({ 'FocusLost', 'BufLeave', 'InsertLeave' }, {
-  callback = function()
+  callback = function ()
     local buf = vim.api.nvim_get_current_buf()
     local modified = vim.api.nvim_buf_get_option(buf, 'modified')
     if vim.bo.filetype ~= '' and vim.bo.buftype == '' and modified then
@@ -59,7 +69,7 @@ autocmd({ 'FocusLost', 'BufLeave', 'InsertLeave' }, {
 })
 
 autocmd('FocusGained', {
-  callback = function()
+  callback = function ()
     vim.cmd 'checktime'
   end,
   group = general,
@@ -67,7 +77,7 @@ autocmd('FocusGained', {
 })
 
 autocmd('VimResized', {
-  callback = function()
+  callback = function ()
     vim.cmd 'wincmd ='
   end,
   group = general,
@@ -77,8 +87,8 @@ autocmd('VimResized', {
 -- mason-tool-installer
 autocmd('User', {
   pattern = 'MasonToolsUpdateCompleted',
-  callback = function(e)
-    vim.schedule(function()
+  callback = function (e)
+    vim.schedule(function ()
       -- os.execute('~/.local/share/nvim/mason/bin/phpcs --config-set default_standard PSR12')
       -- check if the table is empty before printing it
       if next(e.data) == nil then

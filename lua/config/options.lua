@@ -9,13 +9,14 @@ vim.g.startup_message = false
 local o = vim.o
 local wo = vim.wo
 local opt = vim.opt
-local config = require('config')
+local config = require 'config'
 
-opt.background = config.current_theme
+vim.o.background = config.background
 
--- Indent size
+-- Default indent size
 vim.opt_local.shiftwidth = 2
 vim.opt_local.tabstop = 2
+vim.o.shortmess = vim.o.shortmess .. 'I'
 
 opt.cursorline = true
 -- NOTE: now in plugins/smartcolumn.lua
@@ -57,5 +58,4 @@ o.completeopt = 'menuone,noselect'
 
 o.wrap = true -- display long lines with wrap
 
--- NOTE: You should make sure your terminal supports this
 o.termguicolors = true

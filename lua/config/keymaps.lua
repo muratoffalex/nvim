@@ -20,7 +20,7 @@ map.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic
 map.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 map.set('n', '<leader>l', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 map.set('n', '<leader>fm', '<cmd>Format<cr>', { desc = 'Format file' })
-map.set('v', '<leader>fm', '<cmd>Format<cr>', { desc = 'Format file' })
+map.set('v', '<leader>fm', '<cmd>Format<cr>', { desc = 'Format selected lines' })
 
 -- Common keymaps
 map.set('n', '<Esc>', '<cmd> noh <CR>', { desc = 'Clear highlights' })
@@ -32,7 +32,7 @@ map.set('n', '<leader>nr', '<cmd>set relativenumber!<cr>', { desc = 'Toggle rela
 map.set('n', '<leader>nw', function ()
   vim.o.wrap = not vim.o.wrap
 end, { desc = 'Toggle lines wrap mode' })
--- https://nanotipsforvim.prose.sh/keeping-your-register-clean-from-dd
+-- htps://nanotipsforvim.prose.sh/keeping-your-register-clean-from-dd
 map.set("n", "x", '"_x')
 map.set("n", "c", '"_c')
 map.set('n', 'dd', function ()
@@ -45,8 +45,8 @@ map.set('n', '<S-Up>', '<cmd>m-2<cr>', { desc = 'Move line up' })
 map.set('n', '<S-Down>', '<cmd>m+<cr>', { desc = 'Move line down' })
 map.set('i', '<S-Up>', '<Esc><cmd>m .-2<CR>==gi', { desc = 'Move line up' })
 map.set('i', '<S-Down>', '<Esc><cmd>m .+1<CR>==gi', { desc = 'Move line down' })
-map.set('v', '<S-Up>', ":m '<-2<CR>gv=gv", { desc = 'Move line or block up' })
-map.set('v', '<S-Down>', ":m '>+1<CR>gv=gv", { desc = 'Move line or block down' })
+map.set('v', '<S-Up>', ":m '<-2<CR>gv=gv", { desc = 'Move line or block up', silent = true })
+map.set('v', '<S-Down>', ":m '>+1<CR>gv=gv", { desc = 'Move line or block down', silent = true })
 
 -- Terminal
 map.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Switch to normal mode' })
@@ -70,4 +70,9 @@ map.set('n', 'sN', '<C-w>H', { desc = 'Move window to left' })
 map.set('n', 'sE', '<C-w>J', { desc = 'Move window to bottom' })
 map.set('n', 'sI', '<C-w>K', { desc = 'Move window to top' })
 map.set('n', 'sO', '<C-w>L', { desc = 'Move window to right' })
-map.set('n', 'sr', '<C-w>r', { desc = 'Swap two windows' })
+  map.set('n', 'sr', '<C-w>r', { desc = 'Swap two windows' })
+-- resize split windows
+map.set('n', 's>', '<cmd>5winc ><cr>', { desc = 'Increase window width 5' })
+map.set('n', 's<', '<cmd>5winc <<cr>', { desc = 'Decrease window width 5' })
+map.set('n', 's+', '<cmd>resize +5<cr>', { desc = 'Increase window height 5' })
+map.set('n', 's-', '<cmd>resize -5<cr>', { desc = 'Decrease window height 5' })
