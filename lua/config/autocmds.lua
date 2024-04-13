@@ -1,3 +1,6 @@
+-- local templatesBuilder = require 'config.templates.php.builder'
+local utils = require 'utils'
+
 -- AUTOCOMMANDS
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
@@ -5,6 +8,16 @@ local augroup = vim.api.nvim_create_augroup
 -- General Settings
 local general = augroup('General Settings', { clear = true })
 local highlight_group = augroup('YankHighlight', { clear = true })
+local templates_group = augroup('Templates', { clear = true })
+
+autocmd({ 'BufNewFile' }, {
+  pattern = '*.php',
+  callback = function ()
+    utils.template_builders.php.build_by_file_name()
+  end,
+  group = templates_group,
+  desc = 'Insert base PHP template',
+})
 
 autocmd('BufReadPost', {
   pattern = '*',
