@@ -114,13 +114,13 @@ return {
       }
       mason_tool_installer.setup {
          ensure_installed = {
-            'stylua',        -- lua formatter
-            'eslint',        -- js/ts formatter/linter
-            'php-cs-fixer',  -- php formatter
-            'prettierd',     -- general formatter (markdown, json, etc)
-            'markdownlint',  -- markdown linter
+            'stylua', -- lua formatter
+            'eslint', -- js/ts formatter/linter
+            'php-cs-fixer', -- php formatter
+            'prettierd', -- general formatter (markdown, json, etc)
+            'markdownlint', -- markdown linter
             'golangci-lint', -- go linter
-            'phpcs',         -- php linter
+            'phpcs', -- php linter
 
             -- include in gopls lsp
             -- 'gofmt',
@@ -147,10 +147,10 @@ return {
             -- '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp',
          },
          root_dir = function(filename, _)
-            return util.root_pattern 'buildServer.json' (filename)
-                or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
-                or util.find_git_ancestor(filename)
-                or util.root_pattern 'Package.swift' (filename)
+            return util.root_pattern 'buildServer.json'(filename)
+               or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
+               or util.find_git_ancestor(filename)
+               or util.root_pattern 'Package.swift'(filename)
          end,
       }
    end,

@@ -74,7 +74,7 @@ return {
          desc = 'CopilotChat - Inline chat',
       },
       { '<leader>cct', '<cmd>CopilotChatToggle<cr>', desc = 'CopilotChat - Toggle' },
-      { '<leader>ccr', '<cmd>CopilotChatReset<cr>',  desc = 'CopilotChat - Clear buffer and chat history' },
+      { '<leader>ccr', '<cmd>CopilotChatReset<cr>', desc = 'CopilotChat - Clear buffer and chat history' },
    },
    opts = {
       debug = false,

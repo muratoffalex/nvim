@@ -26,8 +26,7 @@ return {
 
       local xcode_test_plan = { "'󰙨 ' .. vim.g.xcodebuild_test_plan", color = { fg = '#a6e3a1', bg = '#161622' } }
       local xcode_platform = {
-         "vim.g.xcodebuild_platform == 'macOS' and '  macOS' or" ..
-         " ' ' .. vim.g.xcodebuild_device_name .. ' (' .. vim.g.xcodebuild_os .. ')'",
+         "vim.g.xcodebuild_platform == 'macOS' and '  macOS' or" .. " ' ' .. vim.g.xcodebuild_device_name .. ' (' .. vim.g.xcodebuild_os .. ')'",
          color = { fg = '#f9e2af', bg = '#161622' },
       }
 

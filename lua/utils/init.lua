@@ -19,10 +19,10 @@ function M.dump(o, redefined_separator)
    end
 end
 
-M.php = require('utils.php')
+M.php = require 'utils.php'
 
 M.template_builders = {
-   php = require('utils.template_builders.php')
+   php = require 'utils.template_builders.php',
 }
 
 return M

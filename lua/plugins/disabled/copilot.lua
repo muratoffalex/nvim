@@ -1,4 +1,4 @@
 return {
-  'github/copilot.vim',
-  cmd = 'Copilot',
+   'github/copilot.vim',
+   cmd = 'Copilot',
 }

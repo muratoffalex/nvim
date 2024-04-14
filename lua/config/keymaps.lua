@@ -29,15 +29,17 @@ map.set('n', '<C-c>', '<cmd> %y+ <CR>', { desc = 'Copy whole file' })
 map.set('n', '<leader>x', '<cmd>bd<cr>', { desc = 'Close current buffer' })
 map.set('n', '<leader>X', '<cmd>bd!<cr>', { desc = 'Close current buffer force' })
 map.set('n', '<leader>nr', '<cmd>set relativenumber!<cr>', { desc = 'Toggle relative number' })
-map.set('n', '<leader>nw', function ()
-  vim.o.wrap = not vim.o.wrap
+map.set('n', '<leader>nw', function()
+   vim.o.wrap = not vim.o.wrap
 end, { desc = 'Toggle lines wrap mode' })
 -- htps://nanotipsforvim.prose.sh/keeping-your-register-clean-from-dd
-map.set("n", "x", '"_x')
-map.set("n", "c", '"_c')
-map.set('n', 'dd', function ()
-  if vim.fn.getline(".") == "" then return '"_dd' end
-  return "dd"
+map.set('n', 'x', '"_x')
+map.set('n', 'c', '"_c')
+map.set('n', 'dd', function()
+   if vim.fn.getline '.' == '' then
+      return '"_dd'
+   end
+   return 'dd'
 end, { expr = true, desc = 'Only yank text with dd from non-empty lines' })
 
 -- Move lines
@@ -70,7 +72,7 @@ map.set('n', 'sN', '<C-w>H', { desc = 'Move window to left' })
 map.set('n', 'sE', '<C-w>J', { desc = 'Move window to bottom' })
 map.set('n', 'sI', '<C-w>K', { desc = 'Move window to top' })
 map.set('n', 'sO', '<C-w>L', { desc = 'Move window to right' })
-  map.set('n', 'sr', '<C-w>r', { desc = 'Swap two windows' })
+map.set('n', 'sr', '<C-w>r', { desc = 'Swap two windows' })
 -- resize split windows
 map.set('n', 's>', '<cmd>5winc ><cr>', { desc = 'Increase window width 5' })
 map.set('n', 's<', '<cmd>5winc <<cr>', { desc = 'Decrease window width 5' })

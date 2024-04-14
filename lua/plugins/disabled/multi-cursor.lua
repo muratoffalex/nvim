@@ -4,6 +4,6 @@
 -- ),
 -- but all actions can be performed using standard Vim functions
 return {
-  'mg979/vim-visual-multi',
-  branch = 'master',
+   'mg979/vim-visual-multi',
+   branch = 'master',
 }
