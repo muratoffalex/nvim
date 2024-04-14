@@ -66,7 +66,11 @@ return {
       end
 
       -- local theme = require('plugins.lualine.theme').theme()
-      local theme = config.theme
+      -- local theme = config.theme
+
+      -- FIXME: lualine theme not dynamic
+      local theme = require("lualine.themes.tokyonight")
+      theme.normal.c.bg = nil
 
       require('lualine').setup {
          options = {
