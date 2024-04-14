@@ -3,12 +3,15 @@ return {
    lazy = false,
    enabled = true,
    priority = 1000,
-   opts = function ()
+   opts = function()
       return {
          transparent = false,
          style = 'storm',
          light_style = 'day',
-         on_highlights = function (hl, c)
+         styles = {
+            sidebars = 'normal',
+         },
+         on_highlights = function(hl, c)
             local prompt = '#2d3149'
             hl.TelescopeNormal = {
                bg = c.bg_dark,
