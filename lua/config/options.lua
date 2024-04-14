@@ -17,6 +17,7 @@ vim.o.background = config.background
 vim.opt_local.shiftwidth = 2
 vim.opt_local.tabstop = 2
 vim.o.shortmess = vim.o.shortmess .. 'I'
+vim.o.conceallevel = 1
 
 opt.cursorline = true
 -- NOTE: now in plugins/smartcolumn.lua
