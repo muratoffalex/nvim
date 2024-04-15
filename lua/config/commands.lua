@@ -6,6 +6,10 @@ new_command('PhpBuildFileByName', function(_)
    php_tb.build_by_file_name()
 end, { nargs = '*', desc = 'Init current php file' })
 
+new_command('PhpBuildEmpty', function(_)
+   php_tb.build_empty()
+end, { nargs = '*', desc = 'Init current empty php file' })
+
 new_command('PhpBuild', function(opts)
    local args = opts.args
    local type = 'class'
@@ -13,4 +17,4 @@ new_command('PhpBuild', function(opts)
       type = args
    end
    php_tb.build_base(type)
-end, { nargs = '*', desc = 'Init current php file' })
+end, { nargs = '*', desc = 'Init current php file with type' })

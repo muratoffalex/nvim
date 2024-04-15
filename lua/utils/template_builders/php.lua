@@ -8,15 +8,40 @@ local types = {
    abstract_class = 'abstract class',
 }
 
+local templates_dir = '~/.config/nvim/templates/php/'
+
+local templates = {
+   empty = templates_dir .. 'empty.php',
+   base = templates_dir .. 'base.php',
+}
+
+local function get_template_file(template_path)
+   if not vim.fn.filereadable(template_path) then
+      print('Template file not found or not readable: ' .. template_path)
+      return false
+   end
+
+   return template_path
+end
+
 local M = {}
+
+function M.build_empty()
+   local template_file = get_template_file(templates.empty)
+   if not template_file then
+      return
+   end
+
+   vim.cmd('silent! 0r ' .. template_file)
+
+   vim.fn.feedkeys '5gg'
+end
 
 function M.build_base(custom_type)
    local type = custom_type or 'class'
 
-   -- Check if the template file exists and is readable
-   local template_file = '~/.config/nvim/templates/php/base.php'
-   if not vim.fn.filereadable(template_file) then
-      print('Template file not found or not readable: ' .. template_file)
+   local template_file = get_template_file(templates.base)
+   if not template_file then
       return
    end
 
@@ -27,7 +52,7 @@ function M.build_base(custom_type)
    vim.cmd("%s/%object_type%/\\=expand('" .. type .. "')")
    vim.cmd "%s/%file_name%/\\=expand('%:t:r')"
 
-   vim.fn.feedkeys '8gg S'
+   vim.fn.feedkeys '9gg'
 end
 
 M.build_class = function()
@@ -63,6 +88,17 @@ function M.build_by_file_name()
       M.build_abstract_class()
    else
       M.build_class()
+   end
+end
+
+function M.build_by_content()
+   local namespace = utils.get_namespace()
+
+   if not namespace then
+      M.build_empty()
+      return
+   else
+      M.build_by_file_name()
    end
 end
 

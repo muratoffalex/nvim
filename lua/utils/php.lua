@@ -1,34 +1,40 @@
 M = {}
 
+-- Get namespace for file or false
 function M.get_namespace()
    -- prepare name and path
    local path = vim.fn.fnamemodify(vim.fn.expand '%:p:h', ':~:.')
-   print(path)
-   -- find psr4 in composer.json
-   local psr4 = {}
-   local is_psr4 = false
-   local composerPath = vim.fn.getcwd() .. '/composer.json'
-   for line in io.lines(composerPath) do
-      if string.find(line, '}$') then
-         is_psr4 = false
-      end
 
-      if is_psr4 then
-         local parts = vim.split(vim.trim(line):gsub('[" ,]+', ''), ':')
-         psr4[parts[1]:gsub('\\\\', '\\')] = parts[2]
-      end
+   -- read and parse composer.json
+   local composer_path = vim.fn.getcwd() .. '/composer.json'
+   local file = io.open(composer_path, 'r')
 
-      if string.find(line, '"psr%-4": {') then
-         is_psr4 = true
+   if file == nil then
+      return false
+   end
+
+   local content = file:read('*all')
+   file:close()
+
+   local composer_data = vim.fn.json_decode(content)
+
+   if composer_data == nil then
+      return false
+   end
+
+   local psr4 = composer_data['autoload'] and composer_data['autoload']['psr-4'] or {}
+
+   -- find and replace namespace in path
+   local namespace_exist = false
+   for value, key in pairs(psr4) do
+      key = key:gsub('/', '')
+      if string.find(path, key) then
+         namespace_exist = true
+         path = string.gsub(path, key, value:gsub('\\\\', '\\'))
       end
    end
 
-   -- fix by psr4
-   if vim.tbl_count(psr4) > 0 then
-      for value, key in pairs(psr4) do
-         path = string.gsub(path, key, value)
-      end
-   else
+   if not namespace_exist then
       return false
    end
 

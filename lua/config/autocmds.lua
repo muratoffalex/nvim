@@ -1,4 +1,3 @@
--- local templatesBuilder = require 'config.templates.php.builder'
 local utils = require 'utils'
 
 -- AUTOCOMMANDS
@@ -10,10 +9,15 @@ local general = augroup('General Settings', { clear = true })
 local highlight_group = augroup('YankHighlight', { clear = true })
 local templates_group = augroup('Templates', { clear = true })
 
-autocmd({ 'BufNewFile' }, {
+autocmd({ 'BufNewFile', 'BufReadPost' }, {
    pattern = '*.php',
    callback = function()
-      utils.template_builders.php.build_by_file_name()
+      local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+      local content = table.concat(lines, "\n")
+
+      if not content:find('<%?php') and not content:find('<%?') then
+         utils.template_builders.php.build_by_content()
+      end
    end,
    group = templates_group,
    desc = 'Insert base PHP template',
