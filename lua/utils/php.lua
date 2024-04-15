@@ -28,6 +28,8 @@ function M.get_namespace()
       for value, key in pairs(psr4) do
          path = string.gsub(path, key, value)
       end
+   else
+      return false
    end
 
    -- fix slashes

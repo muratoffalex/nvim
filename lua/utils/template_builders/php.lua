@@ -20,7 +20,7 @@ function M.build_base(custom_type)
       return
    end
 
-   local namespace = utils.php.get_namespace()
+   local namespace = utils.get_namespace()
 
    vim.cmd('silent! 0r ' .. template_file)
    vim.cmd("%s/%namespace%/\\=expand('" .. namespace .. "')")

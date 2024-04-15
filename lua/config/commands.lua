@@ -3,7 +3,7 @@ local php_tb = require 'utils.template_builders.php'
 
 -- php
 new_command('PhpBuildFileByName', function(_)
-   php_tb.buildFileByName()
+   php_tb.build_by_file_name()
 end, { nargs = '*', desc = 'Init current php file' })
 
 new_command('PhpBuild', function(opts)
@@ -12,5 +12,5 @@ new_command('PhpBuild', function(opts)
    if args ~= nil and string.len(args) > 0 then
       type = args
    end
-   php_tb.generate_base_template(type)
+   php_tb.build_base(type)
 end, { nargs = '*', desc = 'Init current php file' })
