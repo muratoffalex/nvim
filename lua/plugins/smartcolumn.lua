@@ -7,12 +7,14 @@ return {
       disabled_filetypes = {
          'help',
          'text',
-         'markdown',
          'Trouble',
          'neo-tree',
          'dbui',
          'mason',
          'lazy',
+      },
+      custom_colorcolumn = {
+         markdown = '80',
       },
    },
 }

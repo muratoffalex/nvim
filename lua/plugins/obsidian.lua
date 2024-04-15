@@ -24,12 +24,14 @@ return {
       'ObisidianWorkspace',
       'ObsidianPasteImg',
       'ObsidianRename',
-      'ObsidianToggleCheckbox'
+      'ObsidianToggleCheckbox',
    },
    event = {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
       -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-      'BufReadPre ' .. vaults_directory .. '/**/**.md',
+      'BufReadPre '
+      .. vaults_directory
+      .. '/**/**.md',
       'BufNewFile ' .. vaults_directory .. '/**/**.md',
    },
    dependencies = {
@@ -45,6 +47,9 @@ return {
             name = 'owork',
             path = vaults_directory .. '/owork',
          },
+      },
+      daily_notes = {
+         folder = 'dailies',
       },
    },
 }
