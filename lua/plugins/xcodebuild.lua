@@ -13,6 +13,9 @@ return {
                enabled = true,      -- enable updating Xcode project files when using neo-tree.nvim
                guess_target = true, -- guess target for the new file based on the file path
             },
+            nvim_tree = {
+               enabled = false,
+            }
          },
       }
 
