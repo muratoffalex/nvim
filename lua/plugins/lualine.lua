@@ -74,6 +74,8 @@ return {
 
       require('lualine').setup {
          options = {
+            -- TODO: toggle globalstatus to true
+            -- when fix colors in diffent themes
             globalstatus = true,
             icons_enabled = true,
             theme = theme,
@@ -101,6 +103,7 @@ return {
             'lazy',
             'trouble',
             'mason',
+            'symbols-outline'
          },
       }
    end,

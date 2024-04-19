@@ -4,9 +4,11 @@ return {
    opts = {
       options = vim.opt.sessionoptions:get(),
       pre_save = function()
-         -- Close Neotree and DBUI before saving session
          vim.cmd 'silent! Neotree close'
          vim.cmd 'silent! DBUIClose'
+         vim.cmd 'silent! TroubleClose'
+         vim.cmd 'silent! OutlineClose'
+         vim.cmd 'silent! CopilotChatClose'
       end, -- a function to call before saving the session
       save_empty = false, -- don't save if there are no open file buffers
    },

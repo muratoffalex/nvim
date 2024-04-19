@@ -23,6 +23,11 @@ autocmd({ 'BufNewFile', 'BufReadPost' }, {
    desc = 'Insert base PHP template',
 })
 
+autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.podspec", "Podfile" },
+  command = "set filetype=ruby",
+})
+
 autocmd('BufReadPost', {
    pattern = '*',
    command = 'silent! normal! g`"zv',

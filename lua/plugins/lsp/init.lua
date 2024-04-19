@@ -89,6 +89,7 @@ return {
          intelephense = {},
          -- only for php 8.0+
          -- phpactor = {},
+         kotlin_language_server = {},
          tsserver = {},
          lua_ls = {
             Lua = {

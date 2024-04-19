@@ -16,6 +16,7 @@ return {
          ['s'] = { name = 'Split windows', _ = 'which_key_ignore' },
          ['<leader>q'] = { name = 'Sessions', _ = 'which_key_ignore' },
          ['<leader>cn'] = { name = 'Toggle node under cursor', _ = 'which_key_ignore' },
+         ['<leader>o'] = { name = 'Obsidian', d = { name = '+Daily' }, _ = 'which_key_ignore' },
       }
    end,
    opts = {},
