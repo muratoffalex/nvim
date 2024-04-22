@@ -24,10 +24,30 @@ return {
          return '{…}' .. vim.fn['codeium#GetStatusString']()
       end
 
-      local xcode_test_plan = { "'󰙨 ' .. vim.g.xcodebuild_test_plan", color = { fg = '#a6e3a1', bg = '#161622' } }
-      local xcode_platform = {
-         "vim.g.xcodebuild_platform == 'macOS' and '  macOS' or" .. " ' ' .. vim.g.xcodebuild_device_name .. ' (' .. vim.g.xcodebuild_os .. ')'",
-         color = { fg = '#f9e2af', bg = '#161622' },
+      local function xcodebuild_device()
+         if vim.g.xcodebuild_platform == 'macOS' then
+            return ' macOS'
+         end
+
+         local deviceIcon = ''
+         if vim.g.xcodebuild_platform:match 'watch' then
+            deviceIcon = '􀟤'
+         elseif vim.g.xcodebuild_platform:match 'tv' then
+            deviceIcon = '􀡴 '
+         elseif vim.g.xcodebuild_platform:match 'vision' then
+            deviceIcon = '􁎖 '
+         end
+
+         if vim.g.xcodebuild_os then
+            return deviceIcon .. ' ' .. vim.g.xcodebuild_device_name .. ' (' .. vim.g.xcodebuild_os .. ')'
+         end
+
+         return deviceIcon .. ' ' .. vim.g.xcodebuild_device_name
+      end
+
+      local xcodebuild_build_status = {
+         "' ' .. vim.g.xcodebuild_last_status",
+         color = { fg = "Gray" },
       }
 
       local copilot = {
@@ -69,7 +89,7 @@ return {
       -- local theme = config.theme
 
       -- FIXME: lualine theme not dynamic
-      local theme = require("lualine.themes.tokyonight")
+      local theme = require 'lualine.themes.tokyonight'
       theme.normal.c.bg = nil
 
       require('lualine').setup {
@@ -86,7 +106,7 @@ return {
             lualine_a = { 'mode' },
             lualine_b = { 'branch', 'diff', 'diagnostics' },
             lualine_c = { 'filename' },
-            lualine_x = { xcode_test_plan, xcode_platform, package_info, copilot, 'encoding', lsp_clients, 'filetype' },
+            lualine_x = { xcodebuild_build_status, xcodebuild_device, package_info, copilot, 'encoding', lsp_clients, 'filetype' },
             lualine_y = { 'progress' },
             lualine_z = {
                {
@@ -103,7 +123,7 @@ return {
             'lazy',
             'trouble',
             'mason',
-            'symbols-outline'
+            'symbols-outline',
          },
       }
    end,
