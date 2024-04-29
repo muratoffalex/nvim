@@ -27,10 +27,12 @@ function M.get_namespace()
    -- find and replace namespace in path
    local namespace_exist = false
    for value, key in pairs(psr4) do
+      -- ex., src/ => src
       key = key:gsub('/', '')
+
       if string.find(path, key) then
          namespace_exist = true
-         path = string.gsub(path, key, value:gsub('\\\\', '\\'))
+         path = string.gsub(path, key, value:gsub('\\', ''))
       end
    end
 
@@ -39,6 +41,7 @@ function M.get_namespace()
    end
 
    -- fix slashes
+   -- ex., App/Test => App\Test
    path = path:gsub('/', '\\\\')
 
    return path
