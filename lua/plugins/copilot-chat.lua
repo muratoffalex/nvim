@@ -78,6 +78,7 @@ return {
    },
    opts = {
       debug = false,
+      auto_follow_cursor = false,
       prompts = {
          BetterNamings = prompts.BetterNamings,
       },
