@@ -37,24 +37,24 @@ return {
 
          -- Move to definition and center cursor on screen
          -- NOTE: <cmd>lua vim.lsp.buf.definition()<CR>zz for centering after
-         nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-         nmap('gR', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-         nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-         nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-         nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-         nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+         nmap('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
+         nmap('gR', require('telescope.builtin').lsp_references, 'Goto References')
+         nmap('gI', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
+         nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type Definition')
+         nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
+         nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 
          -- See `:help K` for why this keymap
          nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
          nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
          -- Lesser used LSP functionality
-         nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-         nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-         nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+         nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+         nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, 'Workspace Add Folder')
+         nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, 'Workspace Remove Folder')
          nmap('<leader>wl', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-         end, '[W]orkspace [L]ist Folders')
+         end, 'Workspace List Folders')
 
          -- disable formatting
          -- client.resolved_capabilities.document_formatting = false
@@ -115,13 +115,13 @@ return {
       }
       mason_tool_installer.setup {
          ensure_installed = {
-            'stylua', -- lua formatter
-            'eslint', -- js/ts formatter/linter
-            'php-cs-fixer', -- php formatter
-            'prettierd', -- general formatter (markdown, json, etc)
-            'markdownlint', -- markdown linter
+            'stylua',        -- lua formatter
+            'eslint',        -- js/ts formatter/linter
+            'php-cs-fixer',  -- php formatter
+            'prettierd',     -- general formatter (markdown, json, etc)
+            'markdownlint',  -- markdown linter
             'golangci-lint', -- go linter
-            'phpcs', -- php linter
+            'phpcs',         -- php linter
 
             -- include in gopls lsp
             -- 'gofmt',
@@ -142,17 +142,28 @@ return {
       lspconfig['sourcekit'].setup {
          capabilities = capabilities,
          on_attach = on_attach,
+         filetypes = { 'swift', 'objective-c', 'objective-cpp' },
          cmd = {
             vim.trim(vim.fn.system 'xcrun -f sourcekit-lsp'),
             -- NOTE: if not work, use full path
             -- '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp',
          },
          root_dir = function(filename, _)
-            return util.root_pattern 'buildServer.json'(filename)
-               or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
-               or util.find_git_ancestor(filename)
-               or util.root_pattern 'Package.swift'(filename)
+            return util.root_pattern 'buildServer.json' (filename)
+                or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
+                or util.find_git_ancestor(filename)
+                or util.root_pattern 'Package.swift' (filename)
          end,
+      }
+
+      lspconfig['clangd'].setup {
+         capabilities = capabilities,
+         on_attach = on_attach,
+         -- https://www.reddit.com/r/neovim/comments/12qbcua/multiple_different_client_offset_encodings/
+         cmd = {
+            'clangd',
+            '--offset-encoding=utf-16',
+         },
       }
    end,
 }

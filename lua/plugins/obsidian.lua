@@ -43,7 +43,7 @@ return {
       { '<leader>oL',  '<cmd>ObsidianLink<cr>',        desc = 'Link',         noremap = true },
       { '<leader>oln', '<cmd>ObsidianLinkNew<cr>',     desc = 'Link new',     noremap = true },
       { '<leader>ols', '<cmd>ObsidianLinks<cr>',       desc = 'Links',        noremap = true },
-      { '<leader>oe',  '<cmd>ObsidianExtractNote<cr>', desc = 'Extract note', noremap = true, mode = 'x' },
+      { '<leader>oe',  ':ObsidianExtractNote ',        desc = 'Extract note', noremap = true, mode = 'x' },
       { '<leader>ow',  '<cmd>ObsidianWorkspace<cr>',   desc = 'Workspace',    noremap = true },
       { '<leader>op',  '<cmd>ObsidianPasteImg<cr>',    desc = 'Paste image',  noremap = true },
       { '<leader>or',  '<cmd>ObsidianRename<cr>',      desc = 'Rename',       noremap = true },

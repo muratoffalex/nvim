@@ -10,7 +10,6 @@ return {
          additions = {
             { 'tic', 'tac', 'toe' },
             { 'var', 'let' },
-            { '[]', '[x]' },
          },
          allow_caps_additions = {
             { 'enable', 'disable' },
