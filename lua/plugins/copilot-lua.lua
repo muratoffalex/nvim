@@ -36,4 +36,8 @@ return {
          },
       },
    },
+   config = function(_, opts)
+      require('copilot').setup(opts)
+      vim.g.copilot_proxy = require('config').proxy
+   end,
 }

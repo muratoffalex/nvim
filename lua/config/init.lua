@@ -24,6 +24,7 @@ M.icons = {
 
 M.background = os.getenv 'theme' or 'dark'
 M.theme = 'tokyonight'
+M.proxy = os.getenv 'proxy' or nil
 
 M.obsidian = {
    vaults_directory = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents',
