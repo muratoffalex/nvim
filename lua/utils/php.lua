@@ -1,6 +1,7 @@
 M = {}
 
 -- Get namespace for file or false
+-- TODO: add handling dev namespaces
 function M.get_namespace()
    -- prepare name and path
    local path = vim.fn.fnamemodify(vim.fn.expand '%:p:h', ':~:.')

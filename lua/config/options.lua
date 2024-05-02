@@ -7,27 +7,29 @@ vim.g.maplocalleader = ' '
 vim.g.startup_message = false
 
 local o = vim.o
-local wo = vim.wo
-local opt = vim.opt
+
 local config = require 'config'
 
-vim.o.background = config.background
+o.background = config.background
 
 -- Default indent size
-vim.opt_local.shiftwidth = 2
-vim.opt_local.tabstop = 2
-vim.o.shortmess = vim.o.shortmess .. 'I'
-vim.o.conceallevel = 1
+o.shiftwidth = 2
+o.tabstop = 2
 
-opt.cursorline = true
+o.shortmess = o.shortmess .. 'I'
+-- for obsidian
+o.conceallevel = 1
+
+o.cursorline = true
 -- NOTE: now in plugins/smartcolumn.lua
-opt.colorcolumn = '80,120'
+o.colorcolumn = '80,120'
 
 -- Set highlight on search
 o.hlsearch = true
 
 -- Make line numbers default
-wo.number = true
+o.number = true
+o.scrolloff = 10
 
 -- Enable mouse mode
 o.mouse = 'a'
@@ -48,7 +50,7 @@ o.ignorecase = true
 o.smartcase = true
 
 -- Keep signcolumn on by default
-wo.signcolumn = 'yes'
+o.signcolumn = 'yes'
 
 -- Decrease update time
 o.updatetime = 100 -- faster completion

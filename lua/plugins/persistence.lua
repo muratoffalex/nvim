@@ -9,6 +9,7 @@ return {
          vim.cmd 'silent! TroubleClose'
          vim.cmd 'silent! OutlineClose'
          vim.cmd 'silent! CopilotChatClose'
+         vim.cmd 'silent! lua require("nvterm.terminal").close_all_terms()'
       end, -- a function to call before saving the session
       save_empty = false, -- don't save if there are no open file buffers
    },

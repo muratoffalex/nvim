@@ -15,7 +15,7 @@ return {
             },
             nvim_tree = {
                enabled = false,
-            }
+            },
          },
       }
 

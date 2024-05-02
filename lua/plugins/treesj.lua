@@ -5,6 +5,7 @@ return {
       local treesj = require 'treesj'
       local lang_utils = require 'treesj.langs.utils'
       treesj.setup {
+         use_default_keymaps = false,
          langs = {
             swift = {
                array_literal = lang_utils.set_preset_for_dict {
