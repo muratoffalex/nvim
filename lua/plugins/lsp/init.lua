@@ -15,11 +15,16 @@ return {
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
+      -- TODO: mb implement this without plugin in future
+      'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
    },
    event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
    config = function()
       local lspconfig = require 'lspconfig'
       local util = require 'lspconfig.util'
+
+      require('toggle_lsp_diagnostics').init()
+      vim.keymap.set('n', '<leader>tD', '<cmd>ToggleDiag<cr>', { silent = true, desc = 'Toggle LSP Diagnostics' })
 
       local on_attach = function(client, bufnr)
          local nmap = function(keys, func, desc)
