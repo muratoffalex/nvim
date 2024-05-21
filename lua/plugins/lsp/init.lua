@@ -17,7 +17,6 @@ return {
       'folke/neodev.nvim',
    },
    event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
-   -- event = { 'BufEnter' },
    config = function()
       local lspconfig = require 'lspconfig'
       local util = require 'lspconfig.util'
@@ -32,8 +31,6 @@ return {
          end
 
          nmap('<leader>cr', vim.lsp.buf.rename, 'Rename')
-         -- nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-         -- nmap('<leader>ca', '<cmd>CodeActionMenu<cr>', '[C]ode [A]ction')
 
          -- Move to definition and center cursor on screen
          -- NOTE: <cmd>lua vim.lsp.buf.definition()<CR>zz for centering after
@@ -45,6 +42,7 @@ return {
          nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 
          -- See `:help K` for why this keymap
+         -- TODO: in neovim 0.10 this is default keymap, mb remove
          nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
          nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
@@ -55,6 +53,13 @@ return {
          nmap('<leader>wl', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
          end, 'Workspace List Folders')
+
+         -- if client.server_capabilities.inlayHintProvider then
+         --    vim.lsp.inlay_hint.enable(true)
+         -- end
+         nmap('<leader>ni', function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { nil })
+         end, 'Toggle inlay hints')
 
          -- disable formatting
          -- client.resolved_capabilities.document_formatting = false
@@ -95,6 +100,7 @@ return {
             Lua = {
                workspace = { checkThirdParty = false },
                telemetry = { enable = false },
+               hint = { enable = true },
             },
          },
       }

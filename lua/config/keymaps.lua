@@ -16,8 +16,6 @@ map.set('n', '<Down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true
 map.set('n', '<C-n>', '<C-i>', { desc = 'Jump next', noremap = true })
 
 -- Diagnostic keymaps
-map.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-map.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 map.set('n', '<leader>l', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 map.set('n', '<leader>fm', '<cmd>Format<cr>', { desc = 'Format file' })
 map.set('v', '<leader>fm', '<cmd>Format<cr>', { desc = 'Format selected lines' })
@@ -53,7 +51,7 @@ map.set('v', '<S-Down>', ":m '>+1<CR>gv=gv", { desc = 'Move line or block down',
 -- Terminal
 map.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Switch to normal mode' })
 
--- Tabs
+-- Tabs, but I don't use tabs...
 map.set('n', '<leader>tN', '<cmd>tabnew<cr>', { desc = 'New tab' })
 map.set('n', '<leader>tC', '<cmd>tabclose<cr>', { desc = 'Close tab' })
 map.set('n', '<leader>to', '<cmd>tabonly<cr>', { desc = 'Close other tabs' })
