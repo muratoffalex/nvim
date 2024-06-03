@@ -56,6 +56,7 @@ return {
             { name = 'path' },
             { name = 'buffer' },
             { name = 'codeium' },
+            { name = 'lazydev', group_index = 0 },
          },
          formatting = {
             format = require('lspkind').cmp_format {

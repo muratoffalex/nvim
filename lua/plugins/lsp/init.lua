@@ -13,8 +13,6 @@ return {
       },
       'williamboman/mason-lspconfig.nvim',
 
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
       -- TODO: mb implement this without plugin in future
       'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
    },
@@ -42,7 +40,7 @@ return {
          nmap('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
          nmap('gR', require('telescope.builtin').lsp_references, 'Goto References')
          nmap('gI', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
-         nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type Definition')
+         nmap('gy', require('telescope.builtin').lsp_type_definitions, 'Goto Type Definition')
          nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
          nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 
@@ -109,9 +107,6 @@ return {
             },
          },
       }
-
-      -- Setup neovim lua configuration
-      require('neodev').setup()
 
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
