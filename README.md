@@ -43,7 +43,9 @@ For extra lazy loading, use `{ 'BufReadPost', 'BufWritePost', 'BufNewFile' }`
 from LazyVim instead of `BufEnter`, because `BufEnter` is triggered after
 `VimEnter`.
 
-### Post-Initialization Commands
+### Post-Initialization Commands (Optional)
+
+#### PHP
 
 After initializing the configuration, run the following command to set the
 default standard for PHP_CodeSniffer (lint):
@@ -51,6 +53,20 @@ default standard for PHP_CodeSniffer (lint):
 ```sh
 ~/.local/share/nvim/mason/bin/phpcs --config-set default_standard PSR12
 ```
+
+#### Swift develop
+
+brew install ruby
+gem install cocoapods
+gem install xcodeproj
+brew install xcode-build-server
+brew install xcbeautify
+
+#### Dadbod
+
+brew install mysql-client
+brew install libpq
+brew install redis
 
 ## TODO
 
