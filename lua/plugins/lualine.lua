@@ -85,20 +85,17 @@ return {
          return tostring(lines) .. 'L:' .. tostring(fn.wordcount().visual_chars) .. 'C'
       end
 
-      -- local theme = require('plugins.lualine.theme').theme()
       -- local theme = config.theme
-
       -- FIXME: lualine theme not dynamic
-      local theme = require 'lualine.themes.tokyonight'
-      theme.normal.c.bg = nil
+      -- local theme = require 'lualine.themes.tokyonight'
+      -- make main bg transparent
+      -- theme.normal.c.bg = nil
 
       require('lualine').setup {
          options = {
-            -- TODO: toggle globalstatus to true
-            -- when fix colors in diffent themes
-            globalstatus = true,
+            globalstatus = false,
             icons_enabled = true,
-            theme = theme,
+            -- theme = theme,
             component_separators = '|',
             section_separators = '',
          },
