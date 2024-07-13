@@ -64,6 +64,7 @@ map.set('n', '<leader>tn', '<cmd>tabnext<cr>', { desc = 'Next tab' })
 map.set('n', '<leader>tp', '<cmd>tabprevious<cr>', { desc = 'Previous tab' })
 
 -- Split windows
+-- TODO: mb remap to <leader>s
 map.set('n', 'ss', '<cmd>split<cr>', { desc = 'Split window horizontally', noremap = true })
 map.set('n', 'sv', '<cmd>vsplit<cr>', { desc = 'Split window vertically', noremap = true })
 map.set('n', 'sq', '<C-w>q', { desc = 'Close window' })
