@@ -18,3 +18,7 @@ new_command('PhpBuild', function(opts)
    end
    php_tb.build_base(type)
 end, { nargs = '*', desc = 'Init current php file with type' })
+
+new_command('RestoreSession', function(_)
+   require('persistence').load()
+end, { desc = 'Restore session' })
