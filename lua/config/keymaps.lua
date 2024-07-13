@@ -19,6 +19,12 @@ map.set('n', '<leader>l', vim.diagnostic.open_float, { desc = 'Open floating dia
 map.set('n', '<leader>fm', '<cmd>Format<cr>', { desc = 'Format file' })
 map.set('v', '<leader>fm', '<cmd>Format<cr>', { desc = 'Format selected lines' })
 
+-- Language specific keymaps
+map.set('n', 'ф', 'a')
+map.set('n', 'д', 'i')
+map.set('n', 'ж', 'o')
+map.set('n', 'ш', 'u')
+
 -- Common keymaps
 map.set('n', '<Esc>', '<cmd> noh <CR>', { desc = 'Clear highlights' })
 map.set('n', '<C-s>', '<cmd> :silent w <CR>', { desc = 'Save file' })
