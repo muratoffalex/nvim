@@ -15,6 +15,7 @@ return {
       { 'nvim-lua/plenary.nvim' },
    },
    keys = {
+      { '<leader>cc', desc = 'CopilotChat' },
       -- Quick chat with Copilot
       {
          '<leader>ccq',

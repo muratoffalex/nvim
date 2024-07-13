@@ -59,6 +59,10 @@ return {
    end,
    keys = {
       {
+         '<leader>cn',
+         desc = 'Toggle node under cursor',
+      },
+      {
          '<leader>cnt',
          function()
             require('treesj').toggle()
