@@ -8,14 +8,15 @@ local augroup = vim.api.nvim_create_augroup
 local general = augroup('General Settings', { clear = true })
 local highlight_group = augroup('YankHighlight', { clear = true })
 local templates_group = augroup('Templates', { clear = true })
+local persistence = augroup('Persistence', { clear = true })
 
 autocmd({ 'BufNewFile', 'BufReadPost' }, {
    pattern = '*.php',
    callback = function()
       local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-      local content = table.concat(lines, "\n")
+      local content = table.concat(lines, '\n')
 
-      if not content:find('<%?php') and not content:find('<%?') then
+      if not content:find '<%?php' and not content:find '<%?' then
          utils.template_builders.php.build_by_content()
       end
    end,
@@ -23,9 +24,9 @@ autocmd({ 'BufNewFile', 'BufReadPost' }, {
    desc = 'Insert base PHP template',
 })
 
-autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = { "*.podspec", "Podfile" },
-  command = "set filetype=ruby",
+autocmd({ 'BufRead', 'BufNewFile' }, {
+   pattern = { '*.podspec', 'Podfile' },
+   command = 'set filetype=ruby',
 })
 
 autocmd('BufReadPost', {
@@ -108,4 +109,19 @@ autocmd('User', {
    end,
    group = general,
    desc = 'Mason Tools update completed message',
+})
+
+autocmd('User', {
+   pattern = { 'PersistenceSavePre' },
+   callback = function()
+      vim.cmd 'silent! Neotree close'
+      vim.cmd 'silent! DBUIClose'
+      vim.cmd 'silent! TroubleClose'
+      vim.cmd 'silent! OutlineClose'
+      vim.cmd 'silent! CopilotChatClose'
+      vim.cmd 'silent! DiffviewClose'
+      vim.cmd 'silent! lua require("nvterm.terminal").close_all_terms()'
+   end,
+   group = persistence,
+   desc = 'Do some actions before saving the session',
 })

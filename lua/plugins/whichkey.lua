@@ -18,7 +18,7 @@ return {
          { '<leader>w',  group = 'Workspace' },
          { 'gh',         group = 'Diffview' },
          { 'gs',         group = 'Mini.surround' },
-         { '<leader>s',          group = 'Split windows' },
+         { '<leader>s',  group = 'Split windows' },
          {
             mode = { 'n', 'v' },
             { '<leader>c',  group = 'Code/Copilot' },
@@ -28,6 +28,6 @@ return {
             { '<leader>od', group = 'Daily' },
             { '<leader>r',  group = 'Refactoring' },
          },
-      }
+      },
    },
 }
