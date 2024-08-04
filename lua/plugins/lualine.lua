@@ -4,19 +4,18 @@ return {
       'AndreM222/copilot-lualine',
    },
    config = function()
-      local utils = require 'utils'
+      local utils = require 'utils.init'
       local fn = vim.fn
-      local config = require 'config'
 
       -- lsp clients
       local function lsp_clients()
          local bufnr = vim.api.nvim_get_current_buf()
-         local clients = vim.lsp.get_active_clients { bufnr = bufnr }
+         local clients = vim.lsp.get_clients { bufnr = bufnr }
          local clients_list = {}
          for _, client in pairs(clients) do
             table.insert(clients_list, client.name)
          end
-         return utils.dump(clients_list)
+         return utils.dump(clients_list, '·')
       end
 
       -- codeium info
@@ -47,7 +46,7 @@ return {
 
       local xcodebuild_build_status = {
          "' ' .. vim.g.xcodebuild_last_status",
-         color = { fg = "Gray" },
+         color = { fg = 'Gray' },
       }
 
       local copilot = {
@@ -58,7 +57,7 @@ return {
                   enabled = '',
                   disabled = '',
                   warning = '',
-                  unknown = '',
+                  unknown = ' ',
                },
                hl = {
                   enabled = '#41BC9C',
@@ -85,25 +84,21 @@ return {
          return tostring(lines) .. 'L:' .. tostring(fn.wordcount().visual_chars) .. 'C'
       end
 
-      -- local theme = config.theme
-      -- FIXME: lualine theme not dynamic
-      -- local theme = require 'lualine.themes.tokyonight'
-      -- make main bg transparent
-      -- theme.normal.c.bg = nil
-
       require('lualine').setup {
          options = {
             globalstatus = false,
             icons_enabled = true,
-            -- theme = theme,
-            component_separators = '|',
-            section_separators = '',
+            component_separators = { left = '', right = '' },
+            section_separators = { left = '', right = '' },
          },
          sections = {
             lualine_a = { 'mode' },
             lualine_b = { 'branch', 'diff', 'diagnostics' },
-            lualine_c = { 'filename' },
-            lualine_x = { xcodebuild_build_status, xcodebuild_device, package_info, copilot, 'encoding', lsp_clients, 'filetype' },
+            lualine_c = {
+               { 'filetype', padding = { left = 1, right = 0 }, separator = '', icon_only = true },
+               { 'filename', padding = { left = 0, right = 0 }, separator = '' },
+            },
+            lualine_x = { xcodebuild_build_status, xcodebuild_device, package_info, copilot, lsp_clients },
             lualine_y = { 'progress' },
             lualine_z = {
                {

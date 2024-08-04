@@ -9,15 +9,16 @@ function M.dump(o, redefined_separator)
          if type(k) ~= 'number' then
             k = '"' .. k .. '"'
          end
-         --s = s .. '[' .. k .. '] = ' .. M.dump(v) .. ','
          s = s .. M.dump(v) .. separator
       end
 
-      return s:sub(1, -2)
+      return s:sub(1, -1 - string.len(separator))
    else
       return tostring(o)
    end
 end
+
+
 
 M.php = require 'utils.php'
 
