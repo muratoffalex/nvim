@@ -12,19 +12,25 @@ return {
          },
       },
       'williamboman/mason-lspconfig.nvim',
-
-      -- TODO: mb implement this without plugin in future
-      'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
    },
    event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
    config = function()
       local lspconfig = require 'lspconfig'
       local util = require 'lspconfig.util'
 
-      require('toggle_lsp_diagnostics').init()
-      vim.keymap.set('n', '<leader>tD', '<cmd>ToggleDiag<cr>', { silent = true, desc = 'Toggle LSP Diagnostics' })
+      vim.api.nvim_create_autocmd('BufEnter', {
+         callback = function()
+            if vim.bo.filetype == 'swift' and #(vim.lsp.get_clients { name = 'sourcekit' }) == 0 then
+               vim.lsp.start(lspconfig['sourcekit'])
+            end
+         end,
+         desc = 'Start sourcekit on swift files if not already started (enter file or lsp crashed)',
+      })
 
       local on_attach = function(client, bufnr)
+         -- for inline diagnostic messages, use tiny-inline-diagnostic instead
+         vim.diagnostic.config { virtual_text = false }
+
          local nmap = function(keys, func, desc)
             if desc then
                desc = 'LSP: ' .. desc
@@ -57,9 +63,6 @@ return {
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
          end, 'Workspace List Folders')
 
-         -- if client.server_capabilities.inlayHintProvider then
-         --    vim.lsp.inlay_hint.enable(true)
-         -- end
          nmap('<leader>ni', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { nil })
          end, 'Toggle inlay hints')
@@ -146,6 +149,7 @@ return {
       }
 
       lspconfig['sourcekit'].setup {
+         autostart = false,
          capabilities = capabilities,
          on_attach = on_attach,
          filetypes = { 'swift', 'objective-c', 'objective-cpp' },
