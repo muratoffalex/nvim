@@ -8,7 +8,6 @@ local augroup = vim.api.nvim_create_augroup
 local general = augroup('General Settings', { clear = true })
 local highlight_group = augroup('YankHighlight', { clear = true })
 local templates_group = augroup('Templates', { clear = true })
-local persistence = augroup('Persistence', { clear = true })
 
 autocmd({ 'BufNewFile', 'BufReadPost' }, {
    pattern = '*.php',
@@ -111,17 +110,3 @@ autocmd('User', {
    desc = 'Mason Tools update completed message',
 })
 
-autocmd('User', {
-   pattern = { 'PersistenceSavePre' },
-   callback = function()
-      vim.cmd 'silent! Neotree close'
-      vim.cmd 'silent! DBUIClose'
-      vim.cmd 'silent! TroubleClose'
-      vim.cmd 'silent! OutlineClose'
-      vim.cmd 'silent! CopilotChatClose'
-      vim.cmd 'silent! DiffviewClose'
-      vim.cmd 'silent! lua require("nvterm.terminal").close_all_terms()'
-   end,
-   group = persistence,
-   desc = 'Do some actions before saving the session',
-})
