@@ -6,7 +6,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 vim.g.startup_message = false
 
-local o = vim.o
+local o = vim.opt
 
 local config = require 'config'
 
@@ -16,7 +16,7 @@ o.background = config.background
 o.shiftwidth = 2
 o.tabstop = 2
 
-o.shortmess = o.shortmess .. 'I'
+vim.o.shortmess = vim.o.shortmess .. 'I'
 -- for obsidian
 o.conceallevel = 1
 

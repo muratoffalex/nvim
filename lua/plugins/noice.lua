@@ -15,6 +15,9 @@ return {
       --   If not available, we use `mini` as the fallback
       'rcarriga/nvim-notify',
    },
+   keys = {
+      { '<leader>nd', '<cmd>NoiceDismiss<cr>', desc = 'Noice dismiss' }
+   },
    init = function()
       vim.notify = require 'notify'
    end,

@@ -4,7 +4,14 @@ return {
       'nvim-telescope/telescope.nvim',
       'MunifTanjim/nui.nvim',
    },
+   lazy = true,
    ft = { 'swift', 'objective-c', 'objective-cpp' },
+   keys = {
+      {
+         '<leader>cx',
+         desc = 'Xcodebuild',
+      }
+   },
    config = function()
       require('xcodebuild').setup {
          integrations = {

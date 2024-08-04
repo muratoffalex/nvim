@@ -15,8 +15,8 @@ return {
       { '<leader>rb', mode = { 'n' }, desc = 'Refactor extract_block'},
       { '<leader>rbf', mode = { 'n' }, desc = 'Refactor extract_block_to_file'},
    },
-   config = function()
-      require('refactoring').setup()
+   config = function(_, opts)
+      require('refactoring').setup(opts)
       require('telescope').load_extension 'refactoring'
 
       vim.keymap.set({ 'n', 'x' }, '<leader>rr', function()

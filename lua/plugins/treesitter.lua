@@ -30,6 +30,7 @@ return {
                'css',
                'markdown',
                'markdown_inline',
+               'regex',
             },
 
             -- Autoinstall languages that are not installed. Defaults to false
