@@ -3,7 +3,7 @@ vim.loader.enable()
 
 -- space as leader
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = '\\'
 vim.g.startup_message = false
 
 local o = vim.o
@@ -53,8 +53,12 @@ o.smartcase = true
 o.signcolumn = 'yes'
 
 -- Decrease update time
-o.updatetime = 100 -- faster completion
-o.timeoutlen = 300
+o.updatetime = 200 -- faster completion
+o.timeoutlen = 1000 -- which-key timeout trigger
+
+-- Split options
+o.splitright = true
+o.splitbelow = true
 
 -- Set completeopt to have a better completion experience
 o.completeopt = 'menuone,noselect'
@@ -62,3 +66,4 @@ o.completeopt = 'menuone,noselect'
 o.wrap = true -- display long lines with wrap
 
 o.termguicolors = true
+o.smoothscroll = true
