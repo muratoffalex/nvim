@@ -7,7 +7,7 @@ return {
       branch = true,
    },
    -- stylua: ignore
-   keys = {
+  keys = {
       { "<leader>qs", function() require("persistence").load() end,                desc = "Restore Session" },
       { "<leader>qS", function() require("persistence").select() end,              desc = "Select Session" },
       { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
@@ -21,8 +21,6 @@ return {
          callback = function()
             vim.cmd 'silent! Neotree close'
             vim.cmd 'silent! DBUIClose'
-            -- close only last window
-            vim.cmd 'silent! lua require("trouble").close()'
             vim.cmd 'silent! OutlineClose'
             vim.cmd 'silent! CopilotChatClose'
             vim.cmd 'silent! DiffviewClose'

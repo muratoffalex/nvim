@@ -16,6 +16,10 @@ o.background = config.background
 o.shiftwidth = 2
 o.tabstop = 2
 
+-- Sessions
+o.sessionoptions = 'buffers,curdir,folds,tabpages,winsize,resize,winpos'
+
+-- Disable startup message
 vim.o.shortmess = vim.o.shortmess .. 'I'
 -- for obsidian
 o.conceallevel = 1
