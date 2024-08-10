@@ -56,7 +56,7 @@ map.set('v', '<S-Down>', ":m '>+1<CR>gv=gv", { desc = 'Move line or block down',
 -- Terminal
 map.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Switch to normal mode' })
 
--- Tabs, but I don't use tabs...
+-- Tabs
 map.set('n', '<leader>tN', '<cmd>tabnew<cr>', { desc = 'New tab' })
 map.set('n', '<leader>tC', '<cmd>tabclose<cr>', { desc = 'Close tab' })
 map.set('n', '<leader>to', '<cmd>tabonly<cr>', { desc = 'Close other tabs' })

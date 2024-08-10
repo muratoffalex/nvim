@@ -24,11 +24,15 @@ return {
          { '<leader>m',  group = 'Map/Maximize' },
          { '<leader>n',  group = 'Relative number/Wrap mode' },
          { '<leader>p',  group = 'Package.json deps' },
-         { '<leader>t',  group = 'Trouble/Tabs' },
+         { '<leader>t',  group = 'Trouble/Tabs/Translation' },
          { '<leader>w',  group = 'Workspace' },
          { 'gh',         group = 'Diffview' },
          { 'gs',         group = 'Mini.surround' },
          { '<leader>s',  group = 'Split windows' },
+         {
+            { '<leader>t',  group = 'Translation', mode = { 'x', 'v' } },
+            { '<leader>tr', group = 'Translation' },
+         },
          {
             mode = { 'n', 'v' },
             { '<leader>c',  group = 'Code/Copilot' },

@@ -3,10 +3,10 @@ local M = {}
 
 M.icons = {
    git = {
-      added = '',
-      changed = '',
+      added = ' ',
+      changed = ' ',
       copied = '',
-      deleted = '',
+      deleted = ' ',
       ignored = '',
       renamed = '',
       staged = '',
