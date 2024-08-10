@@ -14,22 +14,28 @@ return {
       'williamboman/mason-lspconfig.nvim',
    },
    event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
+   opts = {
+      codelens = {
+         enabled = true,
+      },
+   },
    config = function()
       local lspconfig = require 'lspconfig'
       local util = require 'lspconfig.util'
 
-      vim.api.nvim_create_autocmd('BufEnter', {
-         callback = function()
-            if vim.bo.filetype == 'swift' and #(vim.lsp.get_clients { name = 'sourcekit' }) == 0 then
-               vim.lsp.start(lspconfig['sourcekit'])
-            end
-         end,
-         desc = 'Start sourcekit on swift files if not already started (enter file or lsp crashed)',
-      })
+      -- vim.api.nvim_create_autocmd('BufEnter', {
+      --    callback = function()
+      --       if vim.bo.filetype == 'swift' and #(vim.lsp.get_clients { name = 'sourcekit' }) == 0 then
+      --          vim.lsp.start(lspconfig['sourcekit'])
+      --       end
+      --    end,
+      --    desc = 'Start sourcekit on swift files if not already started (enter file or lsp crashed)',
+      -- })
 
       local on_attach = function(client, bufnr)
          -- for inline diagnostic messages, use tiny-inline-diagnostic instead
          vim.diagnostic.config { virtual_text = false }
+         vim.print(client.config.settings)
 
          local nmap = function(keys, func, desc)
             if desc then
@@ -67,6 +73,10 @@ return {
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { nil })
          end, 'Toggle inlay hints')
 
+         if client.config.settings.codelens_enabled then
+            nmap('<leader>cl', vim.lsp.codelens.run, 'Run CodeLens')
+         end
+
          -- disable formatting
          -- client.resolved_capabilities.document_formatting = false
          -- Create a command `:Format` local to the LSP buffer
@@ -94,10 +104,33 @@ return {
          pyright = {},
          rust_analyzer = {},
          html = { filetypes = { 'html', 'twig', 'hbs' } },
+         cssls = {},
          marksman = {},
          tailwindcss = { filetypes = { 'html', 'twig', 'css', 'jsx', 'vue' } },
          gopls = {},
-         intelephense = {},
+         intelephense = {
+            codelens_enabled = true,
+            intelephense = {
+               codeLens = {
+                  implementations = {
+                     enable = true,
+                  },
+                  overrides = {
+                     enable = true,
+                  },
+                  parent = {
+                     enable = true,
+                  },
+                  references = {
+                     enable = true,
+
+                  },
+                  usages = {
+                     enable = true,
+                  },
+               },
+            },
+         },
          -- only for php 8.0+
          -- phpactor = {},
          kotlin_language_server = {},
@@ -139,7 +172,7 @@ return {
 
       mason_lspconfig.setup_handlers {
          function(server_name)
-            require('lspconfig')[server_name].setup {
+            lspconfig[server_name].setup {
                capabilities = capabilities,
                on_attach = on_attach,
                settings = servers[server_name],
@@ -149,7 +182,7 @@ return {
       }
 
       lspconfig['sourcekit'].setup {
-         autostart = false,
+         autostart = true,
          capabilities = capabilities,
          on_attach = on_attach,
          filetypes = { 'swift', 'objective-c', 'objective-cpp' },
