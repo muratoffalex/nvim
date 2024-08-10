@@ -7,26 +7,26 @@ return {
       'SmiteshP/nvim-navic',
       'nvim-tree/nvim-web-devicons', -- optional dependency
    },
-   opts = {
-      create_autocmd = false,
-      show_modified = true,
-   },
-   config = function(_, opts)
-      require('barbecue').setup(opts)
+   config = function()
+      require('barbecue').setup {
+         create_autocmd = false,
+         show_modified = true,
+         custom_section = require('utils.init').git_status,
+      }
 
       vim.api.nvim_create_autocmd({
-        "WinResized",
-        "BufWinEnter",
-        "CursorHold",
-        "InsertLeave",
+         'WinResized',
+         'BufWinEnter',
+         'CursorHold',
+         'InsertLeave',
 
-        -- include this if you have set `show_modified` to `true`
-        "BufModifiedSet",
+         -- include this if you have set `show_modified` to `true`
+         'BufModifiedSet',
       }, {
-        group = vim.api.nvim_create_augroup("barbecue.updater", {}),
-        callback = function()
-          require("barbecue.ui").update()
-        end,
+         group = vim.api.nvim_create_augroup('barbecue.updater', {}),
+         callback = function()
+            require('barbecue.ui').update()
+         end,
       })
    end,
 }

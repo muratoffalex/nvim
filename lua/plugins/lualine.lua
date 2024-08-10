@@ -5,6 +5,7 @@ return {
    },
    config = function()
       local utils = require 'utils.init'
+      local icons = require('config').icons
       local fn = vim.fn
 
       -- lsp clients
@@ -55,8 +56,8 @@ return {
             status = {
                icons = {
                   enabled = '',
-                  disabled = '',
-                  warning = '',
+                  disabled = ' ',
+                  warning = ' ',
                   unknown = ' ',
                },
                hl = {
@@ -93,12 +94,33 @@ return {
          },
          sections = {
             lualine_a = { 'mode' },
-            lualine_b = { 'branch', 'diff', 'diagnostics' },
+            lualine_b = {
+               -- 'branch',
+               -- {
+               --    'diff',
+               --    symbols = {
+               --       added = icons.git.added,
+               --       modified = icons.git.changed,
+               --       removed = icons.git.deleted,
+               --    },
+               --    source = function()
+               --       local gitsigns = vim.b.gitsigns_status_dict
+               --       if gitsigns then
+               --          return {
+               --             added = gitsigns.added,
+               --             modified = gitsigns.changed,
+               --             removed = gitsigns.removed,
+               --          }
+               --       end
+               --    end,
+               -- },
+               'diagnostics',
+            },
             lualine_c = {
                { 'filetype', padding = { left = 1, right = 0 }, separator = '', icon_only = true },
                { 'filename', padding = { left = 0, right = 0 }, separator = '' },
             },
-            lualine_x = { xcodebuild_build_status, xcodebuild_device, package_info, copilot, lsp_clients },
+            lualine_x = { xcodebuild_build_status, xcodebuild_device, package_info, copilot, lsp_clients, 'encoding' },
             lualine_y = { 'progress' },
             lualine_z = {
                {

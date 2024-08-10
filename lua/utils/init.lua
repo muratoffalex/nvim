@@ -18,7 +18,25 @@ function M.dump(o, redefined_separator)
    end
 end
 
+M.git_status = function()
+   local gitsigns = vim.b.gitsigns_status_dict or {}
+   local added = gitsigns.added or 0
+   local removed = gitsigns.removed or 0
+   local changed = gitsigns.changed or 0
 
+   local status = {}
+   if added > 0 then
+      table.insert(status, string.format('%%#WinBarGreen# %d ', added))
+   end
+   if removed > 0 then
+      table.insert(status, string.format('%%#WinBarRed# %d ', removed))
+   end
+   if changed > 0 then
+      table.insert(status, string.format('%%#WinBarBlue# %d', changed))
+   end
+
+   return table.concat(status)
+end
 
 M.php = require 'utils.php'
 
