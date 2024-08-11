@@ -26,13 +26,13 @@ M.git_status = function()
 
    local status = {}
    if added > 0 then
-      table.insert(status, string.format('%%#WinBarGreen# %d ', added))
+      table.insert(status, string.format('%%#WinBarDiffAdded# %d ', added))
    end
    if removed > 0 then
-      table.insert(status, string.format('%%#WinBarRed# %d ', removed))
+      table.insert(status, string.format('%%#WinBarDiffRemoved# %d ', removed))
    end
    if changed > 0 then
-      table.insert(status, string.format('%%#WinBarBlue# %d', changed))
+      table.insert(status, string.format('%%#WinBarDiffChanged# %d', changed))
    end
 
    return table.concat(status)

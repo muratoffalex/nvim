@@ -9,9 +9,9 @@ return {
          sidebars = 'normal',
       },
       on_highlights = function(highlights, colors)
-         highlights.WinBarGreen = { fg = colors.green }
-         highlights.WinBarRed = { fg = colors.red }
-         highlights.WinBarBlue = { fg = colors.blue }
+         highlights.WinBarDiffAdded = { fg = colors.green }
+         highlights.WinBarDiffRemoved = { fg = colors.red }
+         highlights.WinBarDiffChanged = { fg = colors.blue }
       end,
    },
    config = function(_, opts)
