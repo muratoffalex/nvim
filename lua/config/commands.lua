@@ -22,3 +22,7 @@ end, { nargs = '*', desc = 'Init current php file with type' })
 new_command('RestoreSession', function(_)
    require('persistence').load()
 end, { desc = 'Restore session' })
+
+new_command('DontSaveCurrentSession', function(_)
+   require('persistence').stop()
+end, {})

@@ -35,7 +35,6 @@ return {
       local on_attach = function(client, bufnr)
          -- for inline diagnostic messages, use tiny-inline-diagnostic instead
          vim.diagnostic.config { virtual_text = false }
-         vim.print(client.config.settings)
 
          local nmap = function(keys, func, desc)
             if desc then
@@ -123,7 +122,6 @@ return {
                   },
                   references = {
                      enable = true,
-
                   },
                   usages = {
                      enable = true,
@@ -133,7 +131,7 @@ return {
          },
          -- only for php 8.0+
          -- phpactor = {},
-         kotlin_language_server = {},
+         -- kotlin_language_server = {},
          tsserver = {},
          lua_ls = {
             Lua = {
@@ -152,9 +150,6 @@ return {
       local mason_lspconfig = require 'mason-lspconfig'
       local mason_tool_installer = require 'mason-tool-installer'
 
-      mason_lspconfig.setup {
-         ensure_installed = vim.tbl_keys(servers),
-      }
       mason_tool_installer.setup {
          ensure_installed = {
             'stylua',        -- lua formatter
@@ -164,10 +159,11 @@ return {
             'markdownlint',  -- markdown linter
             'golangci-lint', -- go linter
             'phpcs',         -- php linter
-
-            -- include in gopls lsp
-            -- 'gofmt',
          },
+      }
+
+      mason_lspconfig.setup {
+         ensure_installed = vim.tbl_keys(servers),
       }
 
       mason_lspconfig.setup_handlers {
