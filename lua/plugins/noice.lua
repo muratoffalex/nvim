@@ -1,6 +1,9 @@
 return {
    'folke/noice.nvim',
    event = 'VeryLazy',
+   -- temporarily downgrade
+   -- https://github.com/folke/noice.nvim/issues/923
+   version = '4.4.7',
    opts = {
       notify = {
          enabled = true,
