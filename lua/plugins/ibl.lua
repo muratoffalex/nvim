@@ -1,12 +1,22 @@
 return {
    'lukas-reineke/indent-blankline.nvim',
-   event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
+   event = 'VeryLazy',
+   ---@module "ibl"
+   ---@type ibl.config
    opts = {
       indent = {
          char = '│',
          tab_char = '│',
       },
-      scope = { enabled = false },
+      scope = {
+         enabled = true,
+         show_start = false,
+         show_end = false,
+         -- mini.indentscope behavior
+         include = {
+            node_type = { ['*'] = { '*' } },
+         },
+      },
       exclude = {
          filetypes = {
             'help',
