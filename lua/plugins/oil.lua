@@ -10,12 +10,13 @@ return {
    },
    dependencies = { 'nvim-tree/nvim-web-devicons' },
    config = function(_, opts)
-      require('oil').setup(opts)
+      local oil = require('oil')
+      oil.setup(opts)
       vim.keymap.set('n', '<leader>E', function()
          if vim.startswith(vim.fn.bufname(), 'oil://') then
-            vim.cmd 'bd'
+            oil.close()
          else
-            vim.cmd 'Oil'
+            oil.open()
          end
       end, { silent = true, desc = 'Toggle oil' })
    end,
