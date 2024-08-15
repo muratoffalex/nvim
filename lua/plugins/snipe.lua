@@ -10,7 +10,7 @@ return {
       sort = 'last',
       hints = {
          -- specified for colemak layout
-         dictionary = 'sartdwfneiohmpg',
+         dictionary = 'arstdwfneiohmpg',
       },
    },
    config = function(_, opts)
