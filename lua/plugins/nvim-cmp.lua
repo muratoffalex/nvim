@@ -1,14 +1,13 @@
 return {
    -- Autocompletion
    'hrsh7th/nvim-cmp',
-   version = false,
    dependencies = {
       {
-        "garymjr/nvim-snippets",
-        opts = {
-          friendly_snippets = true,
-        },
-        dependencies = { "rafamadriz/friendly-snippets" },
+         'garymjr/nvim-snippets',
+         opts = {
+            friendly_snippets = true,
+         },
+         dependencies = { 'rafamadriz/friendly-snippets' },
       },
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
@@ -55,7 +54,7 @@ return {
             { name = 'path' },
             { name = 'buffer' },
             { name = 'lazydev', group_index = 0 },
-         }
+         },
       }
    end,
    config = function(_, opts)

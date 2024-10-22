@@ -10,7 +10,7 @@ return {
       {
          '<leader>cx',
          desc = 'Xcodebuild',
-      }
+      },
    },
    config = function()
       require('xcodebuild').setup {
@@ -25,16 +25,12 @@ return {
          },
       }
 
-      -- Enable indexing without building
-      -- https://github.com/wojciech-kulik/xcodebuild.nvim/discussions/120
-      vim.env.XBS_FEAT_NEWFILE = 1
-
       -- Automatically refresh files when changed outside of vim
       -- https://github.com/wojciech-kulik/xcodebuild.nvim/discussions/36
       vim.opt.autoread = true
       vim.fn.timer_start(2000, function()
-        vim.cmd("silent! checktime")
-      end, { ["repeat"] = -1 })
+         vim.cmd 'silent! checktime'
+      end, { ['repeat'] = -1 })
 
       vim.keymap.set('n', '<leader>cxl', '<cmd>XcodebuildToggleLogs<cr>', { desc = 'Toggle Xcodebuild Logs' })
       vim.keymap.set('n', '<leader>cxb', '<cmd>XcodebuildBuild<cr>', { desc = 'Build Project' })

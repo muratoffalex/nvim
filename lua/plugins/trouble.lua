@@ -8,8 +8,7 @@ return {
       { '<leader>tc', "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = 'Trouble toggle document diagnostic' },
       { '<leader>tq', "<cmd>Trouble qflist toggle<CR>", desc = 'Trouble toggle quickfix list' },
       { '<leader>tl', "<cmd>Trouble loclist toggle<CR>", desc = 'Trouble toggle loclist' },
-      { 'gr', "<cmd>Trouble lsp toggle focus=false win.position=right<CR>", desc = 'Trouble lsp references/definitions/...' },
-      -- { 'gi', "<cmd>lua require('trouble').toggle('lsp_implementations')<CR>", desc = 'Trouble lsp implementations' },
+      { 'gr', "<cmd>Trouble lsp toggle focus=false win.position=bottom<CR>", desc = 'Trouble lsp references/definitions/...' },
    },
    opts = {},
 }

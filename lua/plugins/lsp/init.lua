@@ -22,16 +22,6 @@ return {
    config = function()
       local lspconfig = require 'lspconfig'
       local util = require 'lspconfig.util'
-
-      -- vim.api.nvim_create_autocmd('BufEnter', {
-      --    callback = function()
-      --       if vim.bo.filetype == 'swift' and #(vim.lsp.get_clients { name = 'sourcekit' }) == 0 then
-      --          vim.lsp.start(lspconfig['sourcekit'])
-      --       end
-      --    end,
-      --    desc = 'Start sourcekit on swift files if not already started (enter file or lsp crashed)',
-      -- })
-
       local on_attach = function(client, bufnr)
          -- for inline diagnostic messages, use tiny-inline-diagnostic instead
          vim.diagnostic.config { virtual_text = false }
@@ -85,7 +75,7 @@ return {
                timeout_ms = 2000,
                filter = function(c)
                   -- volar conflict with null-ls eslint formatter
-                  if (c.name == 'volar' or c.name == 'tsserver') and c.name ~= 'null-ls' then
+                  if (c.name == 'volar' or c.name == 'tsserver' or c.name == 'intelephense') and c.name ~= 'null-ls' then
                      return false
                   end
                   return true
@@ -132,7 +122,7 @@ return {
          -- only for php 8.0+
          -- phpactor = {},
          -- kotlin_language_server = {},
-         tsserver = {},
+         ts_ls = {},
          lua_ls = {
             Lua = {
                workspace = { checkThirdParty = false },
@@ -154,11 +144,11 @@ return {
          ensure_installed = {
             'stylua',        -- lua formatter
             'eslint',        -- js/ts formatter/linter
-            'php-cs-fixer',  -- php formatter
+            'phpcbf',
+            'phpcs',         -- php linter
             'prettierd',     -- general formatter (markdown, json, etc)
             'markdownlint',  -- markdown linter
             'golangci-lint', -- go linter
-            'phpcs',         -- php linter
          },
       }
 
@@ -177,24 +167,6 @@ return {
          end,
       }
 
-      lspconfig['sourcekit'].setup {
-         autostart = true,
-         capabilities = capabilities,
-         on_attach = on_attach,
-         filetypes = { 'swift', 'objective-c', 'objective-cpp' },
-         cmd = {
-            vim.trim(vim.fn.system 'xcrun -f sourcekit-lsp'),
-            -- NOTE: if not work, use full path
-            -- '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp',
-         },
-         root_dir = function(filename, _)
-            return util.root_pattern 'buildServer.json' (filename)
-                or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
-                or util.find_git_ancestor(filename)
-                or util.root_pattern 'Package.swift' (filename)
-         end,
-      }
-
       lspconfig['clangd'].setup {
          capabilities = capabilities,
          on_attach = on_attach,
@@ -204,5 +176,30 @@ return {
             '--offset-encoding=utf-16',
          },
       }
+
+      lspconfig['sourcekit'].setup({
+         autostart = false,
+         capabilities = capabilities,
+         on_attach = on_attach,
+         filetypes = { 'swift', 'objective-c', 'objective-cpp' },
+         cmd = {
+            vim.trim(vim.fn.system 'xcrun -f sourcekit-lsp'),
+         },
+         root_dir = function(filename, _)
+            return util.root_pattern 'buildServer.json' (filename)
+                or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
+                or util.find_git_ancestor(filename)
+                or util.root_pattern 'Package.swift' (filename)
+         end,
+      })
+
+      vim.api.nvim_create_autocmd({'BufEnter', 'LspDetach'}, {
+         callback = function()
+            if vim.bo.filetype == 'swift' and #(vim.lsp.get_clients { name = 'sourcekit' }) == 0 then
+               vim.cmd('LspStart')
+            end
+         end,
+         desc = 'Start sourcekit on swift files if not already started (enter file or lsp crashed)',
+      })
    end,
 }

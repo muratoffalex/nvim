@@ -11,13 +11,14 @@ local o = vim.opt
 local config = require 'config'
 
 o.background = config.background
+o.swapfile = false
 
 -- Default indent size
 o.shiftwidth = 2
 o.tabstop = 2
 
 -- Sessions
-o.sessionoptions = 'buffers,curdir,folds,tabpages,winsize,resize,winpos'
+o.sessionoptions = 'buffers,curdir,folds,tabpages'
 
 -- Disable startup message
 vim.o.shortmess = vim.o.shortmess .. 'I'
@@ -68,6 +69,9 @@ o.splitbelow = true
 o.completeopt = 'menuone,noselect'
 
 o.wrap = true -- display long lines with wrap
+
+o.list = true
+o.listchars = { tab = ">-", trail = "·" }
 
 o.termguicolors = true
 o.smoothscroll = true

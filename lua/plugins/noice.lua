@@ -1,9 +1,12 @@
 return {
    'folke/noice.nvim',
+   dependencies = {
+      'MunifTanjim/nui.nvim',
+   },
    event = 'VeryLazy',
-   -- temporarily downgrade
-   -- https://github.com/folke/noice.nvim/issues/923
-   version = '4.4.7',
+   keys = {
+      { '<leader>nd', '<cmd>NoiceDismiss<cr>', desc = 'Noice dismiss' },
+   },
    opts = {
       notify = {
          enabled = true,
@@ -24,12 +27,6 @@ return {
          inc_rename = false,           -- enables an input dialog for inc-rename.nvim
          lsp_doc_border = false,       -- add a border to hover docs and signature help
       },
-   },
-   dependencies = {
-      'MunifTanjim/nui.nvim',
-   },
-   keys = {
-      { '<leader>nd', '<cmd>NoiceDismiss<cr>', desc = 'Noice dismiss' },
    },
    config = function(_, opts)
       -- ref: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/ui.lua

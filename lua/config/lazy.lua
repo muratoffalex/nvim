@@ -5,6 +5,9 @@ local plugins = {
 }
 
 local options = {
+   checker = {
+      enabled = true
+   },
    change_detection = {
       -- automatically check for config file changes and reload the ui
       enabled = true,
@@ -13,6 +16,9 @@ local options = {
    performance = {
       cache = {
          enabled = true,
+      },
+      git = {
+         timeout = 300,
       },
       rtp = {
          disabled_plugins = {

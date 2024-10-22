@@ -12,6 +12,8 @@ return {
          'dbui',
          'mason',
          'lazy',
+         'copilot-chat',
+         'Avante'
       },
       custom_colorcolumn = {
          markdown = '80',

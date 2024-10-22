@@ -9,9 +9,16 @@ return {
          sidebars = 'normal',
       },
       on_highlights = function(highlights, colors)
-         highlights.WinBarDiffAdded = { fg = colors.green }
-         highlights.WinBarDiffRemoved = { fg = colors.red }
-         highlights.WinBarDiffChanged = { fg = colors.blue }
+         local diff_highlights = {
+            WinBarDiffAdded = { fg = colors.green },
+            WinBarDiffRemoved = { fg = colors.red },
+            WinBarDiffChanged = { fg = colors.blue },
+            AvanteConflictIncoming = { bg = '#93c47d' },
+            AvanteConflictCurrent = { bg = '#f9bfbf' }
+         }
+         for k, v in pairs(diff_highlights) do
+            highlights[k] = v
+         end
       end,
    },
    config = function(_, opts)

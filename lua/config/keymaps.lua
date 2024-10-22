@@ -84,3 +84,7 @@ map.set('n', 's>', '<cmd>5winc ><cr>', { desc = 'Increase window width 5' })
 map.set('n', 's<', '<cmd>5winc <<cr>', { desc = 'Decrease window width 5' })
 map.set('n', 's+', '<cmd>resize +5<cr>', { desc = 'Increase window height 5' })
 map.set('n', 's-', '<cmd>resize -5<cr>', { desc = 'Decrease window height 5' })
+
+-- Misc
+-- Toggle list
+map.set('n', '<leader>nl', '<cmd>set list!<cr>', { desc = 'Toggle list' })

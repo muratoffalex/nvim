@@ -29,8 +29,11 @@ return {
             b.diagnostics.markdownlint,
 
             -- PHP
-            b.formatting.phpcsfixer,
+            -- b.formatting.phpcsfixer,
             b.diagnostics.phpcs,
+            b.formatting.phpcbf,
+
+            b.formatting.xmllint
          },
       }
    end,

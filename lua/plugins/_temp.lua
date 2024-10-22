@@ -1,8 +1,81 @@
 return {
+   -- now is bad
+   {
+      'saghen/blink.cmp',
+      lazy = false, -- lazy loading handled internally
+      enabled = false,
+      dependencies = 'rafamadriz/friendly-snippets',
+
+      -- use a release tag to download pre-built binaries
+      version = 'v0.*',
+      -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+      -- build = 'cargo build --release',
+
+      opts = {
+         highlight = {
+            -- sets the fallback highlight groups to nvim-cmp's highlight groups
+            -- useful for when your theme doesn't support blink.cmp
+            -- will be removed in a future release, assuming themes add support
+            use_nvim_cmp_as_default = true,
+         },
+         -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+         -- adjusts spacing to ensure icons are aligned
+         nerd_font_variant = 'normal',
+
+         -- experimental auto-brackets support
+         -- accept = { auto_brackets = { enabled = true } }
+
+         -- experimental signature help support
+         -- trigger = { signature_help = { enabled = true } }
+      },
+   },
+   {
+      'monkoose/neocodeium',
+      enabled = false,
+      event = 'VeryLazy',
+      config = function()
+         local neocodeium = require 'neocodeium'
+         neocodeium.setup()
+         vim.keymap.set('i', '<A-g>', function()
+            require('neocodeium').accept()
+         end)
+         vim.keymap.set('i', '<A-w>', function()
+            require('neocodeium').accept_word()
+         end)
+         vim.keymap.set('i', '<A-a>', function()
+            require('neocodeium').accept_line()
+         end)
+         vim.keymap.set('i', '<A-.>', function()
+            require('neocodeium').cycle_or_complete()
+         end)
+         vim.keymap.set('i', '<A-,>', function()
+            require('neocodeium').cycle_or_complete(-1)
+         end)
+         vim.keymap.set('i', '<A-x>', function()
+            require('neocodeium').clear()
+         end)
+         vim.keymap.set('n', '<leader>cC', '<cmd>NeoCodeium chat<cr>',
+            { expr = true, desc = 'Codeium chat', silent = true })
+      end,
+   },
+   {
+      'Exafunction/codeium.nvim',
+      event = 'VeryLazy',
+      enabled = false,
+      dependencies = {
+         'nvim-lua/plenary.nvim',
+         'hrsh7th/nvim-cmp',
+      },
+      config = function()
+         require('codeium').setup {
+            enable_chat = true,
+         }
+      end,
+   },
    -- interesting, mb replace barbecue
    {
       'b0o/incline.nvim',
-      enabled = false,
+      enabled = true,
       event = 'VeryLazy',
       dependencies = {
          'nvim-tree/nvim-web-devicons',
@@ -22,7 +95,13 @@ return {
                if filename == '' then
                   filename = '[No Name]'
                end
+
+               local buf_modified = vim.api.nvim_get_option_value('modified', { buf = props.buf })
                local ft_icon, ft_color = devicons.get_icon_color(filename)
+               if buf_modified then
+                  ft_icon = '●'
+                  ft_color = '#ff0000'
+               end
 
                local function get_git_diff()
                   local icons = { removed = ' ', changed = ' ', added = ' ' }

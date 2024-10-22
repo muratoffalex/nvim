@@ -21,7 +21,8 @@ return {
 
       -- codeium info
       local function codeium()
-         return '{…}' .. vim.fn['codeium#GetStatusString']()
+         return require('neocodeium').get_status()
+         -- return '{…}' .. vim.fn['codeium#GetStatusString']()
       end
 
       local function xcodebuild_device()
@@ -120,7 +121,23 @@ return {
                { 'filetype', padding = { left = 1, right = 0 }, separator = '', icon_only = true },
                { 'filename', padding = { left = 0, right = 0 }, separator = '' },
             },
-            lualine_x = { xcodebuild_build_status, xcodebuild_device, package_info, copilot, lsp_clients, 'encoding' },
+            lualine_x = {
+               xcodebuild_build_status,
+               xcodebuild_device,
+               package_info,
+               copilot,
+               {
+                  require('lazy.status').updates,
+                  cond = require('lazy.status').has_updates
+               },
+               {
+                  lsp_clients,
+                  cond = function()
+                     return vim.lsp.buf_get_clients(0)[1] ~= nil
+                  end,
+               },
+               'encoding',
+            },
             lualine_y = { 'progress' },
             lualine_z = {
                {
