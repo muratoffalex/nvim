@@ -4,7 +4,6 @@ return {
       'nvim-telescope/telescope.nvim',
       'MunifTanjim/nui.nvim',
    },
-   lazy = true,
    ft = { 'swift', 'objective-c', 'objective-cpp' },
    keys = {
       {
@@ -27,8 +26,9 @@ return {
 
       -- Automatically refresh files when changed outside of vim
       -- https://github.com/wojciech-kulik/xcodebuild.nvim/discussions/36
+      -- NOTE: this is expensive on weak machines with many opened buffers
       vim.opt.autoread = true
-      vim.fn.timer_start(2000, function()
+      vim.fn.timer_start(10000, function()
          vim.cmd 'silent! checktime'
       end, { ['repeat'] = -1 })
 

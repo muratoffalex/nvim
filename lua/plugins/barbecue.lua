@@ -1,7 +1,6 @@
 -- disable, because use incline
 return {
    'utilyre/barbecue.nvim',
-   enabled = false,
    name = 'barbecue',
    version = '*',
    event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },

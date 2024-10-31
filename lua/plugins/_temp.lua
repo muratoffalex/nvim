@@ -75,7 +75,7 @@ return {
    -- interesting, mb replace barbecue
    {
       'b0o/incline.nvim',
-      enabled = true,
+      enabled = false,
       event = 'VeryLazy',
       dependencies = {
          'nvim-tree/nvim-web-devicons',
