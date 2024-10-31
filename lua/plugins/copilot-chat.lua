@@ -80,7 +80,6 @@ return {
    opts = {
       debug = false,
       auto_follow_cursor = false,
-      proxy = require('config').proxy,
       prompts = {
          BetterNamings = prompts.BetterNamings,
       },

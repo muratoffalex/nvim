@@ -13,8 +13,7 @@ return {
       provider = 'copilot',
       copilot = {
          endpoint = 'https://api.githubcopilot.com',
-         model = 'gpt-4o-2024-05-13',
-         proxy = require('config').proxy, -- [protocol://]host[:port] Use this proxy
+         model = 'gpt-4o-2024-08-06',
          allow_insecure = true,           -- Allow insecure server connections
          timeout = 30000,                 -- Timeout in milliseconds
          temperature = 0,

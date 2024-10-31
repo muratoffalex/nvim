@@ -1,7 +1,6 @@
 return {
    'zbirenbaum/copilot.lua',
    cmd = 'Copilot',
-   enabled = true,
    event = 'InsertEnter',
    keys = {
       { '<leader>cs', '<cmd>Copilot suggestion<cr>', desc = 'Copilot suggestion' },

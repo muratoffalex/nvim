@@ -5,7 +5,6 @@ return {
    },
    config = function()
       local utils = require 'utils.init'
-      local icons = require('config').icons
       local fn = vim.fn
 
       -- lsp clients
@@ -133,7 +132,7 @@ return {
                {
                   lsp_clients,
                   cond = function()
-                     return vim.lsp.buf_get_clients(0)[1] ~= nil
+                     return #vim.lsp.get_clients { bufnr = 0 } > 0
                   end,
                },
                'encoding',
