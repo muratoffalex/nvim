@@ -49,17 +49,18 @@ return {
             end, { 'i', 's' }),
          },
          sources = {
-            { name = 'nvim_lsp' },
+            { name = 'nvim_lsp', group_index = 1, max_item_count = 15 },
             { name = 'snippets' },
             { name = 'path' },
-            { name = 'buffer' },
+            { name = 'buffer', max_item_count = 5 },
             { name = 'lazydev', group_index = 0 },
          },
       }
    end,
    config = function(_, opts)
       for _, source in ipairs(opts.sources) do
-         source.group_index = source.group_index or 1
+         source.group_index = source.group_index or 2
+         source.max_item_count = source.max_item_count or 10
       end
       require('cmp').setup(opts)
    end,
