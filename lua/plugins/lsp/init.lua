@@ -24,7 +24,7 @@ return {
       local util = require 'lspconfig.util'
       local on_attach = function(client, bufnr)
          -- for inline diagnostic messages, use tiny-inline-diagnostic instead
-         vim.diagnostic.config { virtual_text = false }
+         -- vim.diagnostic.config { virtual_text = false }
 
          local nmap = function(keys, func, desc)
             if desc then
@@ -132,9 +132,20 @@ return {
          },
       }
 
-      -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+      local client_capabilities = function()
+         return vim.tbl_deep_extend(
+            'force',
+            vim.lsp.protocol.make_client_capabilities(),
+            -- nvim-cmp supports additional completion capabilities, so broadcast that to servers.
+            require('cmp_nvim_lsp').default_capabilities(),
+            {
+               workspace = {
+                  didChangeWatchedFiles = { dynamicRegistration = false },
+               },
+            }
+         )
+      end
+      local capabilities = client_capabilities()
 
       -- Ensure the servers above are installed
       local mason_lspconfig = require 'mason-lspconfig'
@@ -177,7 +188,7 @@ return {
          },
       }
 
-      lspconfig['sourcekit'].setup({
+      lspconfig['sourcekit'].setup {
          autostart = false,
          capabilities = capabilities,
          on_attach = on_attach,
@@ -191,12 +202,12 @@ return {
                 or util.find_git_ancestor(filename)
                 or util.root_pattern 'Package.swift' (filename)
          end,
-      })
+      }
 
-      vim.api.nvim_create_autocmd({'BufEnter', 'LspDetach'}, {
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'LspDetach' }, {
          callback = function()
             if vim.bo.filetype == 'swift' and #(vim.lsp.get_clients { name = 'sourcekit' }) == 0 then
-               vim.cmd('LspStart')
+               vim.cmd 'LspStart'
             end
          end,
          desc = 'Start sourcekit on swift files if not already started (enter file or lsp crashed)',
