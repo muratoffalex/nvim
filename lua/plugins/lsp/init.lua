@@ -58,6 +58,8 @@ return {
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
          end, 'Workspace List Folders')
 
+         nmap('<leader>ca', vim.lsp.buf.code_action, 'Code actions')
+
          nmap('<leader>ni', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { nil })
          end, 'Toggle inlay hints')
