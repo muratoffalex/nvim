@@ -14,6 +14,7 @@ return {
       { 'zbirenbaum/copilot.lua' },
       { 'nvim-lua/plenary.nvim' },
    },
+   build = "make tiktoken", -- Only on MacOS or Linux
    keys = {
       { '<leader>cc', desc = 'CopilotChat' },
       -- Quick chat with Copilot
@@ -79,6 +80,7 @@ return {
    },
    opts = {
       debug = false,
+      model = 'claude-3.5-sonnet',
       auto_follow_cursor = false,
       prompts = {
          BetterNamings = prompts.BetterNamings,
