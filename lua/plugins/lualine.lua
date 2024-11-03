@@ -125,10 +125,10 @@ return {
                xcodebuild_device,
                package_info,
                copilot,
-               {
-                  require('lazy.status').updates,
-                  cond = require('lazy.status').has_updates
-               },
+               -- {
+               --    require('lazy.status').updates,
+               --    cond = require('lazy.status').has_updates
+               -- },
                {
                   lsp_clients,
                   cond = function()
