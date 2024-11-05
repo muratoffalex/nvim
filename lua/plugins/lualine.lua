@@ -55,13 +55,15 @@ return {
          symbols = {
             status = {
                icons = {
-                  enabled = '',
+                  enabled = ' ',
+                  sleep = ' ',
                   disabled = ' ',
                   warning = ' ',
                   unknown = ' ',
                },
                hl = {
                   enabled = '#41BC9C',
+                  sleep = "#AEB7D0",
                   disabled = '#6272A4',
                   warning = '#FFB86C',
                   unknown = '#FF5555',
