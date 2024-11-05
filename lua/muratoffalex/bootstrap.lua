@@ -1,0 +1,6 @@
+require 'muratoffalex.config.options'
+require 'muratoffalex.config.keymaps'
+require 'muratoffalex.config.lazy'
+require 'muratoffalex.config.autocmds'
+require 'muratoffalex.config.commands'
+require 'muratoffalex.config.post'

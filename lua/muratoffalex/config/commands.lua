@@ -1,5 +1,5 @@
 local new_command = vim.api.nvim_create_user_command
-local php_tb = require 'utils.template_builders.php'
+local php_tb = require 'muratoffalex.utils.template_builders.php'
 
 -- php
 new_command('PhpBuildFileByName', function(_)

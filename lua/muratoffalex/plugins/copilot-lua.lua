@@ -24,7 +24,7 @@ return {
       },
    },
    config = function(_, opts)
-      vim.g.copilot_proxy = require('config').proxy
+      vim.g.copilot_proxy = require('muratoffalex.config').proxy
       require('copilot').setup(opts)
    end,
 }

@@ -4,7 +4,7 @@ return {
       'AndreM222/copilot-lualine',
    },
    config = function()
-      local utils = require 'utils.init'
+      local utils = require 'muratoffalex.utils'
       local fn = vim.fn
 
       -- lsp clients

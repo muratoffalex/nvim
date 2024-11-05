@@ -1,4 +1,4 @@
-local utils = require 'utils'
+local utils = require 'muratoffalex.utils'
 
 -- AUTOCOMMANDS
 local autocmd = vim.api.nvim_create_autocmd

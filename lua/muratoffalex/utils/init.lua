@@ -38,10 +38,10 @@ M.git_status = function()
    return table.concat(status)
 end
 
-M.php = require 'utils.php'
+M.php = require 'muratoffalex.utils.php'
 
 M.template_builders = {
-   php = require 'utils.template_builders.php',
+   php = require 'muratoffalex.utils.template_builders.php',
 }
 
 return M

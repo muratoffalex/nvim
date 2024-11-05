@@ -8,7 +8,7 @@ vim.g.startup_message = false
 
 local o = vim.opt
 
-local config = require 'config'
+local config = require 'muratoffalex.config'
 
 o.background = config.background
 o.swapfile = false

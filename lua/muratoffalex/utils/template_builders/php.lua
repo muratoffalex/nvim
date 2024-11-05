@@ -1,4 +1,4 @@
-local utils = require 'utils.php'
+local utils = require 'muratoffalex.utils.php'
 
 local types = {
    class = 'class',

@@ -1,7 +1,7 @@
 local plugins = {
-   { import = 'plugins' },
-   { import = 'plugins.lsp' },
-   { import = 'plugins.themes' },
+   { import = 'muratoffalex.plugins' },
+   { import = 'muratoffalex.plugins.lsp' },
+   { import = 'muratoffalex.plugins.themes' },
 }
 
 local options = {
