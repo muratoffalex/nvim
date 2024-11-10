@@ -1,8 +1,7 @@
 return {
    'rachartier/tiny-inline-diagnostic.nvim',
    event = 'VeryLazy',
-   -- disable because buggy
-   enabled = true,
+   priority = 1000,
    opts = {
       options = {
          multilines = true
@@ -15,6 +14,7 @@ return {
          require('tiny-inline-diagnostic').toggle()
       end, { silent = true, desc = 'Toggle LSP Diagnostics' })
 
+      -- TODO: just change highlight colors instead
       local function update_colors()
          local isLight = vim.o.background == 'light'
          local style = isLight and 'day' or 'moon'
