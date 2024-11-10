@@ -28,8 +28,10 @@ local options = {
             'getscriptPlugin',
             'gzip',
             'logipat',
-            'netrw',
-            'netrwPlugin',
+            -- netrw and netrwPlugin need for downloading spell files
+            -- disable when fixed https://github.com/stevearc/oil.nvim/issues/483
+            -- 'netrw',
+            -- 'netrwPlugin',
             'netrwSettings',
             'netrwFileHandlers',
             -- "matchit",

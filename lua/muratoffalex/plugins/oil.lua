@@ -1,6 +1,8 @@
 return {
    'stevearc/oil.nvim',
    opts = {
+      -- delete when fixed https://github.com/stevearc/oil.nvim/issues/483
+      default_file_explorer = false,
       view_options = {
          show_hidden = true,
          is_always_hidden = function(name)

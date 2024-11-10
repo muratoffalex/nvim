@@ -10,6 +10,12 @@ local o = vim.opt
 
 local config = require 'muratoffalex.config'
 
+-- Spellchecking
+-- mb use cspell istead?
+o.spelllang = 'en,ru'
+o.spelloptions = 'camel'
+o.spell = true
+
 o.background = config.background
 o.swapfile = false
 
