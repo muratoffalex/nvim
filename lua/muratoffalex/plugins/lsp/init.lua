@@ -24,7 +24,7 @@ return {
       local util = require 'lspconfig.util'
       local on_attach = function(client, bufnr)
          -- for inline diagnostic messages, use tiny-inline-diagnostic instead
-         -- vim.diagnostic.config { virtual_text = false }
+         vim.diagnostic.config { virtual_text = false }
 
          local nmap = function(keys, func, desc)
             if desc then
