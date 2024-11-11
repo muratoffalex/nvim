@@ -1,8 +1,24 @@
 return {
    'nvimtools/none-ls.nvim',
+   dependencies = {
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+   },
    config = function()
       local null_ls = require 'null-ls'
       local b = null_ls.builtins
+
+      local mason_tool_installer = require 'mason-tool-installer'
+      mason_tool_installer.setup {
+         ensure_installed = {
+            'stylua', -- lua formatter
+            'eslint', -- js/ts formatter/linter
+            'phpcbf',
+            'phpcs', -- php linter
+            'prettierd', -- general formatter (markdown, json, etc)
+            'markdownlint', -- markdown linter
+            'golangci-lint', -- go linter
+         },
+      }
 
       null_ls.setup {
          sources = {
@@ -33,7 +49,7 @@ return {
             b.diagnostics.phpcs,
             b.formatting.phpcbf,
 
-            b.formatting.xmllint
+            b.formatting.xmllint,
          },
       }
    end,
