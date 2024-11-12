@@ -1,7 +1,9 @@
 local M = {}
 
+---@return table<string, LspServerConfig>
 M.lsp_servers = require 'muratoffalex.plugins.lsp.config.servers'
 
+---@return table<string, LspServerConfig>
 M.active_lsp_servers = function()
    local active = {}
    for name, config in pairs(M.lsp_servers) do
@@ -12,6 +14,7 @@ M.active_lsp_servers = function()
    return active
 end
 
+---@return string[]
 M.excluded_formatters = function()
    local servers = M.lsp_servers
    local excluded = {}
@@ -25,6 +28,7 @@ M.excluded_formatters = function()
    return excluded
 end
 
+---@return string[]
 M.ensure_installed = function()
    local servers = M.active_lsp_servers()
    local ensure = {}
@@ -36,19 +40,6 @@ M.ensure_installed = function()
    end
 
    return ensure
-end
-
-M.exclude_auto_install = function()
-   local servers = M.lsp_servers
-   local excluded = {}
-
-   for server_name, config in pairs(servers) do
-      if config.auto_install == false then
-         table.insert(excluded, server_name)
-      end
-   end
-
-   return excluded
 end
 
 M.format = function(opts)
