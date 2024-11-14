@@ -1,11 +1,12 @@
 return {
    'nvimtools/none-ls.nvim',
+   event = 'VeryLazy',
    dependencies = {
       {
          'WhoIsSethDaniel/mason-tool-installer.nvim',
          dependencies = {
             'williamboman/mason.nvim',
-         }
+         },
       },
    },
    config = function()
@@ -16,10 +17,10 @@ return {
       mason_tool_installer.setup {
          ensure_installed = {
             'stylua',        -- lua formatter
-            'eslint',        -- js/ts formatter/linter
             'phpcbf',
             'phpcs',         -- php linter
-            'prettierd',     -- general formatter (markdown, json, etc)
+            'prettier',      -- general formatter (markdown, json, etc)
+            'prettierd',     -- prettier daemon
             'markdownlint',  -- markdown linter
             'golangci-lint', -- go linter
          },
@@ -57,5 +58,8 @@ return {
             b.formatting.xmllint,
          },
       }
+
+      -- TODO: format file on save 
+      -- https://github.com/nvimtools/none-ls.nvim/wiki/Formatting-on-save
    end,
 }

@@ -1,7 +1,141 @@
+local util = require 'lspconfig.util'
+
+local LSP = require 'muratoffalex.plugins.lsp.config.servers'
+
 local M = {}
 
+---TODO: add property like enabled_formatter to LspServerConfig
+---@return string[]
+M.excluded_formatters = {
+   LSP.VOLAR,
+   LSP.INTELEPHENSE,
+   LSP.TS_LS,
+   LSP.LUA_LS,
+}
+
+---@class LspServerConfig
+---@field enabled boolean|nil
+---@field auto_install boolean|nil
+---@field lspconfig_settings lspconfig.Config|nil
+---@field setup function|nil
+
 ---@return table<string, LspServerConfig>
-M.lsp_servers = require 'muratoffalex.plugins.lsp.config.servers'
+M.lsp_servers = {
+   [LSP.VOLAR] = {
+      lspconfig_settings = {
+         settings = {
+            init_options = {
+               vue = {
+                  hybridMode = true,
+               },
+            },
+         },
+      },
+   },
+   [LSP.JSONLS] = {},
+   [LSP.PYRIGHT] = {},
+   [LSP.RUST_ANALYZER] = {},
+   [LSP.HTML] = {
+      lspconfig_settings = {
+         filetypes = { 'html', 'twig', 'hbs' },
+      },
+   },
+   [LSP.CSSLS] = {},
+   [LSP.MARKSMAN] = {},
+   [LSP.TAILWINDCSS] = {
+      lspconfig_settings = {
+         filetypes = { 'html', 'twig', 'css', 'jsx', 'vue' },
+         on_attach = function(_, _) end,
+      },
+   },
+   [LSP.GOPLS] = {},
+   [LSP.INTELEPHENSE] = {
+      lspconfig_settings = {
+         settings = {
+            codelens_enabled = true,
+            intelephense = {
+               codeLens = {
+                  implementations = {
+                     enable = true,
+                  },
+                  overrides = {
+                     enable = true,
+                  },
+                  parent = {
+                     enable = true,
+                  },
+                  references = {
+                     enable = true,
+                  },
+                  usages = {
+                     enable = true,
+                  },
+               },
+            },
+         },
+      },
+   },
+   -- only for php 8.0+
+   -- phpactor = {},
+   -- kotlin_language_server = {},
+   [LSP.TS_LS] = {},
+   [LSP.LUA_LS] = {
+      lspconfig_settings = {
+         settings = {
+            Lua = {
+               workspace = { checkThirdParty = false },
+               telemetry = { enable = false },
+               hint = { enable = true },
+            },
+         },
+      },
+   },
+   [LSP.SOURCEKIT] = {
+      auto_install = false,
+      lspconfig_settings = {
+         filetypes = { 'swift', 'objective-c', 'objective-cpp' },
+         autostart = false,
+         cmd = { vim.trim(vim.fn.system 'xcrun -f sourcekit-lsp') },
+         ---@return string|nil
+         root_dir = function(filename, _)
+            return util.root_pattern 'buildServer.json'(filename)
+               or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
+               or util.find_git_ancestor(filename)
+               or util.root_pattern 'Package.swift'(filename)
+         end,
+         -- https://www.swift.org/documentation/articles/zero-to-swift-nvim.html
+         capabilities = function ()
+            return vim.tbl_deep_extend('force', M.client_capabilities(), {
+               workspace = {
+                  didChangeWatchedFiles = { dynamicRegistration = true },
+               },
+            })
+         end,
+      },
+      setup = function()
+         local group = vim.api.nvim_create_augroup('SourcekitAutostart', { clear = true })
+         vim.api.nvim_create_autocmd({ 'BufEnter', 'LspDetach' }, {
+            group = group,
+            callback = function()
+               if vim.bo.filetype == 'swift' and #(vim.lsp.get_clients { name = 'sourcekit' }) == 0 then
+                  vim.cmd 'LspStart'
+               end
+            end,
+            desc = 'Start sourcekit on swift files if not already started (enter file or lsp crashed)',
+         })
+      end,
+   },
+   [LSP.CLANGD] = {
+      lspconfig_settings = {
+         filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+         -- https://www.reddit.com/r/neovim/comments/12qbcua/multiple_different_client_offset_encodings/
+         cmd = {
+            'clangd',
+            '--offset-encoding=utf-16',
+         },
+      },
+   },
+}
 
 ---@return table<string, LspServerConfig>
 M.active_lsp_servers = function()
@@ -12,20 +146,6 @@ M.active_lsp_servers = function()
       end
    end
    return active
-end
-
----@return string[]
-M.excluded_formatters = function()
-   local servers = M.lsp_servers
-   local excluded = {}
-
-   for server_name, config in pairs(servers) do
-      if config.disabled_formatter == true then
-         table.insert(excluded, server_name)
-      end
-   end
-
-   return excluded
 end
 
 ---@return string[]
@@ -42,7 +162,42 @@ M.ensure_installed = function()
    return ensure
 end
 
-M.format = function(opts)
+M.format_lspconfig_settings = function(settings)
+   local default_opts = {
+      capabilities = M.client_capabilities(),
+      on_attach = M.on_attach,
+   }
+   local formatted = vim.tbl_deep_extend('force', default_opts, settings or {})
+
+   return formatted
+end
+
+M.setup_lsp_servers = function(lspconfig)
+   local servers = M.active_lsp_servers()
+   for server_name, _ in pairs(servers) do
+      local server = servers[server_name] or {}
+
+      lspconfig[server_name].setup(M.format_lspconfig_settings(server.lspconfig_settings))
+
+      if server.setup then
+         server.setup()
+      end
+   end
+end
+
+M.client_capabilities = function()
+   local base_capabilities = vim.lsp.protocol.make_client_capabilities()
+   local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+   return vim.tbl_deep_extend('force', base_capabilities, cmp_capabilities, {
+      -- https://www.reddit.com/r/neovim/comments/1gdkrtn/i_want_to_use_neovim_but_the_lspintellisense_just/
+      workspace = {
+         didChangeWatchedFiles = { dynamicRegistration = false },
+      },
+   })
+end
+
+M.format_action = function(opts)
    local bufnr = type(opts) == 'number' and opts or type(opts) == 'table' and opts.buf or vim.api.nvim_get_current_buf()
 
    local function format_buffer()
@@ -51,7 +206,7 @@ M.format = function(opts)
          -- 2s because some tools are slow (ex. eslint)
          timeout_ms = 2000,
          filter = function(c)
-            return not M.excluded_formatters()[c.name]
+            return not vim.tbl_contains(M.excluded_formatters, c.name)
          end,
       }
    end
@@ -61,20 +216,6 @@ M.format = function(opts)
    if not ok then
       vim.notify('Format failed: ' .. tostring(err), vim.log.levels.ERROR)
    end
-end
-
-M.client_capabilities = function()
-   return vim.tbl_deep_extend(
-      'force',
-      vim.lsp.protocol.make_client_capabilities(),
-      -- nvim-cmp supports additional completion capabilities, so broadcast that to servers.
-      require('cmp_nvim_lsp').default_capabilities(),
-      {
-         workspace = {
-            didChangeWatchedFiles = { dynamicRegistration = false },
-         },
-      }
-   )
 end
 
 M.on_attach = function(client, bufnr)
@@ -126,7 +267,7 @@ M.on_attach = function(client, bufnr)
    -- disable formatting
    -- client.resolved_capabilities.document_formatting = false
    -- Create a command `:Format` local to the LSP buffer
-   vim.api.nvim_buf_create_user_command(bufnr, 'Format', M.format, { desc = 'Format current buffer with LSP' })
+   vim.api.nvim_buf_create_user_command(bufnr, 'Format', M.format_action, { desc = 'Format current buffer with LSP' })
 end
 
 return M
