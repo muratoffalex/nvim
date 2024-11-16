@@ -65,7 +65,6 @@ o.signcolumn = 'yes'
 
 -- Decrease update time
 o.updatetime = 200 -- faster completion
-o.timeoutlen = 1000 -- which-key timeout trigger
 
 -- Split options
 o.splitright = true

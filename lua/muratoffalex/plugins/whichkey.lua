@@ -11,6 +11,7 @@ return {
       },
    },
    opts = {
+      delay = 1000,
       icons = {
          rules = false,
       },
