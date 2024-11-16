@@ -2,6 +2,18 @@ local util = require 'lspconfig.util'
 
 local LSP = require 'muratoffalex.plugins.lsp.config.servers'
 
+local function client_capabilities()
+   local base_capabilities = vim.lsp.protocol.make_client_capabilities()
+   local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+   return vim.tbl_deep_extend('force', base_capabilities, cmp_capabilities, {
+      -- https://www.reddit.com/r/neovim/comments/1gdkrtn/i_want_to_use_neovim_but_the_lspintellisense_just/
+      workspace = {
+         didChangeWatchedFiles = { dynamicRegistration = false },
+      },
+   })
+end
+
 local M = {}
 
 ---TODO: add property like enabled_formatter to LspServerConfig
@@ -104,13 +116,11 @@ M.lsp_servers = {
                or util.root_pattern 'Package.swift'(filename)
          end,
          -- https://www.swift.org/documentation/articles/zero-to-swift-nvim.html
-         capabilities = function ()
-            return vim.tbl_deep_extend('force', M.client_capabilities(), {
-               workspace = {
-                  didChangeWatchedFiles = { dynamicRegistration = true },
-               },
-            })
-         end,
+         capabilities = vim.tbl_deep_extend('force', client_capabilities(), {
+            workspace = {
+               didChangeWatchedFiles = { dynamicRegistration = true },
+            },
+         }),
       },
       setup = function()
          local group = vim.api.nvim_create_augroup('SourcekitAutostart', { clear = true })
@@ -164,7 +174,7 @@ end
 
 M.format_lspconfig_settings = function(settings)
    local default_opts = {
-      capabilities = M.client_capabilities(),
+      capabilities = M.client_capabilities,
       on_attach = M.on_attach,
    }
    local formatted = vim.tbl_deep_extend('force', default_opts, settings or {})
@@ -185,17 +195,7 @@ M.setup_lsp_servers = function(lspconfig)
    end
 end
 
-M.client_capabilities = function()
-   local base_capabilities = vim.lsp.protocol.make_client_capabilities()
-   local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-   return vim.tbl_deep_extend('force', base_capabilities, cmp_capabilities, {
-      -- https://www.reddit.com/r/neovim/comments/1gdkrtn/i_want_to_use_neovim_but_the_lspintellisense_just/
-      workspace = {
-         didChangeWatchedFiles = { dynamicRegistration = false },
-      },
-   })
-end
+M.client_capabilities = client_capabilities()
 
 M.format_action = function(opts)
    local bufnr = type(opts) == 'number' and opts or type(opts) == 'table' and opts.buf or vim.api.nvim_get_current_buf()
@@ -203,8 +203,8 @@ M.format_action = function(opts)
    local function format_buffer()
       vim.lsp.buf.format {
          bufnr = bufnr,
-         -- 2s because some tools are slow (ex. eslint)
-         timeout_ms = 2000,
+         -- some tools (like eslint) are slow
+         timeout_ms = 5000,
          filter = function(c)
             return not vim.tbl_contains(M.excluded_formatters, c.name)
          end,
