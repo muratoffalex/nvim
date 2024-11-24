@@ -33,16 +33,16 @@ map.set('n', '<leader>x', '<cmd>bd<cr>', { desc = 'Close current buffer' })
 map.set('n', '<leader>X', '<cmd>bd!<cr>', { desc = 'Close current buffer force' })
 map.set('n', '<leader>nr', '<cmd>set relativenumber!<cr>', { desc = 'Toggle relative number' })
 map.set('n', '<leader>nw', function()
-   vim.o.wrap = not vim.o.wrap
+  vim.o.wrap = not vim.o.wrap
 end, { desc = 'Toggle lines wrap mode' })
 -- htps://nanotipsforvim.prose.sh/keeping-your-register-clean-from-dd
 map.set('n', 'x', '"_x')
 map.set('n', 'c', '"_c')
 map.set('n', 'dd', function()
-   if vim.fn.getline '.' == '' then
-      return '"_dd'
-   end
-   return 'dd'
+  if vim.fn.getline '.' == '' then
+    return '"_dd'
+  end
+  return 'dd'
 end, { expr = true, desc = 'Only yank text with dd from non-empty lines' })
 
 -- Move lines
