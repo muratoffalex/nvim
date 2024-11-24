@@ -51,7 +51,56 @@ M.lsp_servers = {
          on_attach = function(_, _) end,
       },
    },
-   [LSP.GOPLS] = {},
+   [LSP.GOPLS] = {
+      lspconfig_settings = {
+         root_dir = function(filename, _)
+            local util = require 'lspconfig.util'
+            return util.find_git_ancestor(filename)
+               or util.root_pattern '.jj'(filename)
+               or util.root_pattern '.hg'(filename)
+               or util.root_pattern 'go.mod'(filename)
+         end,
+         -- ref: https://github.com/LazyVim/LazyVim/blob/ecfaed3cc1cbe3013f1201594adde2ea0022c455/lua/lazyvim/plugins/extras/lang/go.lua#L13
+         settings = {
+            formatting_enabled = false,
+            codelens_enabled = true,
+            gopls = {
+               gofumpt = true,
+               codelenses = {
+                  gc_details = false,
+                  generate = true,
+                  regenerate_cgo = true,
+                  run_govulncheck = true,
+                  test = true,
+                  tidy = true,
+                  upgrade_dependency = true,
+                  vendor = true,
+               },
+               hints = {
+                  assignVariableTypes = true,
+                  compositeLiteralFields = true,
+                  compositeLiteralTypes = true,
+                  constantValues = true,
+                  functionTypeParameters = true,
+                  parameterNames = true,
+                  rangeVariableTypes = true,
+               },
+               analyses = {
+                  fieldalignment = true,
+                  nilness = true,
+                  unusedparams = true,
+                  unusedwrite = true,
+                  useany = true,
+               },
+               usePlaceholders = true,
+               completeUnimported = true,
+               staticcheck = true,
+               directoryFilters = { '-.git', '-.vscode', '-.idea', '-.vscode-test', '-node_modules', '-.jj' },
+               semanticTokens = true,
+            },
+         },
+      },
+   },
    [LSP.INTELEPHENSE] = {
       lspconfig_settings = {
          settings = {
