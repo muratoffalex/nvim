@@ -76,7 +76,7 @@ o.completeopt = 'menuone,noselect'
 o.wrap = true -- display long lines with wrap
 
 o.list = true
-o.listchars = { tab = ">-", trail = "·" }
+o.listchars = { tab = '>-', trail = '·' }
 
 o.termguicolors = true
 o.smoothscroll = true
