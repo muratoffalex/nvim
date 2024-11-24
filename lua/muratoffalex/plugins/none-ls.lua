@@ -16,13 +16,14 @@ return {
       local mason_tool_installer = require 'mason-tool-installer'
       mason_tool_installer.setup {
          ensure_installed = {
-            'stylua',        -- lua formatter
+            'stylua', -- lua formatter
             'phpcbf',
-            'phpcs',         -- php linter
-            'prettier',      -- general formatter (markdown, json, etc)
-            'prettierd',     -- prettier daemon
-            'markdownlint',  -- markdown linter
+            'phpcs', -- php linter
+            'prettier', -- general formatter (markdown, json, etc)
+            'prettierd', -- prettier daemon
+            'markdownlint', -- markdown linter
             'golangci-lint', -- go linter
+            'goimports',
          },
       }
 
@@ -37,6 +38,7 @@ return {
 
             -- Go
             b.formatting.gofmt,
+            b.formatting.goimports,
             b.diagnostics.golangci_lint,
 
             -- JS/TS/JSX/Vue
@@ -61,7 +63,7 @@ return {
          },
       }
 
-      -- TODO: format file on save 
+      -- TODO: format file on save
       -- https://github.com/nvimtools/none-ls.nvim/wiki/Formatting-on-save
    end,
 }
