@@ -110,3 +110,21 @@ autocmd('User', {
    desc = 'Mason Tools update completed message',
 })
 
+-- LSP attach
+autocmd('LspAttach', {
+   callback = function(args)
+      local bufnr = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+      local lsp_config = require 'muratoffalex.plugins.lsp.config'
+      local lsp_utils = require 'muratoffalex.plugins.lsp.config.utils'
+
+      -- Create a command `:Format` local to the LSP buffer
+      vim.api.nvim_buf_create_user_command(bufnr, 'Format', function()
+         lsp_utils.format_action(bufnr, lsp_config.excluded_formatters)
+      end, { desc = 'Format current buffer with LSP' })
+   end,
+   -- group = general,
+   desc = 'LSP attach actions',
+})
+

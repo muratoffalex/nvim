@@ -1,29 +1,20 @@
-local util = require 'lspconfig.util'
-
 local LSP = require 'muratoffalex.plugins.lsp.config.servers'
 
 local function client_capabilities()
    local base_capabilities = vim.lsp.protocol.make_client_capabilities()
    local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-   return vim.tbl_deep_extend('force', base_capabilities, cmp_capabilities, {
-      -- https://www.reddit.com/r/neovim/comments/1gdkrtn/i_want_to_use_neovim_but_the_lspintellisense_just/
+   local custom_capabilities = {
       workspace = {
-         didChangeWatchedFiles = { dynamicRegistration = false },
+         -- https://www.reddit.com/r/neovim/comments/1gdkrtn/i_want_to_use_neovim_but_the_lspintellisense_just/
+         -- disable if performance is an issue
+         didChangeWatchedFiles = { dynamicRegistration = true },
       },
-   })
+   }
+
+   return vim.tbl_deep_extend('force', base_capabilities, cmp_capabilities, custom_capabilities)
 end
 
 local M = {}
-
----TODO: add property like enabled_formatter to LspServerConfig
----@return string[]
-M.excluded_formatters = {
-   LSP.VOLAR,
-   LSP.INTELEPHENSE,
-   LSP.TS_LS,
-   LSP.LUA_LS,
-}
 
 ---@class LspServerConfig
 ---@field enabled boolean|nil
@@ -64,6 +55,7 @@ M.lsp_servers = {
    [LSP.INTELEPHENSE] = {
       lspconfig_settings = {
          settings = {
+            formatting_enabled = false,
             codelens_enabled = true,
             intelephense = {
                codeLens = {
@@ -90,10 +82,17 @@ M.lsp_servers = {
    -- only for php 8.0+
    -- phpactor = {},
    -- kotlin_language_server = {},
-   [LSP.TS_LS] = {},
+   [LSP.TS_LS] = {
+      lspconfig_settings = {
+         settings = {
+            formatting_enabled = false,
+         },
+      },
+   },
    [LSP.LUA_LS] = {
       lspconfig_settings = {
          settings = {
+            formatting_enabled = false,
             Lua = {
                workspace = { checkThirdParty = false },
                telemetry = { enable = false },
@@ -110,6 +109,7 @@ M.lsp_servers = {
          cmd = { vim.trim(vim.fn.system 'xcrun -f sourcekit-lsp') },
          ---@return string|nil
          root_dir = function(filename, _)
+            local util = require 'lspconfig.util'
             return util.root_pattern 'buildServer.json'(filename)
                or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
                or util.find_git_ancestor(filename)
@@ -197,27 +197,6 @@ end
 
 M.client_capabilities = client_capabilities()
 
-M.format_action = function(opts)
-   local bufnr = type(opts) == 'number' and opts or type(opts) == 'table' and opts.buf or vim.api.nvim_get_current_buf()
-
-   local function format_buffer()
-      vim.lsp.buf.format {
-         bufnr = bufnr,
-         -- some tools (like eslint) are slow
-         timeout_ms = 5000,
-         filter = function(c)
-            return not vim.tbl_contains(M.excluded_formatters, c.name)
-         end,
-      }
-   end
-
-   -- Execute with error handling
-   local ok, err = pcall(format_buffer)
-   if not ok then
-      vim.notify('Format failed: ' .. tostring(err), vim.log.levels.ERROR)
-   end
-end
-
 M.on_attach = function(client, bufnr)
    -- for inline diagnostic messages, use tiny-inline-diagnostic instead
    vim.diagnostic.config { virtual_text = false }
@@ -242,8 +221,6 @@ M.on_attach = function(client, bufnr)
    nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 
    -- See `:help K` for why this keymap
-   -- TODO: in neovim 0.10 this is default keymap, mb remove
-   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
    nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
    -- Lesser used LSP functionality
@@ -263,11 +240,6 @@ M.on_attach = function(client, bufnr)
    if client.config.settings.codelens_enabled then
       nmap('<leader>cl', vim.lsp.codelens.run, 'Run CodeLens')
    end
-
-   -- disable formatting
-   -- client.resolved_capabilities.document_formatting = false
-   -- Create a command `:Format` local to the LSP buffer
-   vim.api.nvim_buf_create_user_command(bufnr, 'Format', M.format_action, { desc = 'Format current buffer with LSP' })
 end
 
 return M
