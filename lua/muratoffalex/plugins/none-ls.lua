@@ -55,7 +55,9 @@ return {
             b.diagnostics.phpcs,
             b.formatting.phpcbf,
 
-            b.formatting.xmllint,
+            b.formatting.xmllint.with {
+               args = { '--noenc', '--encode', 'utf8', '--format', '-' },
+            },
          },
       }
 
