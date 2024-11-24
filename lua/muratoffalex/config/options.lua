@@ -11,7 +11,7 @@ local o = vim.opt
 local config = require 'muratoffalex.config'
 
 -- Spellchecking
--- mb use cspell istead?
+-- mb use cspell instead?
 o.spelllang = 'en,ru'
 o.spelloptions = 'camel'
 o.spell = true
