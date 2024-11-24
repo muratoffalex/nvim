@@ -1,6 +1,6 @@
 local M = {}
 
-M.format_action = function(_)
+M.format_action = function()
   local function format_buffer()
     vim.lsp.buf.format {
       -- some tools (like eslint) are slow
