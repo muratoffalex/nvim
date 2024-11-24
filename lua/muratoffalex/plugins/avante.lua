@@ -1,8 +1,13 @@
 return {
    'yetone/avante.nvim',
-   event = 'VeryLazy',
-   lazy = false,
    version = false, -- set this if you want to always pull the latest change
+   lazy = true,
+   event = {
+      {
+         event = 'ModeChanged',
+         pattern = { "*:[vV\x16]*" } -- when enter in visual mode
+      }
+   },
    keys = {
       { '<leader>aa', '<cmd>AvanteAsk<cr>' },
       { '<leader>at', '<cmd>AvanteToggle<cr>' },
@@ -20,7 +25,6 @@ return {
          max_tokens = 4096,
       },
    },
-   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
    build = 'make',
    dependencies = {
       'stevearc/dressing.nvim',
