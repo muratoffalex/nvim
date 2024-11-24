@@ -1,6 +1,7 @@
 return {
    -- Autocompletion
    'hrsh7th/nvim-cmp',
+   event = 'InsertEnter',
    dependencies = {
       {
          'garymjr/nvim-snippets',
@@ -50,9 +51,9 @@ return {
          },
          sources = {
             { name = 'nvim_lsp', group_index = 1, max_item_count = 15 },
-            { name = 'snippets' },
+            { name = 'snippets', keyword_length = 2 },
             { name = 'path' },
-            { name = 'buffer', max_item_count = 5 },
+            { name = 'buffer', max_item_count = 5, keyword_length = 2 },
             { name = 'lazydev', group_index = 0 },
          },
       }
