@@ -14,7 +14,7 @@ return {
       { 'zbirenbaum/copilot.lua' },
       { 'nvim-lua/plenary.nvim' },
    },
-   build = "make tiktoken", -- Only on MacOS or Linux
+   build = 'make tiktoken', -- Only on MacOS or Linux
    keys = {
       { '<leader>cc', desc = 'CopilotChat' },
       -- Quick chat with Copilot
@@ -48,6 +48,11 @@ return {
          end,
          desc = 'CopilotChat - Help actions',
       },
+      {
+         '<leader>ccm',
+         '<cmd>CopilotChatModels<cr>',
+         desc = 'CopilotChat - Select model',
+      },
       -- Show prompts actions with telescope
       {
          '<leader>ccp',
@@ -79,7 +84,7 @@ return {
       { '<leader>ccr', '<cmd>CopilotChatReset<cr>', desc = 'CopilotChat - Clear buffer and chat history' },
    },
    opts = {
-      debug = false,
+      log_level = 'warn',
       model = 'claude-3.5-sonnet',
       auto_follow_cursor = false,
       prompts = {
@@ -91,21 +96,6 @@ return {
       local select = require 'CopilotChat.select'
 
       chat.setup(opts)
-
-      -- Custom buffer for CopilotChat
-      vim.api.nvim_create_autocmd('BufEnter', {
-         pattern = 'copilot-*',
-         callback = function()
-            vim.opt_local.relativenumber = true
-            vim.opt_local.number = true
-
-            -- Get current filetype and set it to markdown if the current filetype is copilot-chat
-            local ft = vim.bo.filetype
-            if ft == 'copilot-chat' then
-               vim.bo.filetype = 'markdown'
-            end
-         end,
-      })
 
       vim.api.nvim_create_user_command('CopilotChatVisual', function(args)
          chat.ask(args.args, { selection = select.visual })
