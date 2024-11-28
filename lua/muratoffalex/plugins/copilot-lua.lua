@@ -1,5 +1,9 @@
 return {
-  'zbirenbaum/copilot.lua',
+  -- TODO: return original when this PR is merged
+  -- https://github.com/zbirenbaum/copilot.lua/pull/336
+  -- 'zbirenbaum/copilot.lua',
+  'traysh/copilot.lua',
+  branch = 'fix_issue_330',
   cmd = 'Copilot',
   event = 'InsertEnter',
   keys = {
@@ -26,5 +30,7 @@ return {
   config = function(_, opts)
     vim.g.copilot_proxy = require('muratoffalex.config').proxy
     require('copilot').setup(opts)
+
+    vim.keymap.set('i', '<M-е>', require("copilot.suggestion").accept)
   end,
 }
