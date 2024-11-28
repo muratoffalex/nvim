@@ -2,12 +2,13 @@ return {
   'yetone/avante.nvim',
   version = false, -- set this if you want to always pull the latest change
   lazy = true,
-  event = {
-    {
-      event = 'ModeChanged',
-      pattern = { '*:[vV\x16]*' }, -- when enter in visual mode
-    },
-  },
+  event = 'VeryLazy',
+  -- event = {
+  --   {
+  --     event = 'ModeChanged',
+  --     pattern = { '*:[vV\x16]*' }, -- when enter in visual mode
+  --   },
+  -- },
   keys = {
     { '<leader>aa', '<cmd>AvanteAsk<cr>' },
     { '<leader>at', '<cmd>AvanteToggle<cr>' },

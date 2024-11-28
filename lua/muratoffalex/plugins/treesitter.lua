@@ -35,6 +35,9 @@ return {
 
         -- Autoinstall languages that are not installed. Defaults to false
         auto_install = true,
+        modules = {},
+        sync_install = false,
+        ignore_install = {},
 
         highlight = {
           enable = true,
