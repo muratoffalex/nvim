@@ -2,6 +2,7 @@ return {
   'nvim-lualine/lualine.nvim',
   dependencies = {
     'AndreM222/copilot-lualine',
+    'bwpge/lualine-pretty-path',
   },
   config = function()
     local utils = require 'muratoffalex.utils'
@@ -97,40 +98,16 @@ return {
       sections = {
         lualine_a = { 'mode' },
         lualine_b = {
-          -- 'branch',
-          -- {
-          --    'diff',
-          --    symbols = {
-          --       added = icons.git.added,
-          --       modified = icons.git.changed,
-          --       removed = icons.git.deleted,
-          --    },
-          --    source = function()
-          --       local gitsigns = vim.b.gitsigns_status_dict
-          --       if gitsigns then
-          --          return {
-          --             added = gitsigns.added,
-          --             modified = gitsigns.changed,
-          --             removed = gitsigns.removed,
-          --          }
-          --       end
-          --    end,
-          -- },
           'diagnostics',
         },
         lualine_c = {
-          { 'filetype', padding = { left = 1, right = 0 }, separator = '', icon_only = true },
-          { 'filename', padding = { left = 0, right = 0 }, separator = '' },
+          'pretty_path'
         },
         lualine_x = {
           xcodebuild_build_status,
           xcodebuild_device,
           package_info,
           copilot,
-          -- {
-          --    require('lazy.status').updates,
-          --    cond = require('lazy.status').has_updates
-          -- },
           {
             lsp_clients,
             cond = function()

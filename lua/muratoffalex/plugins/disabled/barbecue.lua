@@ -12,7 +12,7 @@ return {
     require('barbecue').setup {
       create_autocmd = false,
       show_modified = true,
-      custom_section = require('muratoffalex.utils').git_status,
+      custom_section = require('muratoffalex.utils').git_status_string,
     }
 
     vim.api.nvim_create_autocmd({
