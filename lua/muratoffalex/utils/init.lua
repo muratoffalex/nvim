@@ -18,21 +18,27 @@ function M.dump(o, redefined_separator)
   end
 end
 
-M.git_status = function()
-  local gitsigns = vim.b.gitsigns_status_dict or {}
-  local added = gitsigns.added or 0
-  local removed = gitsigns.removed or 0
-  local changed = gitsigns.changed or 0
+M.git_status = function(bufnr)
+  local icons = { removed = ' ', changed = ' ', added = ' ' }
+  local signs = bufnr and vim.b[bufnr].gitsigns_status_dict or vim.b.gitsigns_status_dict
+  local labels = {}
+  if signs == nil then
+    return labels
+  end
+  for name, icon in pairs(icons) do
+    if tonumber(signs[name]) and signs[name] > 0 then
+      table.insert(labels, { icon .. signs[name] .. ' ', group = 'WinBarDiff' .. name })
+    end
+  end
+  return labels
+end
 
+M.git_status_string = function()
+  local labels = M.git_status()
   local status = {}
-  if added > 0 then
-    table.insert(status, string.format('%%#WinBarDiffAdded# %d ', added))
-  end
-  if removed > 0 then
-    table.insert(status, string.format('%%#WinBarDiffRemoved# %d ', removed))
-  end
-  if changed > 0 then
-    table.insert(status, string.format('%%#WinBarDiffChanged# %d', changed))
+
+  for _, label in ipairs(labels) do
+    table.insert(status, string.format("%%#%s#%s", label.group, label[1]))
   end
 
   return table.concat(status)
