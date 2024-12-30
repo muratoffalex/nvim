@@ -2,7 +2,7 @@ local LSP = require 'muratoffalex.plugins.lsp.config.servers'
 
 local function client_capabilities()
   local base_capabilities = vim.lsp.protocol.make_client_capabilities()
-  local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+  local cmp_capabilities = require('blink.cmp').get_lsp_capabilities()
   local custom_capabilities = {
     workspace = {
       -- https://www.reddit.com/r/neovim/comments/1gdkrtn/i_want_to_use_neovim_but_the_lspintellisense_just/
@@ -257,8 +257,6 @@ M.on_attach = function(client, bufnr)
 
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
-
-  nmap('<leader>cr', vim.lsp.buf.rename, 'Rename')
 
   -- Move to definition and center cursor on screen
   -- NOTE: <cmd>lua vim.lsp.buf.definition()<CR>zz for centering after
