@@ -23,13 +23,18 @@ return {
     opts = {
       ui = {
         position = 'cursor',
+        max_height = 15,
+      navigate = {
+        next_page = ']',
+        prev_page = '[',
+        cancel_snipe = { '<esc>', 'q' },
       },
       sort = 'last',
       hints = {
         -- specified for colemak layout
         dictionary = 'arstdwfneiohmpg',
       },
-    }
+    },
   },
   {
     'kungfusheep/snipe-spell.nvim',
