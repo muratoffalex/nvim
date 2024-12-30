@@ -20,6 +20,7 @@ return {
       -- See the full "keymap" documentation for information on defining your own keymap.
       keymap = {
         preset = 'enter',
+        ['<C-r>'] = { 'show', 'fallback' },
         ['<C-y>'] = { 'select_and_accept' },
         ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
@@ -86,6 +87,11 @@ return {
       },
 
       completion = {
+        list = {
+          selection = function(ctx)
+            return ctx.mode == 'cmdline' and 'auto_insert' or 'preselect'
+          end,
+        },
         accept = {
           -- experimental auto-brackets support
           auto_brackets = {
@@ -94,7 +100,7 @@ return {
         },
         menu = {
           auto_show = function(_)
-            return vim.bo.filetype ~= "TelescopePrompt"
+            return vim.bo.filetype ~= 'TelescopePrompt'
           end,
           draw = {
             treesitter = { 'lsp' },
@@ -125,9 +131,9 @@ return {
         cmdline = function()
           local type = vim.fn.getcmdtype()
           -- Search forward and backward
-          if type == '/' or type == '?' then
-            return { 'buffer' }
-          end
+          -- if type == '/' or type == '?' then
+          --   return { 'buffer' }
+          -- end
           -- Commands
           if type == ':' then
             return { 'cmdline' }
@@ -136,7 +142,7 @@ return {
         end,
         providers = {
           lsp = {
-            min_keyword_length = 2, -- Number of characters to trigger porvider
+            -- min_keyword_length = 2, -- Number of characters to trigger porvider
             score_offset = 0, -- Boost/penalize the score of the items
           },
           path = {
@@ -149,9 +155,7 @@ return {
             min_keyword_length = 5,
             max_items = 5,
           },
-          cmdline = {
-            min_keyword_length = 4,
-          },
+          cmdline = {},
         },
       },
     },
