@@ -7,17 +7,17 @@ return {
         -- NOTE: for obsidian.nvim
         failed = {
           raw = '[~]',
-          rendered = '󰰱',
+          rendered = '󰰱 ',
           highlight = 'WinBarDiffRemoved',
         },
         in_progress = {
           raw = '[>]',
-          rendered = '',
+          rendered = ' ',
           highlight = 'WinBarDiffChanged',
         },
         important = {
           raw = '[!]',
-          rendered = '',
+          rendered = ' ',
           highlight = 'WinBarDiffAdded',
         },
       },
