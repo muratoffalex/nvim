@@ -1,18 +1,19 @@
--- todo main config
+local cache = require 'muratoffalex.utils.cache'
+
 local M = {}
 
 M.icons = {
   git = {
     added = ' ',
     changed = ' ',
-    copied = '',
+    copied = ' ',
     deleted = ' ',
-    ignored = '',
-    renamed = '',
-    staged = '',
-    unmerged = '',
-    unstaged = '',
-    untracked = '',
+    ignored = ' ',
+    renamed = ' ',
+    staged = ' ',
+    unmerged = ' ',
+    unstaged = ' ',
+    untracked = ' ',
   },
   diagnostics = {
     error = ' ',
@@ -22,8 +23,8 @@ M.icons = {
   },
 }
 
-M.background = os.getenv 'theme' or 'dark'
+-- change to local cache because env is not stable
+M.background = cache.read_value('theme', 'dark')
 M.theme = 'tokyonight'
-M.proxy = os.getenv 'proxy' or nil
 
 return M

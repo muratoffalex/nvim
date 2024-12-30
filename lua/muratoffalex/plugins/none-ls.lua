@@ -50,7 +50,9 @@ return {
         b.formatting.prettierd,
 
         -- Markdown
-        b.diagnostics.markdownlint,
+        b.diagnostics.markdownlint.with {
+          extra_args = { "--disable", "line-length" },
+        },
 
         -- PHP
         -- b.formatting.phpcsfixer,

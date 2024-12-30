@@ -8,6 +8,9 @@ return {
   config = function()
     local devicons = require 'nvim-web-devicons'
     require('incline').setup {
+      hide = {
+        cursorline = true,
+      },
       window = {
         padding = 1,
         margin = {
@@ -40,7 +43,7 @@ return {
         end
 
         return {
-          { require('muratoffalex.utils').git_status(props.buf) },
+          { require('muratoffalex.utils.git').status(props.buf) },
           { (ft_icon or '') .. ' ', guifg = ft_color },
           { filename, gui = vim.bo[props.buf].modified and 'bold,italic' or 'bold' },
         }
