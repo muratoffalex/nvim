@@ -1,5 +1,4 @@
 return {
-  -- TODO: check blink.nvim later
   {
     -- jujutsu squashing
     'julienvincent/hunk.nvim',
