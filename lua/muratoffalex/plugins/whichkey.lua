@@ -18,7 +18,6 @@ return {
     spec = {
       -- document existing key chains
       -- TODO: mb put some chains to plugin files?
-      { '<leader>b', group = 'Buffers' },
       { '<leader>q', group = 'Sessions' },
       { '<leader>cx', group = 'Xcodebuild' },
       { '<leader>d', group = 'Document' },
@@ -29,7 +28,8 @@ return {
       { '<leader>w', group = 'Workspace' },
       { 'gh', group = 'Diffview' },
       { 'gs', group = 'Mini.surround' },
-      { '<leader>s', group = 'Split windows' },
+      { 's', group = 'Split windows' },
+      { 'l', group = 'Language specific keymaps' },
       {
         { '<leader>t', group = 'Translation', mode = { 'x', 'v' } },
         { '<leader>tr', group = 'Translation' },
