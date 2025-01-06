@@ -2,7 +2,10 @@ return {
   {
     'saghen/blink.cmp',
     -- optional: provides snippets for the snippet source
-    dependencies = 'rafamadriz/friendly-snippets',
+    dependencies = {
+      'rafamadriz/friendly-snippets',
+      'xzbdmw/colorful-menu.nvim',
+    },
 
     -- use a release tag to download pre-built binaries
     version = '*',
@@ -14,10 +17,6 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      -- 'default' for mappings similar to built-in completion
-      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-      -- See the full "keymap" documentation for information on defining your own keymap.
       keymap = {
         preset = 'enter',
         ['<C-r>'] = { 'show', 'fallback' },
@@ -103,14 +102,13 @@ return {
             return vim.bo.filetype ~= 'TelescopePrompt'
           end,
           draw = {
-            treesitter = { 'lsp' },
-            columns = { { 'item_idx' }, { 'kind_icon' }, { 'label', 'label_description', gap = 1 } },
+            -- We don't need label_description now because label and label_description are already
+            -- conbined together in label by colorful-menu.nvim.
+            columns = { { 'kind_icon' }, { 'label', gap = 1 } },
             components = {
-              item_idx = {
-                text = function(ctx)
-                  return ctx.idx == 10 and '0' or ctx.idx >= 10 and ' ' or tostring(ctx.idx)
-                end,
-                highlight = 'CursorLineNr',
+              label = {
+                text = require('colorful-menu').blink_components_text,
+                highlight = require('colorful-menu').blink_components_highlight,
               },
             },
           },
@@ -127,7 +125,7 @@ return {
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'dadbod' },
         cmdline = function()
           local type = vim.fn.getcmdtype()
           -- Search forward and backward
@@ -155,7 +153,15 @@ return {
             min_keyword_length = 5,
             max_items = 5,
           },
-          cmdline = {},
+          cmdline = {
+            max_items = 10,
+          },
+          dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
+          markdown = {
+            name = 'RenderMarkdown',
+            module = 'render-markdown.integ.blink',
+            fallbacks = { 'lsp' },
+          },
         },
       },
     },

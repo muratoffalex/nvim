@@ -1,5 +1,9 @@
 return {
   {
+    'xzbdmw/colorful-menu.nvim',
+    opts = {},
+  },
+  {
     -- jujutsu squashing
     'julienvincent/hunk.nvim',
     cmd = { 'DiffEditor' },

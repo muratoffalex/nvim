@@ -24,16 +24,5 @@ return {
     vim.g.db_ui_show_database_icon = 1
     vim.g.db_ui_use_nvim_notify = 1
     vim.g.db_ui_show_help = 0
-
-    local cmp = require 'cmp'
-
-    local autocomplete_group = vim.api.nvim_create_augroup('vimrc_autocompletion', { clear = true })
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = { 'sql', 'mysql', 'plsql' },
-      callback = function()
-        cmp.setup.buffer { sources = { { name = 'vim-dadbod-completion' } } }
-      end,
-      group = autocomplete_group,
-    })
   end,
 }
