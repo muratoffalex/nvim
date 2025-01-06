@@ -63,8 +63,8 @@ return {
             unknown = ' ',
           },
           hl = {
-            enabled = '#41BC9C',
-            sleep = '#AEB7D0',
+            enabled = '#AEB7D0',
+            sleep = '#41BC9C',
             disabled = '#6272A4',
             warning = '#FFB86C',
             unknown = '#FF5555',

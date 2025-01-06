@@ -34,7 +34,7 @@ return {
   dependencies = {
     'wojciech-kulik/xcodebuild.nvim',
   },
-  ft = { 'swift', 'objective-c', 'objective-cpp' },
+  ft = { 'swift', 'objective-c', 'objective-cpp', 'go' },
   config = function()
     local xcodebuild = require 'xcodebuild.integrations.dap'
 
@@ -58,7 +58,7 @@ return {
       vim.keymap.set("n", "<leader>dT", xcodebuild.debug_class_tests, { desc = "Debug Class Tests" })
       vim.keymap.set("n", "<leader>b", xcodebuild.toggle_breakpoint, { desc = "Toggle Breakpoint" })
       vim.keymap.set("n", "<leader>B", xcodebuild.toggle_message_breakpoint, { desc = "Toggle Message Breakpoint" })
-    --stylua: ignore end
+      --stylua: ignore end
 
     vim.keymap.set('n', '<leader>dx', function()
       xcodebuild.terminate_session()

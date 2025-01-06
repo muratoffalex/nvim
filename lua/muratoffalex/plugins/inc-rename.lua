@@ -1,10 +1,11 @@
 return {
   'smjonas/inc-rename.nvim',
   config = function()
-    require('inc_rename').setup()
+    require('inc_rename').setup({})
 
     vim.keymap.set('n', '<leader>cr', function()
-      return ':IncRename ' .. vim.fn.expand '<cword>'
+      -- return ':IncRename ' .. vim.fn.expand '<cword>'
+      return ':IncRename '
     end, { expr = true, desc = 'Rename' })
   end,
 }

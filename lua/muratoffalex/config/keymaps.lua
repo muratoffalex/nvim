@@ -26,9 +26,9 @@ map.set('n', 'ж', 'o')
 map.set('n', 'ш', 'u')
 
 -- Common keymaps
-map.set('n', '<Esc>', '<cmd> noh <CR>', { desc = 'Clear highlights' })
-map.set('n', '<C-s>', '<cmd> :silent w <CR>', { desc = 'Save file' })
-map.set('n', '<C-c>', '<cmd> %y+ <CR>', { desc = 'Copy whole file' })
+map.set('n', '<Esc>', '<cmd>noh<CR>', { desc = 'Clear highlights' })
+map.set('n', '<C-s>', '<cmd>silent w<CR>', { desc = 'Save file' })
+map.set('n', '<C-c>', '<cmd>%y+<CR>', { desc = 'Copy whole file' })
 map.set('n', '<leader>x', '<cmd>bd<cr>', { desc = 'Close current buffer' })
 map.set('n', '<leader>X', '<cmd>bd!<cr>', { desc = 'Close current buffer force' })
 map.set('n', '<leader>nr', '<cmd>set relativenumber!<cr>', { desc = 'Toggle relative number' })
@@ -88,3 +88,17 @@ map.set('n', 's-', '<cmd>resize -5<cr>', { desc = 'Decrease window height 5' })
 -- Misc
 -- Toggle list
 map.set('n', '<leader>nl', '<cmd>set list!<cr>', { desc = 'Toggle list' })
+
+
+-- Advanced keymaps
+
+vim.keymap.set("v", "<leader>lml", function()
+  vim.cmd("let @a = getreg('+')")
+  vim.cmd("normal d")
+  vim.cmd("startinsert")
+  vim.api.nvim_put({ "[]() " }, "c", true, true)
+  vim.cmd("normal F[pf(")
+  vim.cmd("call setreg('+', @a)")
+  vim.cmd("normal p")
+  vim.cmd("stopinsert")
+end, { desc = "[Markdown] Convert to link" })
