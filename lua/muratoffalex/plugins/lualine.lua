@@ -77,10 +77,6 @@ return {
       show_loading = true,
     }
 
-    local function package_info()
-      return require('package-info').get_status()
-    end
-
     local function selectionCount()
       local starts = fn.line 'v'
       local ends = fn.line '.'
@@ -106,7 +102,6 @@ return {
         lualine_x = {
           xcodebuild_build_status,
           xcodebuild_device,
-          package_info,
           copilot,
           {
             lsp_clients,
