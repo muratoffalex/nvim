@@ -62,8 +62,9 @@ return {
     },
   },
   {
+    -- TODO: contribute and change
     'kungfusheep/snipe-spell.nvim',
-    dependencies = 'leath-dub/snipe.nvim',
+    dependencies = 'muratoffalex/snipe.nvim',
     config = true,
     keys = {
       { '<leader>sc', '<cmd>SnipeSpell<cr>', desc = 'Snipe Spellchecker' },
