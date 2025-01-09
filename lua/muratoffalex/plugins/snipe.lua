@@ -1,16 +1,27 @@
 return {
   {
-    'stevearc/dressing.nvim',
+    -- TODO: contribute and change
+    'muratoffalex/dressing.nvim',
+    branch = "feat/snipe-select-backend",
     dependencies = 'leath-dub/snipe.nvim',
     opts = {
       select = {
         enabled = true,
         backend = 'snipe',
+        snipe = {
+          options = {
+            default_keymaps = {
+              cancel = { '<esc>', 'q' },
+            },
+          },
+        },
       },
     },
   },
   {
-    'leath-dub/snipe.nvim',
+    -- TODO: contribute and change
+    'muratoffalex/snipe.nvim',
+    branch = "pagination",
     keys = {
       {
         'tt',
@@ -24,6 +35,20 @@ return {
       ui = {
         position = 'cursor',
         max_height = 15,
+        subtitle = {
+          format = '%pagination%%total_items% items',
+        },
+        pagination = {
+          -- format = "[%page%/%total_pages%] ",
+          format = function(vars)
+            if vars.total_pages == 1 then
+              return ''
+            end
+            return string.format('[%d/%d] %d items', vars.page, vars.total_pages, vars.total_items)
+          end,
+        },
+        text_align = 'left',
+      },
       navigate = {
         next_page = ']',
         prev_page = '[',
