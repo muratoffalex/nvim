@@ -87,9 +87,14 @@ return {
 
       completion = {
         list = {
-          selection = function(ctx)
-            return ctx.mode == 'cmdline' and 'auto_insert' or 'preselect'
-          end,
+          selection = {
+            preselect = function(ctx)
+              return ctx.mode ~= 'cmdline'
+            end,
+            auto_insert = function(ctx)
+              return ctx.mode == 'cmdline'
+            end
+          },
         },
         accept = {
           -- experimental auto-brackets support
@@ -140,7 +145,7 @@ return {
         end,
         providers = {
           lsp = {
-            -- min_keyword_length = 2, -- Number of characters to trigger porvider
+            -- min_keyword_length = 2, -- Number of characters to trigger provider
             score_offset = 0, -- Boost/penalize the score of the items
           },
           path = {
