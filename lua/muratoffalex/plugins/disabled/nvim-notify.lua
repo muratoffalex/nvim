@@ -1,6 +1,7 @@
 -- ref: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/ui.lua
 return {
   'rcarriga/nvim-notify',
+  enabled = false,
   opts = {
     stages = 'static',
     timeout = 3000,

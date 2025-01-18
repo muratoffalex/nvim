@@ -14,20 +14,33 @@ return {
   keys = {
     { '<leader>e', '<cmd>Neotree toggle<cr>', desc = 'Neotree toggle' },
   },
-  opts = {
-    filesystem = {
-      follow_current_file = {
-        enabled = true,
-        leave_dirs_open = false,
-      },
-    },
-    default_component_configs = {
-      git_status = {
-        symbols = {
-          -- default unstaged icon not showing
-          unstaged = config.icons.git.unstaged,
+  opts = function(_, opts)
+    -- Snacks rename
+    local function on_move(data)
+      Snacks.rename.on_rename_file(data.source, data.destination)
+    end
+    local events = require 'neo-tree.events'
+    opts.event_handlers = opts.event_handlers or {}
+    vim.list_extend(opts.event_handlers, {
+      { event = events.FILE_MOVED, handler = on_move },
+      { event = events.FILE_RENAMED, handler = on_move },
+    })
+
+    return {
+      filesystem = {
+        follow_current_file = {
+          enabled = true,
+          leave_dirs_open = false,
         },
       },
-    },
-  },
+      default_component_configs = {
+        git_status = {
+          symbols = {
+            -- default unstaged icon not showing
+            unstaged = config.icons.git.unstaged,
+          },
+        },
+      },
+    }
+  end,
 }
