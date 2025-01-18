@@ -13,8 +13,6 @@ return {
         WinBarDiffAdded = { fg = colors.green },
         WinBarDiffRemoved = { fg = colors.red },
         WinBarDiffChanged = { fg = colors.blue },
-        AvanteConflictIncoming = { bg = '#93c47d' },
-        AvanteConflictCurrent = { bg = '#f9bfbf' },
       }
       for k, v in pairs(diff_highlights) do
         highlights[k] = v

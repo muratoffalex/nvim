@@ -3,14 +3,22 @@ return {
   event = 'VeryLazy',
   keys = {
     {
-      '<leader>?',
+      "<leader>?",
       function()
-        require('which-key').show { global = false }
+        require("which-key").show({ global = false })
       end,
-      desc = 'Buffer Local Keymaps (which-key)',
+      desc = "Buffer Keymaps (which-key)",
+    },
+    {
+      "<c-w><space>",
+      function()
+        require("which-key").show({ keys = "<c-w>", loop = true })
+      end,
+      desc = "Window Hydra Mode (which-key)",
     },
   },
   opts = {
+    preset = "classic",
     delay = 500,
     icons = {
       rules = false,
@@ -43,6 +51,7 @@ return {
         { '<leader>od', group = 'Daily' },
         { '<leader>r', group = 'Refactoring' },
       },
+      { "gx", desc = "Open with system app" },
     },
-  },
+  }
 }

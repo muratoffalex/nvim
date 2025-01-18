@@ -19,12 +19,6 @@ return {
       return utils.dump(clients_list, '·')
     end
 
-    -- codeium info
-    local function codeium()
-      return require('neocodeium').get_status()
-      -- return '{…}' .. vim.fn['codeium#GetStatusString']()
-    end
-
     local function xcodebuild_device()
       if vim.g.xcodebuild_platform == 'macOS' then
         return ' macOS'
