@@ -258,15 +258,6 @@ M.on_attach = function(client, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  -- Move to definition and center cursor on screen
-  -- NOTE: <cmd>lua vim.lsp.buf.definition()<CR>zz for centering after
-  nmap('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
-  nmap('gR', require('telescope.builtin').lsp_references, 'Goto References')
-  nmap('gI', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
-  nmap('gy', require('telescope.builtin').lsp_type_definitions, 'Goto Type Definition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
-
   -- See `:help K` for why this keymap
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 

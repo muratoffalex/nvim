@@ -1,7 +1,7 @@
 return {
   'wojciech-kulik/xcodebuild.nvim',
   dependencies = {
-    'nvim-telescope/telescope.nvim',
+    'ibhagwan/fzf-lua',
     'MunifTanjim/nui.nvim',
   },
   ft = { 'swift', 'objective-c', 'objective-cpp' },
@@ -47,6 +47,5 @@ return {
       '<cmd>XcodebuildShowCodeCoverageReport<cr>',
       { desc = 'Show Code Coverage Report' }
     )
-    vim.keymap.set('n', '<leader>cxq', '<cmd>Telescope quickfix<cr>', { desc = 'Show QuickFix List' })
   end,
 }

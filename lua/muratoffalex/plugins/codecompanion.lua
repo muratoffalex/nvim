@@ -8,7 +8,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
-    'nvim-telescope/telescope.nvim', -- Optional: For using slash commands
+    'ibhagwan/fzf-lua', -- Optional: For using slash commands
   },
   config = true,
 }

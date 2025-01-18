@@ -103,9 +103,6 @@ return {
           },
         },
         menu = {
-          auto_show = function(_)
-            return vim.bo.filetype ~= 'TelescopePrompt'
-          end,
           draw = {
             -- We don't need label_description now because label and label_description are already
             -- conbined together in label by colorful-menu.nvim.
