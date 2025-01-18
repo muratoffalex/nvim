@@ -83,6 +83,7 @@ return {
         height = 0.8,
         row = 0.5,
         col = 0.5,
+        backdrop = 100,
         preview = {
           scrollchars = { '┃', '' },
         },
