@@ -30,6 +30,7 @@ o.sessionoptions = 'buffers,curdir,folds,tabpages'
 vim.o.shortmess = vim.o.shortmess .. 'I'
 -- for obsidian
 o.conceallevel = 1
+o.laststatus = 3
 
 o.cursorline = true
 -- NOTE: now in plugins/smartcolumn.lua
