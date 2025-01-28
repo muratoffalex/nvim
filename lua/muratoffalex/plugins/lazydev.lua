@@ -6,6 +6,7 @@ return {
       return {
         library = {
           uv = 'luvit-meta/library',
+          { path = 'snacks.nvim', words = { 'Snacks' } },
         },
       }
     end,

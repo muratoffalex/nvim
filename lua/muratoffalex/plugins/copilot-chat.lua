@@ -39,12 +39,12 @@ return {
       mode = 'x',
       desc = 'CopilotChat - Quick chat',
     },
-    -- Show help actions with telescope
+    -- Show help actions with fzflua
     {
       '<leader>cch',
       function()
         local actions = require 'CopilotChat.actions'
-        require('CopilotChat.integrations.telescope').pick(actions.help_actions())
+        require('CopilotChat.integrations.fzflua').pick(actions.help_actions())
       end,
       desc = 'CopilotChat - Help actions',
     },
@@ -53,12 +53,12 @@ return {
       '<cmd>CopilotChatModels<cr>',
       desc = 'CopilotChat - Select model',
     },
-    -- Show prompts actions with telescope
+    -- Show prompts actions with fzflua
     {
       '<leader>ccp',
       function()
         local actions = require 'CopilotChat.actions'
-        require('CopilotChat.integrations.telescope').pick(
+        require('CopilotChat.integrations.fzflua').pick(
           actions.prompt_actions { selection = require('CopilotChat.select').buffer }
         )
       end,
@@ -66,7 +66,7 @@ return {
     },
     {
       '<leader>ccp',
-      ":lua require('CopilotChat.integrations.telescope').pick(require('CopilotChat.actions').prompt_actions({selection = require('CopilotChat.select').visual}))<CR>",
+      ":lua require('CopilotChat.integrations.fzflua').pick(require('CopilotChat.actions').prompt_actions({selection = require('CopilotChat.select').visual}))<CR>",
       mode = 'x',
       desc = 'CopilotChat - Prompt actions',
     },

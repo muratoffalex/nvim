@@ -54,7 +54,7 @@ map.set('v', '<S-Up>', ":m '<-2<CR>gv=gv", { desc = 'Move line or block up', sil
 map.set('v', '<S-Down>', ":m '>+1<CR>gv=gv", { desc = 'Move line or block down', silent = true })
 
 -- Terminal
-map.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Switch to normal mode' })
+-- map.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Switch to normal mode' })
 
 -- Tabs
 map.set('n', '<leader>tN', '<cmd>tabnew<cr>', { desc = 'New tab' })

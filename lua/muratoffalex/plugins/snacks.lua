@@ -1,29 +1,125 @@
 return {
-  "folke/snacks.nvim",
+  'folke/snacks.nvim',
   priority = 1000,
   lazy = false,
   keys = {
-    { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-    { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-    { "<leader>nh",  function() Snacks.notifier.show_history() end, desc = "Show notifications history" },
+    {
+      '<leader>.',
+      function()
+        Snacks.scratch()
+      end,
+    },
+    {
+      '<leader>S',
+      function()
+        Snacks.scratch.select()
+      end,
+      desc = 'Select Scratch Buffer',
+    },
+    {
+      '<leader>nh',
+      function()
+        Snacks.notifier.show_history()
+      end,
+      desc = 'Show notifications history',
+    },
   },
   ---@type snacks.Config
   opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
     bigfile = { enabled = true },
     quickfile = { enabled = true },
-    scope = { enabled = true },
     notifier = {
       enabled = true,
-      style = "fancy",
+      style = 'minimal',
     },
     rename = { enabled = true },
-    input = { enabled = false },
-    dashboard = { enabled = false },
-    indent = { enabled = false },
-    scroll = { enabled = false },
-    statuscolumn = { enabled = false },
+    words = { enabled = true },
+    statuscolumn = {
+      enabled = false,
+      left = { 'mark', 'git' },
+      right = { 'sign', 'fold' },
+    },
+    scratch = {
+      enabled = true,
+      win_by_ft = {
+        go = {
+          keys = {
+            ['source'] = {
+              '<cr>',
+              function(self)
+                local file_path = vim.api.nvim_buf_get_name(self.buf)
+
+                -- Run Go file and capture output
+                vim.fn.jobstart({ 'go', 'run', file_path }, {
+                  stdout_buffered = true,
+                  on_stdout = function(_, data)
+                    if data then
+                      local output = table.concat(data, '\n')
+                      if output ~= '' then
+                        vim.notify(output, vim.log.levels.INFO)
+                      end
+                    end
+                  end,
+                  on_stderr = function(_, data)
+                    if data then
+                      local error = table.concat(data, '\n')
+                      if error ~= '' then
+                        vim.notify(error, vim.log.levels.ERROR)
+                      end
+                    end
+                  end,
+                })
+              end,
+              desc = 'Run scratch',
+              mode = { 'n', 'x' },
+            },
+          },
+        },
+        php = {
+          keys = {
+            ['source'] = {
+              '<cr>',
+              function(self)
+                local file_path = vim.api.nvim_buf_get_name(self.buf)
+
+                -- Run PHP file and capture output
+                vim.fn.jobstart({ 'php', file_path }, {
+                  stdout_buffered = true,
+                  on_stdout = function(_, data)
+                    if data then
+                      local output = table.concat(data, '\n')
+                      if output ~= '' then
+                        vim.notify(output, vim.log.levels.INFO)
+                      end
+                    end
+                  end,
+                  on_stderr = function(_, data)
+                    if data then
+                      local error = table.concat(data, '\n')
+                      if error ~= '' then
+                        vim.notify(error, vim.log.levels.ERROR)
+                      end
+                    end
+                  end,
+                })
+              end,
+              desc = 'Run scratch',
+              mode = { 'n', 'x' },
+            },
+          },
+        },
+      },
+    },
+    ---@type table<string, snacks.win.Config>
+    styles = {
+      scratch = {
+        relative = "editor",
+        wo = { winhighlight = 'NormalFloat:NormalFloat,SignColumn:NormalFloat' },
+      },
+      notification_history = {
+        relative = "editor",
+        wo = { winhighlight = 'NormalFloat:NormalFloat,SignColumn:NormalFloat' },
+      },
+    },
   },
 }
