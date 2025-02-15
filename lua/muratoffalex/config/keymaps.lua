@@ -3,11 +3,13 @@ local map = vim.keymap
 map.set({ 'n', 'v' }, '<space>', '<nop>', { silent = true })
 
 -- remap for dealing with word wrap
-map.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-map.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
--- Same with arrows for split keyboard with layout miryoku
 map.set('n', '<Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map.set('n', '<Down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+map.set('n', '<A-Up>', '20<C-y>', { desc = 'Vertical scroll top 20', noremap = true })
+map.set('n', '<A-Down>', '20<C-e>', { desc = 'Vertical scroll down 20', noremap = true })
+map.set('n', '<A-Left>', 'zh20', { desc = 'Horizontal scroll left 20', noremap = true })
+map.set('n', '<A-Right>', 'zl20', { desc = 'Horizontal scroll right 20', noremap = true })
 
 -- NOTE: Set jump to next item in jumplist with <C-n> (n - next),
 -- because press <C-i> identical to <Tab> (Tab navigation, nvim-cmp navigation)
@@ -89,16 +91,15 @@ map.set('n', 's-', '<cmd>resize -5<cr>', { desc = 'Decrease window height 5' })
 -- Toggle list
 map.set('n', '<leader>nl', '<cmd>set list!<cr>', { desc = 'Toggle list' })
 
-
 -- Advanced keymaps
 
-vim.keymap.set("v", "<leader>lml", function()
-  vim.cmd("let @a = getreg('+')")
-  vim.cmd("normal d")
-  vim.cmd("startinsert")
-  vim.api.nvim_put({ "[]() " }, "c", true, true)
-  vim.cmd("normal F[pf(")
-  vim.cmd("call setreg('+', @a)")
-  vim.cmd("normal p")
-  vim.cmd("stopinsert")
-end, { desc = "[Markdown] Convert to link" })
+vim.keymap.set('v', '<leader>lml', function()
+  vim.cmd "let @a = getreg('+')"
+  vim.cmd 'normal d'
+  vim.cmd 'startinsert'
+  vim.api.nvim_put({ '[]() ' }, 'c', true, true)
+  vim.cmd 'normal F[pf('
+  vim.cmd "call setreg('+', @a)"
+  vim.cmd 'normal p'
+  vim.cmd 'stopinsert'
+end, { desc = '[Markdown] Convert to link' })

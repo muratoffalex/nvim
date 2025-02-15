@@ -18,6 +18,7 @@ o.spell = true
 
 o.background = config.background
 o.swapfile = false
+o.diffopt = 'filler,internal,closeoff,algorithm:histogram,linematch:60,context:5,indent-heuristic'
 
 -- Default indent size
 o.shiftwidth = 2
