@@ -13,4 +13,6 @@ return {
   LUA_LS = 'lua_ls',
   SOURCEKIT = 'sourcekit',
   CLANGD = 'clangd',
+  KULALA_LS = 'kulala_ls',
+  NIX_LS = 'nil_ls',
 }

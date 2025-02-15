@@ -24,6 +24,9 @@ local M = {}
 
 ---@return table<string, LspServerConfig>
 M.lsp_servers = {
+  [LSP.KULALA_LS] = {
+    auto_install = false,
+  },
   [LSP.VOLAR] = {
     lspconfig_settings = {
       settings = {
