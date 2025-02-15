@@ -26,11 +26,15 @@ return {
   },
   ---@type snacks.Config
   opts = {
+    picker = {
+      layout = "ivy",
+    },
     bigfile = { enabled = true },
     quickfile = { enabled = true },
     notifier = {
       enabled = true,
-      style = 'minimal',
+      style = 'compact',
+      padding = false,
     },
     rename = { enabled = true },
     words = { enabled = true },
@@ -113,12 +117,16 @@ return {
     ---@type table<string, snacks.win.Config>
     styles = {
       scratch = {
-        relative = "editor",
+        relative = 'editor',
         wo = { winhighlight = 'NormalFloat:NormalFloat,SignColumn:NormalFloat' },
       },
       notification_history = {
-        relative = "editor",
+        relative = 'editor',
         wo = { winhighlight = 'NormalFloat:NormalFloat,SignColumn:NormalFloat' },
+      },
+      notification = {
+        relative = 'editor',
+        wo = { wrap = true },
       },
     },
   },

@@ -3,11 +3,11 @@ return {
   opts = {
     file_types = { 'markdown', 'Avante', 'copilot-chat' },
     checkbox = {
-      unchecked = {
-        icon = '○',
-      },
+      -- unchecked = {
+      --   icon = '○',
+      -- },
       checked = {
-        icon = '✓',
+        -- icon = '✓',
         highlight = 'Comment',
         scope_highlight = 'Comment',
       },
@@ -15,20 +15,20 @@ return {
         -- NOTE: for obsidian.nvim
         failed = {
           raw = '[~]',
-          -- rendered = '󰰱 ',
-          rendered = '⊝',
+          rendered = '󰰱 ',
+          -- rendered = '⊝',
           highlight = 'Error',
         },
         in_progress = {
           raw = '[>]',
-          -- rendered = ' ',
-          rendered = '◐',
+          rendered = ' ',
+          -- rendered = '◐',
           highlight = 'WinBarDiffChanged',
         },
         important = {
           raw = '[!]',
-          -- rendered = ' ',
-          rendered = '◉',
+          rendered = ' ',
+          -- rendered = '◉',
           highlight = 'Constant',
         },
       },

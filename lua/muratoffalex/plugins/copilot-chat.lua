@@ -15,6 +15,47 @@ return {
     { 'nvim-lua/plenary.nvim' },
   },
   build = 'make tiktoken', -- Only on MacOS or Linux
+  opts = function()
+    local COPILOT_INSTRUCTIONS = require('CopilotChat.config.prompts').COPILOT_INSTRUCTIONS.system_prompt .. 'Answer in russian.'
+    return {
+      log_level = 'warn',
+      system_prompt = COPILOT_INSTRUCTIONS,
+      model = 'claude-3.5-sonnet',
+      auto_follow_cursor = false,
+      prompts = {
+        BetterNamings = prompts.BetterNamings,
+      },
+      highlight_headers = false,
+      separator = '',
+      answer_header = '## Copilot',
+      question_header = '## User',
+      error_header = '> [!ERROR] Error',
+    }
+  end,
+  config = function(_, opts)
+    local chat = require 'CopilotChat'
+    local select = require 'CopilotChat.select'
+
+    chat.setup(opts)
+
+    vim.api.nvim_create_user_command('CopilotChatVisual', function(args)
+      chat.ask(args.args, { selection = select.visual })
+    end, { nargs = '*', range = true })
+
+    -- Inline chat with Copilot
+    vim.api.nvim_create_user_command('CopilotChatInline', function(args)
+      chat.ask(args.args, {
+        selection = select.visual,
+        window = {
+          layout = 'float',
+          relative = 'cursor',
+          width = 1,
+          height = 0.4,
+          row = 1,
+        },
+      })
+    end, { nargs = '*', range = true })
+  end,
   keys = {
     { '<leader>cc', desc = 'CopilotChat' },
     -- Quick chat with Copilot
@@ -39,7 +80,7 @@ return {
       mode = 'x',
       desc = 'CopilotChat - Quick chat',
     },
-    -- Show help actions with fzflua
+    -- Show help actions with picker
     {
       '<leader>cch',
       function()
@@ -53,7 +94,7 @@ return {
       '<cmd>CopilotChatModels<cr>',
       desc = 'CopilotChat - Select model',
     },
-    -- Show prompts actions with fzflua
+    -- Show prompts actions with picker
     {
       '<leader>ccp',
       function()
@@ -84,37 +125,24 @@ return {
     },
     { '<leader>cct', '<cmd>CopilotChatToggle<cr>', desc = 'CopilotChat - Toggle' },
     { '<leader>ccr', '<cmd>CopilotChatReset<cr>', desc = 'CopilotChat - Clear buffer and chat history' },
-  },
-  opts = {
-    log_level = 'warn',
-    model = 'claude-3.5-sonnet',
-    auto_follow_cursor = false,
-    prompts = {
-      BetterNamings = prompts.BetterNamings,
+    { '<leader>ccs', ':CopilotChatSave ', desc = 'CopilotChat - Save' },
+    { '<leader>ccl', ':CopilotChatLoad ', desc = 'CopilotChat - Load' },
+
+    {
+      '<leader>ccS',
+      function()
+        local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+        vim.fn.feedkeys(':CopilotChatSave ' .. cwd, 'n')
+      end,
+      desc = 'CopilotChat - Save project chat',
+    },
+    {
+      '<leader>ccL',
+      function()
+        local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+        vim.fn.feedkeys(':CopilotChatLoad ' .. cwd, 'n')
+      end,
+      desc = 'CopilotChat - Load project chat',
     },
   },
-  config = function(_, opts)
-    local chat = require 'CopilotChat'
-    local select = require 'CopilotChat.select'
-
-    chat.setup(opts)
-
-    vim.api.nvim_create_user_command('CopilotChatVisual', function(args)
-      chat.ask(args.args, { selection = select.visual })
-    end, { nargs = '*', range = true })
-
-    -- Inline chat with Copilot
-    vim.api.nvim_create_user_command('CopilotChatInline', function(args)
-      chat.ask(args.args, {
-        selection = select.visual,
-        window = {
-          layout = 'float',
-          relative = 'cursor',
-          width = 1,
-          height = 0.4,
-          row = 1,
-        },
-      })
-    end, { nargs = '*', range = true })
-  end,
 }

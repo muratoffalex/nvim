@@ -17,6 +17,7 @@ return {
     },
     custom_colorcolumn = {
       markdown = '80',
+      go = { '80', '100' },
     },
   },
 }
