@@ -1,6 +1,6 @@
 return {
   'sam4llis/nvim-tundra',
-  enabled = false,
+  enabled = require('muratoffalex.config').theme == 'tundra',
   config = function()
     require('nvim-tundra').setup {
       transparent_background = true,

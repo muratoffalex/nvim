@@ -24,7 +24,9 @@ M.icons = {
 }
 
 -- change to local cache because env is not stable
-M.background = cache.read_value('theme', 'dark')
-M.theme = 'tokyonight'
+M.background = cache.read_value('background', 'dark')
+M.theme = (cache.read_value('theme', 'tokyonight')):match("^([^-]+)")
+
+M.picker = 'fzflua'
 
 return M

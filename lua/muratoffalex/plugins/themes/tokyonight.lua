@@ -1,6 +1,7 @@
 return {
   'folke/tokyonight.nvim',
   priority = 1000,
+  lazy = require('muratoffalex.config').theme ~= 'tokyonight',
   opts = {
     transparent = false,
     style = 'night',
@@ -21,8 +22,6 @@ return {
   },
   config = function(_, opts)
     require('tokyonight').setup(opts)
-
-    -- apply on_highlights after start nvim
     vim.cmd.colorscheme 'tokyonight'
   end,
 }

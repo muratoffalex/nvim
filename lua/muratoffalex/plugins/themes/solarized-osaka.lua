@@ -1,7 +1,7 @@
 return {
   'craftzdog/solarized-osaka.nvim',
   lazy = false,
-  enabled = false,
+  enabled = require('muratoffalex.config').theme == 'solirized-osaka',
   priority = 1000,
   opts = function()
     return {
