@@ -124,11 +124,8 @@ return {
         },
       },
 
-      -- Default list of enabled providers defined so that you can extend it
-      -- elsewhere in your config, without redefining it, due to `opts_extend`
-      sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer', 'dadbod' },
-        cmdline = function()
+      cmdline = {
+        sources = function()
           local type = vim.fn.getcmdtype()
           -- Search forward and backward
           -- if type == '/' or type == '?' then
@@ -139,7 +136,13 @@ return {
             return { 'cmdline' }
           end
           return {}
-        end,
+        end
+      },
+
+      -- Default list of enabled providers defined so that you can extend it
+      -- elsewhere in your config, without redefining it, due to `opts_extend`
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'dadbod' },
         providers = {
           lsp = {
             -- min_keyword_length = 2, -- Number of characters to trigger provider
