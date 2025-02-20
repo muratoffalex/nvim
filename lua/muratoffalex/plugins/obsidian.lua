@@ -1,4 +1,4 @@
-local absolute_vaults_directory = '/Library/Mobile Documents/iCloud~md~obsidian/Documents'
+local absolute_vaults_directory = '/obsidian'
 local vaults_directory = '~' .. absolute_vaults_directory
 
 return {
