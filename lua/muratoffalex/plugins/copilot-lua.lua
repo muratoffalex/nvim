@@ -11,8 +11,8 @@ return {
       enabled = false,
     },
     suggestion = {
-      enaled = false,
-      auto_trigger = false,
+      enaled = true,
+      auto_trigger = true,
       keymap = {
         accept = '<M-g>',
         accept_line = '<M-l>',
