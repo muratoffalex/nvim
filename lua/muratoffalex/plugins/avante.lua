@@ -19,7 +19,7 @@ return {
     provider = 'copilot',
     copilot = {
       endpoint = 'https://api.githubcopilot.com',
-      model = 'claude-3.5-sonnet',
+      model = 'claude-3.7-sonnet',
       allow_insecure = true, -- Allow insecure server connections
       timeout = 30000, -- Timeout in milliseconds
       temperature = 0,
