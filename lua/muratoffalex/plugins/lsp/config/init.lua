@@ -24,6 +24,9 @@ local M = {}
 
 ---@return table<string, LspServerConfig>
 M.lsp_servers = {
+  [LSP.NIX_LS] = {
+    auto_install = false,
+  },
   [LSP.KULALA_LS] = {
     auto_install = false,
   },
@@ -47,7 +50,9 @@ M.lsp_servers = {
     },
   },
   [LSP.CSSLS] = {},
-  [LSP.MARKSMAN] = {},
+  [LSP.MARKSMAN] = {
+    auto_install = false,
+  },
   [LSP.TAILWINDCSS] = {
     lspconfig_settings = {
       filetypes = { 'html', 'twig', 'css', 'jsx', 'vue' },

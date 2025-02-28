@@ -49,6 +49,9 @@ return {
         -- Typescript and Markdown
         b.formatting.prettierd,
 
+        -- nix
+        b.formatting.nixfmt,
+
         -- Markdown
         b.diagnostics.markdownlint.with {
           extra_args = { "--disable", "line-length" },

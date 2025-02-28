@@ -6,8 +6,8 @@ map.set({ 'n', 'v' }, '<space>', '<nop>', { silent = true })
 map.set('n', '<Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map.set('n', '<Down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-map.set('n', '<A-Up>', '20<C-y>', { desc = 'Vertical scroll top 20', noremap = true })
-map.set('n', '<A-Down>', '20<C-e>', { desc = 'Vertical scroll down 20', noremap = true })
+map.set('n', '<A-Up>', '1<C-y>', { desc = 'Vertical scroll top 20', noremap = true })
+map.set('n', '<A-Down>', '1<C-e>', { desc = 'Vertical scroll down 20', noremap = true })
 map.set('n', '<A-Left>', 'zh20', { desc = 'Horizontal scroll left 20', noremap = true })
 map.set('n', '<A-Right>', 'zl20', { desc = 'Horizontal scroll right 20', noremap = true })
 
