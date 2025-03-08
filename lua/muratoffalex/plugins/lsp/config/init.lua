@@ -29,6 +29,12 @@ M.lsp_servers = {
   },
   [LSP.KULALA_LS] = {
     auto_install = false,
+    lspconfig_settings = {
+      -- HACK: for nixos, before accepting this PR: 
+      -- https://github.com/NixOS/nixpkgs/pull/385105
+      -- https://nixpkgs-tracker.ocfox.me/?pr=385105
+      cmd = { 'npx', '--yes', '--', '@mistweaverco/kulala-ls', '--stdio' },
+    },
   },
   [LSP.VOLAR] = {
     lspconfig_settings = {
