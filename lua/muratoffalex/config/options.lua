@@ -75,10 +75,14 @@ o.splitbelow = true
 -- Set completeopt to have a better completion experience
 o.completeopt = 'menuone,noselect'
 
-o.wrap = true -- display long lines with wrap
+o.wrap = false -- display long lines with wrap
 
 o.list = true
 o.listchars = { tab = '>-', trail = '·' }
+
+o.expandtab = true
+o.smartindent = true
+o.autoindent = true
 
 o.termguicolors = true
 o.smoothscroll = true
