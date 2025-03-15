@@ -33,7 +33,7 @@ function M.get_namespace()
 
     if string.find(path, key) then
       namespace_exist = true
-      path = string.gsub(path, key, value:gsub('\\', ''))
+      path = string.gsub(path, key, value)
     end
   end
 
@@ -43,7 +43,7 @@ function M.get_namespace()
 
   -- fix slashes
   -- ex., App/Test => App\Test
-  path = path:gsub('/', '\\\\')
+  path = path:gsub('/', '\\')
 
   return path
 end
