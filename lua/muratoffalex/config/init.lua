@@ -24,8 +24,8 @@ M.icons = {
 }
 
 -- change to local cache because env is not stable
-M.background = cache.read_value('background', 'dark')
-M.theme = (cache.read_value('theme', 'tokyonight')):match("^([^-]+)")
+M.background = cache.read_value('background', 'light')
+M.theme = (cache.read_value('theme', 'kanagawa')):match("^([^-]+)")
 M.current_os = vim.env.current_os or 'unknown'
 
 M.picker = 'fzflua'
