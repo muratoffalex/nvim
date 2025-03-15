@@ -4,6 +4,14 @@ return {
   lazy = false,
   keys = {
     {
+      'gb',
+      function()
+        Snacks.gitbrowse.open()
+      end,
+      desc = 'Git browse',
+      mode = { 'n', 'x', 'v' },
+    },
+    {
       '<leader>.',
       function()
         Snacks.scratch()
@@ -26,9 +34,20 @@ return {
   },
   ---@type snacks.Config
   opts = {
+    gitbrowse = {
+      enabled = true,
+      url_patterns = {
+        ['forge%.'] = {
+          branch = '/src/branch/{branch}',
+          file = '/src/branch/{branch}/{file}#L{line_start}-L{line_end}',
+          permalink = '/src/commit/{commit}/{file}#L{line_start}-L{line_end}',
+          commit = '/commit/{commit}',
+        },
+      },
+    },
     image = { enabled = true },
     picker = {
-      layout = "ivy",
+      layout = 'ivy',
     },
     bigfile = { enabled = true },
     quickfile = { enabled = true },
