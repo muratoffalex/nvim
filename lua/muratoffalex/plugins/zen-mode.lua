@@ -48,7 +48,7 @@ return {
       -- - allow_remote_control socket-only
       -- - listen_on unix:/tmp/kitty
       kitty = {
-        enabled = false,
+        enabled = true,
         font = '+4', -- font size increment
       },
       -- this will change the font size on alacritty when in zen mode

@@ -1,5 +1,9 @@
 return {
   {
+    'fladson/vim-kitty',
+    ft = 'kitty',
+  },
+  {
     'lfilho/note2cal.nvim',
     config = function()
       require('note2cal').setup {

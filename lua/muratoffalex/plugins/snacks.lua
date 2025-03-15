@@ -26,6 +26,7 @@ return {
   },
   ---@type snacks.Config
   opts = {
+    image = { enabled = true },
     picker = {
       layout = "ivy",
     },

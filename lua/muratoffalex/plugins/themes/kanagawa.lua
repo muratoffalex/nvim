@@ -3,6 +3,7 @@ return {
   lazy = require('muratoffalex.config').theme ~= 'kanagawa',
   priority = 1000,
   opts = {
+    compile = true,
     theme = 'wave',
     background = {
       dark = 'wave',
