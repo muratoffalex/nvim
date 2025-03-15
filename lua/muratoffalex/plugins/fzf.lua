@@ -87,28 +87,28 @@ return {
     { '<leader>fd', '<cmd>FzfLua diagnostics_document<cr>', desc = 'Diagnostics' },
     {
       'gd',
-      '<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>',
+      '<cmd>FzfLua lsp_definitions     jump1=true ignore_current_line=true<cr>',
       desc = 'Goto Definition',
     },
     {
       'gD',
-      '<cmd>FzfLua lsp_declarations     jump_to_single_result=true ignore_current_line=true<cr>',
+      '<cmd>FzfLua lsp_declarations     jump1=true ignore_current_line=true<cr>',
       desc = 'Goto Declaration',
     },
     {
       'gr',
-      '<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>',
+      '<cmd>FzfLua lsp_references      jump1=true ignore_current_line=true<cr>',
       desc = 'References',
       nowait = true,
     },
     {
       'gI',
-      '<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>',
+      '<cmd>FzfLua lsp_implementations jump1=true ignore_current_line=true<cr>',
       desc = 'Goto Implementation',
     },
     {
       'gy',
-      '<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>',
+      '<cmd>FzfLua lsp_typedefs        jump1=true ignore_current_line=true<cr>',
       desc = 'Goto Type Definition',
     },
 
