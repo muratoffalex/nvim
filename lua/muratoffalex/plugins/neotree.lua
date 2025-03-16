@@ -27,6 +27,16 @@ return {
     })
 
     return {
+      window = {
+        mappings = {
+          ['P'] = {
+            'toggle_preview',
+            config = {
+              use_float = false,
+            },
+          },
+        },
+      },
       filesystem = {
         follow_current_file = {
           enabled = true,
