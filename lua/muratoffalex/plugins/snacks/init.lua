@@ -7,25 +7,13 @@ return {
     priority = 1000,
     lazy = false,
     keys = {
+      { 'gb', function() Snacks.gitbrowse() end, desc = 'Git browse', mode = { 'n', 'v' } },
       { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-      {
-        'gb',
-        function()
-          Snacks.gitbrowse.open()
-        end,
-        desc = 'Git browse',
-        mode = { 'n', 'v' },
-      },
-      {
-        '<leader>nh',
-        function()
-          Snacks.notifier.show_history()
-        end,
-        desc = 'Show notifications history',
-      },
+      { '<leader>nh', function() Snacks.notifier.show_history() end, desc = 'Show notifications history' },
     },
     ---@type snacks.Config
     opts = {
+      input = { enabled = true },
       image = { enabled = true },
       bigfile = { enabled = true },
       quickfile = { enabled = true },
