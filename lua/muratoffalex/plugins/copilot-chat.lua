@@ -55,6 +55,10 @@ return {
         },
       })
     end, { nargs = '*', range = true })
+
+    require('which-key').add({
+      { 'cc', 'CopilotChat' },
+    })
   end,
   keys = {
     { '<leader>cc', desc = 'CopilotChat' },
@@ -80,28 +84,17 @@ return {
       mode = 'x',
       desc = 'CopilotChat - Quick chat',
     },
-    -- Show help actions with picker
-    {
-      '<leader>cch',
-      function()
-        local actions = require 'CopilotChat.actions'
-        require('CopilotChat.integrations.fzflua').pick(actions.help_actions())
-      end,
-      desc = 'CopilotChat - Help actions',
-    },
     {
       '<leader>ccm',
       '<cmd>CopilotChatModels<cr>',
       desc = 'CopilotChat - Select model',
     },
-    -- Show prompts actions with picker
     {
       '<leader>ccp',
       function()
-        local actions = require 'CopilotChat.actions'
-        require('CopilotChat.integrations.fzflua').pick(
-          actions.prompt_actions { selection = require('CopilotChat.select').buffer }
-        )
+        require('CopilotChat').select_prompt({
+          selection = require('CopilotChat.select').buffer,
+        })
       end,
       desc = 'CopilotChat - Prompt actions',
     },
