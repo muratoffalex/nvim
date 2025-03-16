@@ -6,6 +6,7 @@ return {
       function()
         Snacks.scratch()
       end,
+      desc = 'Open Scratch Buffer',
     },
     {
       '<leader>S',

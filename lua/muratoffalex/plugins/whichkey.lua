@@ -34,6 +34,8 @@ return {
       { '<leader>p', group = 'Package.json deps' },
       { '<leader>t', group = 'Trouble/Tabs/Translation' },
       { '<leader>w', group = 'Workspace' },
+      { '<leader>s', group = 'Search' },
+      { '<leader>g', group = 'Git' },
       { 'gh', group = 'Diffview' },
       { 'gs', group = 'Mini.surround' },
       { 's', group = 'Split windows' },
