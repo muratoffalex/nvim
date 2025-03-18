@@ -68,7 +68,7 @@ autocmd('FileType', {
 autocmd({ 'FocusLost', 'BufLeave', 'InsertLeave' }, {
   callback = function()
     local buf = vim.api.nvim_get_current_buf()
-    local modified = vim.api.nvim_buf_get_option(buf, 'modified')
+    local modified = vim.api.nvim_get_option_value('modified', { buf = buf })
     if vim.bo.filetype ~= '' and vim.bo.buftype == '' and modified then
       vim.cmd 'silent! w'
     end

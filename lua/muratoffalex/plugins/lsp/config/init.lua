@@ -69,7 +69,7 @@ M.lsp_servers = {
     lspconfig_settings = {
       root_dir = function(filename, _)
         local util = require 'lspconfig.util'
-        return util.find_git_ancestor(filename)
+        return vim.fs.root(filename, '.git')
           or util.root_pattern '.jj'(filename)
           or util.root_pattern '.hg'(filename)
           or util.root_pattern 'go.mod'(filename)
@@ -175,7 +175,7 @@ M.lsp_servers = {
         local util = require 'lspconfig.util'
         return util.root_pattern 'buildServer.json'(filename)
           or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
-          or util.find_git_ancestor(filename)
+          or vim.fs.root(filename, '.git')
           or util.root_pattern 'Package.swift'(filename)
       end,
       -- https://www.swift.org/documentation/articles/zero-to-swift-nvim.html
