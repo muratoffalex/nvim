@@ -4,6 +4,9 @@ return {
     picker = {
       layout = 'ivy',
       ui_select = true,
+      db = {
+        sqlite3_path = vim.env.SQLITE_LIBRARY_PATH and vim.env.SQLITE_LIBRARY_PATH .. '/libsqlite3.so' or nil,
+      },
     },
   },
   keys = {
