@@ -7,6 +7,9 @@ return {
         preset = function()
           return vim.o.columns >= 80 and "ivy" or "ivy_split"
         end,
+        layout = {
+          height = 0.5
+        }
       },
       ui_select = true,
       db = {
