@@ -2,7 +2,12 @@ return {
   'folke/snacks.nvim',
   opts = {
     picker = {
-      layout = 'ivy',
+      layout = {
+        cycle = true,
+        preset = function()
+          return vim.o.columns >= 80 and "ivy" or "ivy_split"
+        end,
+      },
       ui_select = true,
       db = {
         sqlite3_path = vim.env.SQLITE_LIBRARY_PATH and vim.env.SQLITE_LIBRARY_PATH .. '/libsqlite3.so' or nil,
