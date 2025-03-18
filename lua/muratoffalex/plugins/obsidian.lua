@@ -2,7 +2,7 @@ local absolute_vaults_directory = '/obsidian'
 local vaults_directory = '~' .. absolute_vaults_directory
 
 return {
-  'epwalsh/obsidian.nvim',
+  'obsidian-nvim/obsidian.nvim',
   version = '*', -- recommended, use latest release instead of latest commit
   lazy = true,
   cmd = {
@@ -54,8 +54,13 @@ return {
   },
   dependencies = {
     'nvim-lua/plenary.nvim',
+    'saghen/blink.cmp'
   },
   opts = {
+    completion = {
+      nvim_cmp = false,
+      blink = true,
+    },
     ui = {
       enable = false,
     },
