@@ -16,7 +16,8 @@ return {
   },
   build = 'make tiktoken', -- Only on MacOS or Linux
   opts = function()
-    local COPILOT_INSTRUCTIONS = require('CopilotChat.config.prompts').COPILOT_INSTRUCTIONS.system_prompt .. 'Answer in russian.'
+    local COPILOT_INSTRUCTIONS = require('CopilotChat.config.prompts').COPILOT_INSTRUCTIONS.system_prompt
+      .. 'Answer in russian.'
     return {
       log_level = 'warn',
       system_prompt = COPILOT_INSTRUCTIONS,
@@ -56,9 +57,17 @@ return {
       })
     end, { nargs = '*', range = true })
 
-    require('which-key').add({
-      { 'cc', 'CopilotChat' },
+    vim.api.nvim_create_autocmd('BufEnter', {
+      pattern = 'copilot-*',
+      callback = function()
+        vim.opt_local.relativenumber = false
+        vim.opt_local.number = false
+      end,
     })
+
+    require('which-key').add {
+      { 'cc', 'CopilotChat' },
+    }
   end,
   keys = {
     { '<leader>cc', desc = 'CopilotChat' },
@@ -92,9 +101,9 @@ return {
     {
       '<leader>ccp',
       function()
-        require('CopilotChat').select_prompt({
+        require('CopilotChat').select_prompt {
           selection = require('CopilotChat.select').buffer,
-        })
+        }
       end,
       desc = 'CopilotChat - Prompt actions',
     },
