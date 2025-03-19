@@ -1,6 +1,7 @@
 return {
   'MeanderingProgrammer/render-markdown.nvim',
   opts = {
+    completions = { lsp = { enabled = true } },
     file_types = { 'markdown', 'Avante', 'copilot-chat' },
     checkbox = {
       -- unchecked = {

@@ -5,6 +5,7 @@ return {
     dependencies = {
       'rafamadriz/friendly-snippets',
       'xzbdmw/colorful-menu.nvim',
+      'Kaiser-Yang/blink-cmp-avante',
     },
 
     -- use a release tag to download pre-built binaries
@@ -142,7 +143,14 @@ return {
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer', 'dadbod' },
+        default = {
+          'lsp',
+          'path',
+          'snippets',
+          'buffer',
+          'dadbod',
+          'avante',
+        },
         providers = {
           lsp = {
             -- min_keyword_length = 2, -- Number of characters to trigger provider
@@ -166,6 +174,9 @@ return {
             name = 'RenderMarkdown',
             module = 'render-markdown.integ.blink',
             fallbacks = { 'lsp' },
+          avante = {
+            module = 'blink-cmp-avante',
+            name = 'Avante',
           },
         },
       },
