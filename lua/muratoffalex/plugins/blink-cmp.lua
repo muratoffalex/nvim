@@ -1,7 +1,6 @@
 return {
   {
     'saghen/blink.cmp',
-    -- optional: provides snippets for the snippet source
     dependencies = {
       'rafamadriz/friendly-snippets',
       'xzbdmw/colorful-menu.nvim',
@@ -94,11 +93,10 @@ return {
             end,
             auto_insert = function(ctx)
               return ctx.mode == 'cmdline'
-            end
+            end,
           },
         },
         accept = {
-          -- experimental auto-brackets support
           auto_brackets = {
             enabled = true,
           },
@@ -125,21 +123,6 @@ return {
         },
       },
 
-      cmdline = {
-        sources = function()
-          local type = vim.fn.getcmdtype()
-          -- Search forward and backward
-          -- if type == '/' or type == '?' then
-          --   return { 'buffer' }
-          -- end
-          -- Commands
-          if type == ':' then
-            return { 'cmdline' }
-          end
-          return {}
-        end
-      },
-
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
@@ -149,6 +132,7 @@ return {
           'snippets',
           'buffer',
           'dadbod',
+          'cmdline',
           'avante',
         },
         providers = {
@@ -170,10 +154,6 @@ return {
             max_items = 10,
           },
           dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
-          markdown = {
-            name = 'RenderMarkdown',
-            module = 'render-markdown.integ.blink',
-            fallbacks = { 'lsp' },
           avante = {
             module = 'blink-cmp-avante',
             name = 'Avante',
