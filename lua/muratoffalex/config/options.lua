@@ -20,18 +20,11 @@ o.background = config.background
 o.swapfile = false
 o.diffopt = 'filler,internal,closeoff,algorithm:histogram,linematch:60,context:5,indent-heuristic'
 
--- Default indent size
-o.shiftwidth = 2
-o.tabstop = 2
-
 -- Sessions
 o.sessionoptions = 'buffers,curdir,folds,tabpages'
 
 -- Disable startup message
 vim.o.shortmess = vim.o.shortmess .. 'I'
--- for obsidian
-o.conceallevel = 1
-o.laststatus = 3
 
 o.cursorline = true
 -- NOTE: now in plugins/smartcolumn.lua
@@ -80,6 +73,9 @@ o.wrap = false -- display long lines with wrap
 o.list = true
 o.listchars = { tab = '>-', trail = '·' }
 
+-- Default indent size
+o.shiftwidth = 2
+o.tabstop = 2
 o.expandtab = true
 o.smartindent = true
 o.autoindent = true

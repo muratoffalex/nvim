@@ -1,6 +1,9 @@
 return {
   'MeanderingProgrammer/render-markdown.nvim',
   opts = {
+    win_options = {
+      conceallevel = { default = 0, rendered = 3 },
+    },
     completions = { lsp = { enabled = true } },
     file_types = { 'markdown', 'Avante', 'copilot-chat' },
     checkbox = {
