@@ -30,7 +30,7 @@ M.lsp_servers = {
   [LSP.KULALA_LS] = {
     auto_install = false,
     lspconfig_settings = {
-      -- HACK: for nixos, before accepting this PR: 
+      -- HACK: for nixos, before accepting this PR:
       -- https://github.com/NixOS/nixpkgs/pull/385105
       -- https://nixpkgs-tracker.ocfox.me/?pr=385105
       cmd = { 'npx', '--yes', '--', '@mistweaverco/kulala-ls', '--stdio' },
@@ -140,6 +140,46 @@ M.lsp_servers = {
           },
         },
       },
+      on_init = function(client)
+        local project_path = client.workspace_folders[1].name
+        local function read_file(path)
+          local open = io.open
+          local file = open(path, 'rb') -- r read mode and b binary mode
+          if not file then
+            return nil
+          end
+          local content = file:read '*a' -- *a or *all reads the whole file
+          file:close()
+          return content
+        end
+
+        local composer_path = project_path .. '/composer.json'
+        if vim.fn.filereadable(composer_path) ~= 1 then
+          return
+        end
+
+        local content = read_file(composer_path)
+        if not content then
+          return
+        end
+
+        local success, composer = pcall(vim.json.decode, content)
+        if not success or not composer then
+          return
+        end
+
+        if not composer.config or not composer.config.platform or not composer.config.platform.php then
+          return
+        end
+
+        print('Configuring intelephense for php ' .. composer.config.platform.php)
+        client.config.settings.intelephense = vim.tbl_deep_extend('force', client.config.settings.intelephense or {}, {
+          environment = {
+            phpVersion = composer.config.platform.php,
+          },
+        })
+        client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+      end,
     },
   },
   -- only for php 8.0+
