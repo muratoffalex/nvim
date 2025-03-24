@@ -3,10 +3,8 @@ M = {}
 -- Get namespace for file or false
 -- TODO: add handling dev namespaces
 function M.get_namespace()
-  -- prepare name and path
   local path = vim.fn.fnamemodify(vim.fn.expand '%:p:h', ':~:.')
 
-  -- read and parse composer.json
   local composer_path = vim.fn.getcwd() .. '/composer.json'
   local file = io.open(composer_path, 'r')
 
@@ -27,23 +25,25 @@ function M.get_namespace()
 
   -- find and replace namespace in path
   local namespace_exist = false
-  for value, key in pairs(psr4) do
+  for namespace, dir in pairs(psr4) do
     -- ex., src/ => src
-    key = key:gsub('/', '')
+    dir = dir:gsub('/$', '')
 
-    if string.find(path, key) then
+    -- vim.notify("Namespace: [" .. namespace .. "], Dir: [" .. dir .. "]")
+    if string.find(path, dir .. '/') == 1 then
       namespace_exist = true
-      path = string.gsub(path, key, value)
+      local remaining_path = string.sub(path, string.len(dir) + 2)
+      namespace = namespace:gsub('\\', "\\\\")
+      namespace = namespace:gsub('\\+$', "")
+      path = namespace .. "\\\\" .. remaining_path:gsub('/', '\\\\')
+      -- vim.notify("Final path: [" .. path .. "]")
+      break
     end
   end
 
   if not namespace_exist then
     return false
   end
-
-  -- fix slashes
-  -- ex., App/Test => App\Test
-  path = path:gsub('/', '\\')
 
   return path
 end
