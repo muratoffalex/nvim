@@ -5,6 +5,7 @@ local plugins = {
 }
 
 local options = {
+  concurrency = 10,
   checker = {
     enabled = false,
   },
@@ -16,9 +17,6 @@ local options = {
   performance = {
     cache = {
       enabled = true,
-    },
-    git = {
-      timeout = 300,
     },
     rtp = {
       disabled_plugins = {
