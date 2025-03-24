@@ -5,6 +5,7 @@ local plugins = {
 }
 
 local options = {
+  -- ref: https://github.com/folke/lazy.nvim/issues/1568#issuecomment-2442184084
   concurrency = 10,
   checker = {
     enabled = false,
