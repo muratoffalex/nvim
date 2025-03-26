@@ -121,6 +121,11 @@ M.lsp_servers = {
         formatting_enabled = false,
         codelens_enabled = true,
         intelephense = {
+          files = {
+            exclude = {
+              '**/.direnv/**',
+            },
+          },
           codeLens = {
             implementations = {
               enable = true,
