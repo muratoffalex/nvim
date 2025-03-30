@@ -4,7 +4,6 @@ return {
   priority = 1000,
   opts = {
     compile = true,
-    theme = 'wave',
     background = {
       dark = 'wave',
       light = 'lotus',
