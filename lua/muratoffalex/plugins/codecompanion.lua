@@ -42,6 +42,18 @@ return {
       },
       strategies = {
         chat = {
+          slash_commands = {
+            ['file'] = {
+              opts = {
+                provider = 'snacks',
+              },
+            },
+            ['buffer'] = {
+              opts = {
+                provider = 'snacks',
+              },
+            },
+          },
           adapter = 'deepseek',
         },
         inline = {
