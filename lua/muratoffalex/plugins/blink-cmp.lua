@@ -134,6 +134,7 @@ return {
           'dadbod',
           'cmdline',
           'avante',
+          'codecompanion',
         },
         providers = {
           lsp = {

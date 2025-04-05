@@ -14,6 +14,7 @@ return {
       'lazy',
       'copilot-chat',
       'Avante',
+      'codecompanion',
     },
     custom_colorcolumn = {
       markdown = '80',

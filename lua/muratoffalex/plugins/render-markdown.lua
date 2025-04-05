@@ -5,7 +5,7 @@ return {
       conceallevel = { default = 0, rendered = 3 },
     },
     completions = { lsp = { enabled = true } },
-    file_types = { 'markdown', 'Avante', 'copilot-chat' },
+    file_types = { 'markdown', 'Avante', 'copilot-chat', 'codecompanion' },
     checkbox = {
       -- unchecked = {
       --   icon = '○',
