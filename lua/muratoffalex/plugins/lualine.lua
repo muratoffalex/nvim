@@ -1,3 +1,30 @@
+-- ref: https://github.com/jessevdp/personal.nvim/blob/1aa011927be1ccc515477f6d08c9a206c8e163e5/lua/plugins/statusline.lua#L27-L43
+local mode = {
+  "mode",
+  fmt = function(s)
+    local mode_map = {
+      ["NORMAL"] = "N",
+      ["O-PENDING"] = "N?",
+      ["INSERT"] = "I",
+      ["VISUAL"] = "V",
+      ["V-BLOCK"] = "VB",
+      ["V-LINE"] = "VL",
+      ["V-REPLACE"] = "VR",
+      ["REPLACE"] = "R",
+      ["COMMAND"] = "!",
+      ["SHELL"] = "SH",
+      ["TERMINAL"] = "T",
+      ["EX"] = "X",
+      ["S-BLOCK"] = "SB",
+      ["S-LINE"] = "SL",
+      ["SELECT"] = "S",
+      ["CONFIRM"] = "Y?",
+      ["MORE"] = "M",
+    }
+    return mode_map[s] or s
+  end,
+}
+
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = {
@@ -60,7 +87,7 @@ return {
         section_separators = { left = '', right = '' },
       },
       sections = {
-        lualine_a = { 'mode' },
+        lualine_a = { mode },
         lualine_b = {
           'diagnostics',
         },
