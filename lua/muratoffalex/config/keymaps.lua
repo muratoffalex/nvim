@@ -1,6 +1,7 @@
 local map = vim.keymap
 
 map.set({ 'n', 'v' }, '<space>', '<nop>', { silent = true })
+map.set({ 'n', 'v' }, '<bs>', '<nop>', { silent = true })
 
 -- remap for dealing with word wrap
 map.set('n', '<Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
