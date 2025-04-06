@@ -1,5 +1,6 @@
 local plugins = {
   { import = 'muratoffalex.plugins' },
+  { import = 'muratoffalex.plugins.ai' },
   { import = 'muratoffalex.plugins.lang' },
   { import = 'muratoffalex.plugins.themes' },
 }
