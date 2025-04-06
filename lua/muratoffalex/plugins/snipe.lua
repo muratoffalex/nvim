@@ -1,25 +1,6 @@
 return {
   {
     -- TODO: contribute and change
-    'muratoffalex/dressing.nvim',
-    branch = "feat/snipe-select-backend",
-    dependencies = 'leath-dub/snipe.nvim',
-    opts = {
-      select = {
-        enabled = true,
-        backend = 'snipe',
-        snipe = {
-          options = {
-            default_keymaps = {
-              cancel = { '<esc>', 'q' },
-            },
-          },
-        },
-      },
-    },
-  },
-  {
-    -- TODO: contribute and change
     'muratoffalex/snipe.nvim',
     branch = "pagination",
     keys = {
@@ -62,7 +43,6 @@ return {
     },
   },
   {
-    -- TODO: contribute and change
     'kungfusheep/snipe-spell.nvim',
     dependencies = 'muratoffalex/snipe.nvim',
     config = true,
