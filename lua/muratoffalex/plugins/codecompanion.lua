@@ -88,6 +88,13 @@ return {
             ['symbols'] = slash_default_opts,
           },
           adapter = main_adapter,
+          tools = {
+            ['mcp'] = {
+              -- Prevent mcphub from loading before needed
+              callback = function()
+                return require 'mcphub.extensions.codecompanion'
+              end,
+              description = 'Call tools and resources from the MCP Servers',
             },
           },
         },
@@ -159,6 +166,8 @@ Format findings as markdown and with:
             {
               role = 'user',
               content = 'Please review provided code.\n' .. '#buffer #lsp',
+            },
+          },
         },
       },
     }

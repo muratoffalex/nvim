@@ -21,7 +21,7 @@ return {
     return {
       log_level = 'warn',
       system_prompt = COPILOT_INSTRUCTIONS,
-      model = 'claude-3.7-sonnet',
+      model = 'claude-3.5-sonnet',
       auto_follow_cursor = false,
       prompts = {
         BetterNamings = prompts.BetterNamings,
