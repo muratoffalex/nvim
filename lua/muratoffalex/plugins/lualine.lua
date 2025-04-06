@@ -1,52 +1,44 @@
 -- ref: https://github.com/jessevdp/personal.nvim/blob/1aa011927be1ccc515477f6d08c9a206c8e163e5/lua/plugins/statusline.lua#L27-L43
 local mode = {
-  "mode",
+  'mode',
   fmt = function(s)
     local mode_map = {
-      ["NORMAL"] = "N",
-      ["O-PENDING"] = "N?",
-      ["INSERT"] = "I",
-      ["VISUAL"] = "V",
-      ["V-BLOCK"] = "VB",
-      ["V-LINE"] = "VL",
-      ["V-REPLACE"] = "VR",
-      ["REPLACE"] = "R",
-      ["COMMAND"] = "!",
-      ["SHELL"] = "SH",
-      ["TERMINAL"] = "T",
-      ["EX"] = "X",
-      ["S-BLOCK"] = "SB",
-      ["S-LINE"] = "SL",
-      ["SELECT"] = "S",
-      ["CONFIRM"] = "Y?",
-      ["MORE"] = "M",
+      ['NORMAL'] = 'N',
+      ['O-PENDING'] = 'N?',
+      ['INSERT'] = 'I',
+      ['VISUAL'] = 'V',
+      ['V-BLOCK'] = 'VB',
+      ['V-LINE'] = 'VL',
+      ['V-REPLACE'] = 'VR',
+      ['REPLACE'] = 'R',
+      ['COMMAND'] = '!',
+      ['SHELL'] = 'SH',
+      ['TERMINAL'] = 'T',
+      ['EX'] = 'X',
+      ['S-BLOCK'] = 'SB',
+      ['S-LINE'] = 'SL',
+      ['SELECT'] = 'S',
+      ['CONFIRM'] = 'Y?',
+      ['MORE'] = 'M',
     }
     return mode_map[s] or s
   end,
 }
 
-local codecompanion = require("codecompanion")
-
-local function codecompanion_adapter_name()
-  local chat = codecompanion.buf_get_chat(vim.api.nvim_get_current_buf())
-  if not chat then
-    return nil
-  end
-
-  return " " .. chat.adapter.formatted_name -- or just name
+local function avante_provider_name()
+  return ' ' .. require('avante.config').provider
 end
 
-local function codecompanion_current_model_name()
-  local chat = codecompanion.buf_get_chat(vim.api.nvim_get_current_buf())
-  if not chat then
-    return nil
-  end
+local function avante_model_name()
+  local Providers = require 'avante.providers'
+  local provider = require('avante.config').provider
 
-  return chat.settings.model
+  return Providers[provider].model
 end
 
 return {
   'nvim-lualine/lualine.nvim',
+  event = 'VeryLazy',
   dependencies = {
     'AndreM222/copilot-lualine',
     'bwpge/lualine-pretty-path',
@@ -99,6 +91,36 @@ return {
       return tostring(lines) .. 'L:' .. tostring(fn.wordcount().visual_chars) .. 'C'
     end
 
+    local mcp = require 'mcphub.extensions.lualine'
+    local update_status = mcp.update_status
+
+    ---@diagnostic disable: duplicate-set-field
+    function mcp:update_status()
+      local status = update_status(self)
+      -- remove extra space
+      return status:sub(1, -4) .. status:sub(-2)
+    end
+
+    local codecompanion = require 'codecompanion'
+
+    local function codecompanion_adapter_name()
+      local chat = codecompanion.buf_get_chat(vim.api.nvim_get_current_buf())
+      if not chat then
+        return nil
+      end
+
+      return ' ' .. chat.adapter.formatted_name -- or just name
+    end
+
+    local function codecompanion_current_model_name()
+      local chat = codecompanion.buf_get_chat(vim.api.nvim_get_current_buf())
+      if not chat then
+        return nil
+      end
+
+      return chat.settings.model
+    end
+
     require('lualine').setup {
       options = {
         globalstatus = false,
@@ -112,7 +134,7 @@ return {
           'diagnostics',
         },
         lualine_c = {
-          'pretty_path'
+          'pretty_path',
         },
         lualine_x = {
           copilot,
@@ -141,37 +163,45 @@ return {
         'trouble',
         'mason',
         'symbols-outline',
-        "quickfix",
+        'quickfix',
         {
-          filetypes = { "codecompanion" },
+          filetypes = { 'AvanteInput' },
           sections = {
-            lualine_a = {
-              mode,
-            },
-            lualine_b = {
-              codecompanion_adapter_name,
-            },
-            lualine_c = {
-              codecompanion_current_model_name,
-            },
+            lualine_a = { mode },
+            lualine_b = { avante_provider_name },
+            lualine_c = { avante_model_name },
+            lualine_x = { mcp },
+            lualine_y = { 'progress' },
+            lualine_z = { 'location' },
+          },
+        },
+        {
+          filetypes = { 'Avante', 'AvanteSelectedFiles' },
+          sections = {
+            lualine_a = { mode },
+            lualine_b = {},
+            lualine_c = {},
             lualine_x = {},
-            lualine_y = {
-              "progress",
-            },
-            lualine_z = {
-              "location",
-            },
+            lualine_y = { 'progress' },
+            lualine_z = { 'location' },
+          },
+        },
+        {
+          filetypes = { 'codecompanion' },
+          sections = {
+            lualine_a = { mode },
+            lualine_b = { codecompanion_adapter_name },
+            lualine_c = { codecompanion_current_model_name },
+            lualine_x = { mcp },
+            lualine_y = { 'progress' },
+            lualine_z = { 'location' },
           },
           inactive_sections = {
             lualine_a = {},
-            lualine_b = {
-              codecompanion_adapter_name,
-            },
+            lualine_b = { codecompanion_adapter_name },
             lualine_c = {},
             lualine_x = {},
-            lualine_y = {
-              "progress",
-            },
+            lualine_y = { 'progress' },
             lualine_z = {},
           },
         },
