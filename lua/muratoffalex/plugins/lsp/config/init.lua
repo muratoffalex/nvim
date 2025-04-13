@@ -19,7 +19,7 @@ local M = {}
 ---@class LspServerConfig
 ---@field enabled boolean|nil
 ---@field auto_install boolean|nil
----@field lspconfig_settings lspconfig.Config|nil
+---@field config vim.lsp.Config|nil
 ---@field setup function|nil
 
 ---@return table<string, LspServerConfig>
@@ -29,7 +29,7 @@ M.lsp_servers = {
   },
   [LSP.KULALA_LS] = {
     auto_install = false,
-    lspconfig_settings = {
+    config = {
       -- HACK: for nixos, before accepting this PR:
       -- https://github.com/NixOS/nixpkgs/pull/385105
       -- https://nixpkgs-tracker.ocfox.me/?pr=385105
@@ -37,7 +37,7 @@ M.lsp_servers = {
     },
   },
   [LSP.VOLAR] = {
-    lspconfig_settings = {
+    config = {
       settings = {
         init_options = {
           vue = {
@@ -51,7 +51,7 @@ M.lsp_servers = {
   [LSP.PYRIGHT] = {},
   [LSP.RUST_ANALYZER] = {},
   [LSP.HTML] = {
-    lspconfig_settings = {
+    config = {
       filetypes = { 'html', 'twig', 'hbs' },
     },
   },
@@ -60,13 +60,13 @@ M.lsp_servers = {
     auto_install = false,
   },
   [LSP.TAILWINDCSS] = {
-    lspconfig_settings = {
+    config = {
       filetypes = { 'html', 'twig', 'css', 'jsx', 'vue' },
       on_attach = function(_, _) end,
     },
   },
   [LSP.GOPLS] = {
-    lspconfig_settings = {
+    config = {
       root_dir = function(filename, _)
         local util = require 'lspconfig.util'
         return vim.fs.root(filename, '.git')
@@ -116,7 +116,7 @@ M.lsp_servers = {
     },
   },
   [LSP.INTELEPHENSE] = {
-    lspconfig_settings = {
+    config = {
       settings = {
         formatting_enabled = false,
         codelens_enabled = true,
@@ -187,18 +187,15 @@ M.lsp_servers = {
       end,
     },
   },
-  -- only for php 8.0+
-  -- phpactor = {},
-  -- kotlin_language_server = {},
   [LSP.TS_LS] = {
-    lspconfig_settings = {
+    config = {
       settings = {
         formatting_enabled = false,
       },
     },
   },
   [LSP.LUA_LS] = {
-    lspconfig_settings = {
+    config = {
       settings = {
         formatting_enabled = false,
         Lua = {
@@ -211,7 +208,7 @@ M.lsp_servers = {
   },
   [LSP.SOURCEKIT] = {
     auto_install = false,
-    lspconfig_settings = {
+    config = {
       filetypes = { 'swift', 'objective-c', 'objective-cpp' },
       autostart = false,
       cmd = { vim.trim(vim.fn.system 'xcrun -f sourcekit-lsp') },
@@ -244,7 +241,7 @@ M.lsp_servers = {
     end,
   },
   [LSP.CLANGD] = {
-    lspconfig_settings = {
+    config = {
       filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
       -- https://www.reddit.com/r/neovim/comments/12qbcua/multiple_different_client_offset_encodings/
       cmd = {
@@ -280,22 +277,23 @@ M.ensure_installed = function()
   return ensure
 end
 
-M.format_lspconfig_settings = function(settings)
+M.format_config = function(config)
   local default_opts = {
     capabilities = M.client_capabilities,
     on_attach = M.on_attach,
   }
-  local formatted = vim.tbl_deep_extend('force', default_opts, settings or {})
+  local formatted = vim.tbl_deep_extend('force', default_opts, config or {})
 
   return formatted
 end
 
-M.setup_lsp_servers = function(lspconfig)
+M.setup_lsp_servers = function()
   local servers = M.active_lsp_servers()
   for server_name, _ in pairs(servers) do
     local server = servers[server_name] or {}
 
-    lspconfig[server_name].setup(M.format_lspconfig_settings(server.lspconfig_settings))
+    vim.lsp.enable(server_name)
+    vim.lsp.config(server_name, M.format_config(server.config))
 
     if server.setup then
       server.setup()
@@ -333,7 +331,7 @@ M.on_attach = function(client, bufnr)
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { nil })
   end, 'Toggle inlay hints')
 
-  if client.config.settings.codelens_enabled then
+  if client.config.settings and client.config.settings.codelens_enabled then
     nmap('<leader>cl', vim.lsp.codelens.run, 'Run CodeLens')
   end
 end

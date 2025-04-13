@@ -16,7 +16,6 @@ return {
     },
   },
   config = function()
-    local lspconfig = require 'lspconfig'
     local config = require 'muratoffalex.plugins.lsp.config'
 
     if userConfig.current_os ~= 'nixos' then
@@ -28,6 +27,6 @@ return {
       }
     end
 
-    config.setup_lsp_servers(lspconfig)
+    config.setup_lsp_servers()
   end,
 }
