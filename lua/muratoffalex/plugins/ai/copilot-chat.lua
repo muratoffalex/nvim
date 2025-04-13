@@ -21,7 +21,7 @@ return {
     return {
       log_level = 'warn',
       system_prompt = COPILOT_INSTRUCTIONS,
-      model = 'claude-3.5-sonnet',
+      model = 'deepseek/deepseek-chat-v3-0324',
       auto_follow_cursor = false,
       prompts = {
         BetterNamings = prompts.BetterNamings,

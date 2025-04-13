@@ -1,6 +1,6 @@
 return {
   'yetone/avante.nvim',
-  version = false, -- set this if you want to always pull the latest change
+  version = false,
   lazy = true,
   event = 'VeryLazy',
   keys = {
@@ -11,7 +11,11 @@ return {
     { '<leader>am', '<cmd>AvanteModels<cr>' },
   },
   opts = {
-    provider = 'copilot',
+    provider = 'deepseek_v3',
+    auto_suggestions_provider = "deepseek_v3",
+    behaviour = {
+      auto_suggestions = false,
+    },
     copilot = {
       model = 'claude-3.5-sonnet',
       allow_insecure = true,
@@ -58,6 +62,9 @@ return {
       'delete_dir',
       'bash', -- Built-in terminal access
     },
+    windows = {
+      width = 35,
+    }
   },
   build = 'make',
   dependencies = {
