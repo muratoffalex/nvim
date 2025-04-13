@@ -15,6 +15,8 @@ return {
       'copilot-chat',
       'Avante',
       'codecompanion',
+      'mcphub',
+      'snipe-menu',
     },
     custom_colorcolumn = {
       markdown = '80',
