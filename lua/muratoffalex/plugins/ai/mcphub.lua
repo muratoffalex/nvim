@@ -1,8 +1,11 @@
+local userConfig = require 'muratoffalex.config'
+
 return {
   'ravitemer/mcphub.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim',
   },
+  build = userConfig.current_os ~= 'nixos' and 'npm install -g mcp-hub@latest' or nil,
   cmd = 'MCPHub',
   opts = {
     auto_approve = false,
