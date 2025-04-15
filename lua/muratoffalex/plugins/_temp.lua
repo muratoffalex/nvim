@@ -1,4 +1,5 @@
 return {
+  { 'vuciv/golf', enabled = true, lazy = false },
   {
     'fladson/vim-kitty',
     ft = 'kitty',
