@@ -9,7 +9,7 @@ return {
     { '<leader>tq', '<cmd>Trouble qflist toggle<CR>', desc = 'Trouble toggle quickfix list' },
     { '<leader>tl', '<cmd>Trouble loclist toggle<CR>', desc = 'Trouble toggle loclist' },
     {
-      'gr',
+      'grr',
       '<cmd>Trouble lsp toggle focus=false win.position=bottom<CR>',
       desc = 'Trouble lsp references/definitions/...',
     },
