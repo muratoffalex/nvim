@@ -1,9 +1,8 @@
 return {
   'folke/flash.nvim',
-  event = 'CmdlineEnter',
-  enabled = true,
+  event = 'VeryLazy',
   opts = {
-    labels = 'asdfghjklqwertyuiopzxcvbnm',
+    labels = 'arstdwfneiohmpg',
     search = {
       -- search/jump in all windows
       multi_window = true,

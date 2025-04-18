@@ -1,7 +1,6 @@
 -- speed up startup
 vim.loader.enable()
 
--- space as leader
 vim.g.mapleader = ' '
 vim.g.maplocalleader = vim.api.nvim_replace_termcodes('<BS>', false, false, true)
 vim.g.startup_message = false

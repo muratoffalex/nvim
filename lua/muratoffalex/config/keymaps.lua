@@ -12,9 +12,6 @@ map.set('n', '<A-Down>', '1<C-e>', { desc = 'Vertical scroll down 20', noremap =
 map.set('n', '<A-Left>', 'zh20', { desc = 'Horizontal scroll left 20', noremap = true })
 map.set('n', '<A-Right>', 'zl20', { desc = 'Horizontal scroll right 20', noremap = true })
 
--- NOTE: Set jump to next item in jumplist with <C-n> (n - next),
--- because press <C-i> identical to <Tab> (Tab navigation, nvim-cmp navigation)
--- TODO: Maybe don't use <Tab> for tab navigation ?
 map.set('n', '<C-n>', '<C-i>', { desc = 'Jump next', noremap = true })
 
 -- Diagnostic keymaps
@@ -57,7 +54,7 @@ map.set('v', '<S-Up>', ":m '<-2<CR>gv=gv", { desc = 'Move line or block up', sil
 map.set('v', '<S-Down>', ":m '>+1<CR>gv=gv", { desc = 'Move line or block down', silent = true })
 
 -- Terminal
--- map.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Switch to normal mode' })
+map.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Switch to normal mode' })
 
 -- Tabs
 map.set('n', '<leader>tN', '<cmd>tabnew<cr>', { desc = 'New tab' })
