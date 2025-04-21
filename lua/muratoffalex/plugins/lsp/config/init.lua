@@ -67,13 +67,6 @@ M.lsp_servers = {
   },
   [LSP.GOPLS] = {
     config = {
-      root_dir = function(filename, _)
-        local util = require 'lspconfig.util'
-        return vim.fs.root(filename, '.git')
-          or util.root_pattern '.jj'(filename)
-          or util.root_pattern '.hg'(filename)
-          or util.root_pattern 'go.mod'(filename)
-      end,
       -- ref: https://github.com/LazyVim/LazyVim/blob/ecfaed3cc1cbe3013f1201594adde2ea0022c455/lua/lazyvim/plugins/extras/lang/go.lua#L13
       settings = {
         formatting_enabled = false,
