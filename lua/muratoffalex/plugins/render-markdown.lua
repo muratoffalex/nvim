@@ -29,6 +29,11 @@ return {
           -- rendered = '◐',
           highlight = 'WinBarDiffChanged',
         },
+        in_question = {
+          raw = '[?]',
+          rendered = ' ',
+          highlight = 'function',
+        },
         important = {
           raw = '[!]',
           rendered = ' ',

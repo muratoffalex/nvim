@@ -84,6 +84,14 @@ return {
       show_loading = true,
     }
 
+    local function isRecording()
+      local reg = vim.fn.reg_recording()
+      if reg == '' then
+        return ''
+      end -- not recording
+      return 'recording to ' .. reg
+    end
+
     local function selectionCount()
       local starts = fn.line 'v'
       local ends = fn.line '.'
@@ -137,6 +145,7 @@ return {
           'pretty_path',
         },
         lualine_x = {
+          isRecording,
           -- copilot,
           {
             lsp_clients,

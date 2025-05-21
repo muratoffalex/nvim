@@ -14,12 +14,14 @@ return {
       'lazy',
       'copilot-chat',
       'Avante',
+      'AvanteInput',
+      'AvanteSelectedFiles',
       'codecompanion',
       'mcphub',
       'snipe-menu',
+      'markdown'
     },
     custom_colorcolumn = {
-      markdown = '80',
       go = { '80', '100' },
     },
   },

@@ -35,6 +35,7 @@ o.hlsearch = true
 -- Make line numbers default
 o.number = true
 o.scrolloff = 5
+o.sidescrolloff = 15
 
 -- Enable mouse mode
 o.mouse = 'a'
