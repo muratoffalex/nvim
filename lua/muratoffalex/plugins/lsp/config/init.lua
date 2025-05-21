@@ -36,7 +36,7 @@ M.lsp_servers = {
       cmd = { 'npx', '--yes', '--', '@mistweaverco/kulala-ls', '--stdio' },
     },
   },
-  [LSP.VOLAR] = {
+  [LSP.VUE_LS] = {
     config = {
       settings = {
         init_options = {

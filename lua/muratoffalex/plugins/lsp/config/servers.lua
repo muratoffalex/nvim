@@ -1,5 +1,5 @@
 return {
-  VOLAR = 'volar',
+  VUE_LS = 'vue_ls',
   JSONLS = 'jsonls',
   PYRIGHT = 'pyright',
   RUST_ANALYZER = 'rust_analyzer',
