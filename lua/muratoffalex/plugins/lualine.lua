@@ -137,7 +137,7 @@ return {
           'pretty_path',
         },
         lualine_x = {
-          copilot,
+          -- copilot,
           {
             lsp_clients,
             cond = function()

@@ -5,28 +5,27 @@ return {
   config = function()
     require('minuet').setup {
       provider = 'openai_compatible',
+      debug = true,
+      request_timeout = 5,
+      throttle = 1500, -- Increase to reduce costs and avoid rate limits
+      debounce = 600, -- Increase to reduce costs and avoid rate limits
+      context_window = 768,
       provider_options = {
         openai_compatible = {
-          end_point = 'https://api.deepseek.com/v1/chat/completions',
-          api_key = 'DEEPSEEK_API_KEY',
-          name = 'deepseek',
-          model = 'deepseek-chat',
+          api_key = 'OPENROUTER_API_KEY',
+          end_point = 'https://openrouter.ai/api/v1/chat/completions',
+          model = 'openai/gpt-4.1-nano',
+          name = 'Openrouter',
           optional = {
-            max_tokens = 256,
+            max_tokens = 56,
             top_p = 0.9,
-          },
-        },
-        openai_fim_compatible = {
-          api_key = 'DEEPSEEK_API_KEY',
-          name = 'deepseek',
-          optional = {
-            max_tokens = 256,
-            top_p = 0.9,
+            provider = {
+              -- Prioritize throughput for faster completion
+              sort = 'throughput',
+            },
           },
         },
       },
-      context_window = 768,
-      request_timeout = 20,
       virtualtext = {
         auto_trigger_ft = { '*' },
         auto_trigger_ignore_ft = { 'markdown' },
