@@ -39,9 +39,18 @@ return {
       version = '*',
       dependencies = 'nvim-lua/plenary.nvim',
     },
+    'ravitemer/codecompanion-history.nvim',
   },
   config = function(_, _)
     require('codecompanion').setup {
+      extensions = {
+        history = {
+          enabled = true,
+          opts = {
+            picker = "snacks",
+          },
+        },
+      },
       opts = {
         language = 'Russian',
       },
@@ -160,7 +169,6 @@ Format findings as markdown and with:
 - Issue: [description]
 - Impact: [specific impact]
 - Suggestion: [concrete improvement with code example/suggestion]
-
               ]],
             },
             {
