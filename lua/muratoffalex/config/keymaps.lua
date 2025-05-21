@@ -88,6 +88,10 @@ map.set('n', 's-', '<cmd>resize -5<cr>', { desc = 'Decrease window height 5' })
 -- Misc
 -- Toggle list
 map.set('n', '<leader>nl', '<cmd>set list!<cr>', { desc = 'Toggle list' })
+-- https://www.reddit.com/r/neovim/comments/1k4efz8/share_your_proudest_config_oneliners/
+map.set("n", "ycc", '"yy" . v:count1 . "gcc\']p"', { remap = true, expr = true })
+map.set("x", "/", "<Esc>/\\%V") -- search within visual selection
+map.set("n", "J", "mzJ`z:delmarks z<cr>")
 
 -- Advanced keymaps
 
