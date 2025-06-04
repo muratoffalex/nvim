@@ -16,11 +16,11 @@ return {
     behaviour = {
       auto_suggestions = false,
     },
-    copilot = {
-      model = 'claude-3.5-sonnet',
-      allow_insecure = true,
-    },
-    vendors = {
+    providers = {
+      copilot = {
+        model = 'claude-3.5-sonnet',
+        allow_insecure = true,
+      },
       deepseek_v3 = {
         __inherited_from = 'openai',
         api_key_name = 'DEEPSEEK_API_KEY',
