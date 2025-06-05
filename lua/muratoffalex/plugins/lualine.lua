@@ -99,16 +99,7 @@ return {
       return tostring(lines) .. 'L:' .. tostring(fn.wordcount().visual_chars) .. 'C'
     end
 
-    local mcp = require 'mcphub.extensions.lualine'
-    local update_status = mcp.update_status
-
-    ---@diagnostic disable: duplicate-set-field
-    function mcp:update_status()
-      local status = update_status(self)
-      -- remove extra space
-      return status:sub(1, -4) .. status:sub(-2)
-    end
-
+    local mcp = require 'muratoffalex.plugins.extensions.lualine.mcphub-status'
     local codecompanion = require 'codecompanion'
 
     local function codecompanion_adapter_name()

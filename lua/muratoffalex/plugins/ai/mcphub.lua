@@ -2,6 +2,7 @@ local userConfig = require 'muratoffalex.config'
 
 return {
   'ravitemer/mcphub.nvim',
+  enabled = userConfig.current_os == 'nixos',
   dependencies = {
     'nvim-lua/plenary.nvim',
   },

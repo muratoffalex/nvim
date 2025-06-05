@@ -36,12 +36,23 @@ return {
     'ravitemer/codecompanion-history.nvim',
   },
   config = function(_, _)
+    local tools = {}
+
+    local mcp_available, _ = pcall(require, 'mcphub.extensions.codecompanion')
+    if mcp_available then
+      tools['mcp'] = {
+        callback = function()
+          return require 'mcphub.extensions.codecompanion'
+        end,
+        description = 'Call tools and resources from the MCP Servers',
+      }
+    end
     require('codecompanion').setup {
       extensions = {
         history = {
           enabled = true,
           opts = {
-            picker = "snacks",
+            picker = 'snacks',
           },
         },
       },
@@ -61,16 +72,16 @@ return {
           show_defaults = false,
         },
         openrouter = function()
-          return require("codecompanion.adapters").extend("openai_compatible", {
-            name = "openrouter",
+          return require('codecompanion.adapters').extend('openai_compatible', {
+            name = 'openrouter',
             env = {
-              url = "https://openrouter.ai/api",
-              api_key = "OPENROUTER_API_KEY",
-              chat_url = "/v1/chat/completions",
+              url = 'https://openrouter.ai/api',
+              api_key = 'OPENROUTER_API_KEY',
+              chat_url = '/v1/chat/completions',
             },
             schema = {
               model = {
-                default = "deepseek/deepseek-chat",
+                default = 'deepseek/deepseek-chat-v3-0324',
               },
             },
           })
@@ -100,15 +111,7 @@ return {
             ['symbols'] = slash_default_opts,
           },
           adapter = main_adapter,
-          tools = {
-            ['mcp'] = {
-              -- Prevent mcphub from loading before needed
-              callback = function()
-                return require 'mcphub.extensions.codecompanion'
-              end,
-              description = 'Call tools and resources from the MCP Servers',
-            },
-          },
+          tools = tools,
         },
         inline = {
           adapter = main_adapter,
