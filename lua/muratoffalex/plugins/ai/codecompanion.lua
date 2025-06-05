@@ -4,7 +4,7 @@ local slash_default_opts = {
   },
 }
 
-local main_adapter = 'deepseek'
+local main_adapter = 'openrouter'
 
 return {
   'olimorris/codecompanion.nvim',
@@ -33,11 +33,6 @@ return {
         }
       end,
     },
-    {
-      'Davidyz/VectorCode',
-      version = '*',
-      dependencies = 'nvim-lua/plenary.nvim',
-    },
     'ravitemer/codecompanion-history.nvim',
   },
   config = function(_, _)
@@ -62,6 +57,24 @@ return {
         },
       },
       adapters = {
+        opts = {
+          show_defaults = false,
+        },
+        openrouter = function()
+          return require("codecompanion.adapters").extend("openai_compatible", {
+            name = "openrouter",
+            env = {
+              url = "https://openrouter.ai/api",
+              api_key = "OPENROUTER_API_KEY",
+              chat_url = "/v1/chat/completions",
+            },
+            schema = {
+              model = {
+                default = "deepseek/deepseek-chat",
+              },
+            },
+          })
+        end,
         deepseek = function()
           return require('codecompanion.adapters').extend('deepseek', {
             schema = {
@@ -73,15 +86,6 @@ return {
               },
               top_p = {
                 default = nil,
-              },
-            },
-          })
-        end,
-        copilot = function()
-          return require('codecompanion.adapters').extend('copilot', {
-            schema = {
-              model = {
-                default = 'claude-3.5-sonnet',
               },
             },
           })

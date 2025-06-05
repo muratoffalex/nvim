@@ -3,8 +3,8 @@ local userConfig = require 'muratoffalex.config'
 return {
   'neovim/nvim-lspconfig',
   dependencies = userConfig.current_os ~= 'nixos' and {
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
+    'mason-org/mason.nvim',
+    'mason-org/mason-lspconfig.nvim',
     'saghen/blink.cmp',
   } or {
     'saghen/blink.cmp',

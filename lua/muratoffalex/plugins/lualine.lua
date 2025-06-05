@@ -117,7 +117,7 @@ return {
         return nil
       end
 
-      return ' ' .. chat.adapter.formatted_name -- or just name
+      return ' ' .. chat.adapter.name
     end
 
     local function codecompanion_current_model_name()
