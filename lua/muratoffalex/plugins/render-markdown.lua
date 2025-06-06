@@ -21,6 +21,7 @@ return {
           raw = '[~]',
           rendered = '󰰱 ',
           -- rendered = '⊝',
+          scope_highlight = 'Comment',
           highlight = 'Error',
         },
         in_progress = {
@@ -38,7 +39,8 @@ return {
           raw = '[!]',
           rendered = ' ',
           -- rendered = '◉',
-          highlight = 'Constant',
+          highlight = 'WarningMsg',
+          scope_highlight = 'WarningMsg',
         },
       },
     },

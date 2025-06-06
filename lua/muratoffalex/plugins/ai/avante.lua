@@ -16,10 +16,6 @@ return {
       auto_suggestions = false,
     },
     providers = {
-      copilot = {
-        model = 'claude-3.5-sonnet',
-        allow_insecure = true,
-      },
       openrouter = {
         __inherited_from = 'openai',
         endpoint = 'https://openrouter.ai/api/v1',
@@ -81,8 +77,7 @@ return {
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
     --- The below dependencies are optional,
-    'echasnovski/mini.icons', -- or echasnovski/mini.icons
-    'zbirenbaum/copilot.lua', -- for providers='copilot'
+    'echasnovski/mini.icons',
     'MeanderingProgrammer/render-markdown.nvim',
   },
 }
