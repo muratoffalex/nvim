@@ -54,7 +54,6 @@ return {
   },
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'saghen/blink.cmp'
   },
   opts = {
     completion = {

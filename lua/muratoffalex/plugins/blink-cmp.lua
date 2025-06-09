@@ -5,6 +5,7 @@ return {
       'rafamadriz/friendly-snippets',
       'xzbdmw/colorful-menu.nvim',
       'Kaiser-Yang/blink-cmp-avante',
+      'obsidian-nvim/obsidian.nvim',
     },
 
     -- use a release tag to download pre-built binaries
@@ -135,6 +136,9 @@ return {
           'cmdline',
           'avante',
           'codecompanion',
+          'obsidian',
+          'obsidian_new',
+          'obsidian_tags',
         },
         providers = {
           lsp = {
@@ -155,6 +159,7 @@ return {
             max_items = 10,
           },
           dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
+          -- obsidian = { name = 'Obsidian', module = 'obsidian.completion.sources.blink.refs' },
           avante = {
             module = 'blink-cmp-avante',
             name = 'Avante',
