@@ -6,7 +6,7 @@ return {
     'windwp/nvim-ts-autotag',
     'gbprod/php-enhanced-treesitter.nvim',
   },
-  event = { 'BufReadPost', 'BufWritePost', 'BufNewFile' },
+  event = { 'BufReadPre', 'BufWritePost', 'BufNewFile' },
   build = ':TSUpdate',
   config = function()
     -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'

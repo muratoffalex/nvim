@@ -125,3 +125,11 @@ autocmd('LspAttach', {
   -- group = general,
   desc = 'LSP attach actions',
 })
+
+autocmd('VimLeavePre', {
+  callback = function()
+    vim.iter(vim.lsp.get_clients()):each(function(client)
+      client:stop()
+    end)
+  end,
+})

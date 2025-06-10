@@ -5,7 +5,7 @@ return {
       'rafamadriz/friendly-snippets',
       'xzbdmw/colorful-menu.nvim',
       'Kaiser-Yang/blink-cmp-avante',
-      'obsidian-nvim/obsidian.nvim',
+      'obsidian-nvim/obsidian.nvim'
     },
 
     -- use a release tag to download pre-built binaries
