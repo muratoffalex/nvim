@@ -31,7 +31,7 @@ return {
         gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
       end, { desc = 'Reset hunk' })
       map('n', '<leader>hS', gs.stage_buffer, { desc = 'Stage buffer' })
-      map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'Undo stage hunk' })
+      map('n', '<leader>hu', gs.stage_hunk, { desc = 'Undo stage hunk' })
       map('n', '<leader>hR', gs.reset_buffer, { desc = 'Reset buffer' })
       map('n', '<leader>hp', gs.preview_hunk, { desc = 'Preview hunk' })
       map('n', '<leader>hb', function()
@@ -42,7 +42,7 @@ return {
       map('n', '<leader>hD', function()
         gs.diffthis '~'
       end, { desc = 'Diff this ~' })
-      map('n', '<leader>td', gs.toggle_deleted, { desc = 'Toggle deleted' })
+      map('n', '<leader>td', gs.preview_hunk_inline, { desc = 'Toggle deleted' })
 
       -- Text object
       map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'Select hunk' })
@@ -52,7 +52,7 @@ return {
           return ']c'
         end
         vim.schedule(function()
-          gs.next_hunk()
+          gs.nav_hunk('next')
         end)
         return '<Ignore>'
       end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
@@ -61,7 +61,7 @@ return {
           return '[c'
         end
         vim.schedule(function()
-          gs.prev_hunk()
+          gs.nav_hunk('prev')
         end)
         return '<Ignore>'
       end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
