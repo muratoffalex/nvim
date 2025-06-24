@@ -140,43 +140,49 @@ M.lsp_servers = {
       },
       on_init = function(client)
         local project_path = client.workspace_folders[1].name
-        local function read_file(path)
-          local open = io.open
-          local file = open(path, 'rb') -- r read mode and b binary mode
-          if not file then
-            return nil
-          end
-          local content = file:read '*a' -- *a or *all reads the whole file
-          file:close()
-          return content
-        end
 
+        -- 1. Check composer.json (platform.php)
         local composer_path = project_path .. '/composer.json'
-        if vim.fn.filereadable(composer_path) ~= 1 then
-          return
+        if vim.fn.filereadable(composer_path) == 1 then
+          local lines = vim.fn.readfile(composer_path)
+          local content = table.concat(lines, '\n')
+          if content then
+            local success, composer = pcall(vim.json.decode, content)
+            if
+              success
+              and composer
+              and composer.config
+              and composer.config.platform
+              and composer.config.platform.php
+            then
+              client.config.settings.intelephense.environment = client.config.settings.intelephense.environment or {}
+              client.config.settings.intelephense.environment.phpVersion = composer.config.platform.php
+              return
+            end
+          end
         end
 
-        local content = read_file(composer_path)
-        if not content then
-          return
+        -- 2. Check .php-version
+        local php_version_path = project_path .. '/.php-version'
+        if vim.fn.filereadable(php_version_path) == 1 then
+          local version = vim.fn.readfile(php_version_path)[1]:gsub('%s+', '')
+          if version and version ~= '' then
+            client.config.settings.intelephense.environment = client.config.settings.intelephense.environment or {}
+            client.config.settings.intelephense.environment.phpVersion = version
+            return
+          end
         end
 
-        local success, composer = pcall(vim.json.decode, content)
-        if not success or not composer then
-          return
+        -- 3. Fallback to system PHP version else nothing
+        local handle = io.popen 'php -r "echo PHP_MAJOR_VERSION.\'.\'.PHP_MINOR_VERSION;" 2>/dev/null'
+        if handle then
+          local php_version = handle:read('*a'):gsub('%s+', '')
+          handle:close()
+          if php_version and php_version ~= '' and not php_version:match 'error' then
+            client.config.settings.intelephense.environment = client.config.settings.intelephense.environment or {}
+            client.config.settings.intelephense.environment.phpVersion = php_version
+          end
         end
-
-        if not composer.config or not composer.config.platform or not composer.config.platform.php then
-          return
-        end
-
-        print('Configuring intelephense for php ' .. composer.config.platform.php)
-        client.config.settings.intelephense = vim.tbl_deep_extend('force', client.config.settings.intelephense or {}, {
-          environment = {
-            phpVersion = composer.config.platform.php,
-          },
-        })
-        client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
       end,
     },
   },
