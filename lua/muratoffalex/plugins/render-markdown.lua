@@ -7,11 +7,7 @@ return {
     completions = { lsp = { enabled = true } },
     file_types = { 'markdown', 'Avante', 'copilot-chat', 'codecompanion' },
     checkbox = {
-      -- unchecked = {
-      --   icon = '○',
-      -- },
       checked = {
-        -- icon = '✓',
         highlight = 'Comment',
         scope_highlight = 'Comment',
       },
@@ -19,26 +15,24 @@ return {
         -- NOTE: for obsidian.nvim
         failed = {
           raw = '[~]',
-          rendered = '󰰱 ',
-          -- rendered = '⊝',
+          rendered = '󰅙 ', -- nf-md-close_circle
           scope_highlight = 'Comment',
           highlight = 'Error',
         },
         in_progress = {
           raw = '[>]',
-          rendered = ' ',
-          -- rendered = '◐',
-          highlight = 'WinBarDiffChanged',
+          rendered = '󰬪 ', -- nf-md-chevron_right_circle
+          highlight = 'WinBarDiffAdded',
         },
         in_question = {
           raw = '[?]',
-          rendered = ' ',
+          rendered = '󰋗 ', -- nf-md-help_circle
           highlight = 'function',
+          scope_highlight = 'function',
         },
         important = {
           raw = '[!]',
-          rendered = ' ',
-          -- rendered = '◉',
+          rendered = '󰀨 ', -- nf-md-alert_circle
           highlight = 'WarningMsg',
           scope_highlight = 'WarningMsg',
         },
