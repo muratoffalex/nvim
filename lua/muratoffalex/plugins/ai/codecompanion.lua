@@ -70,6 +70,7 @@ return {
       adapters = {
         opts = {
           show_defaults = false,
+          show_model_choices = true,
         },
         openrouter = function()
           return require('codecompanion.adapters').extend('openai_compatible', {
@@ -77,26 +78,10 @@ return {
             env = {
               url = 'https://openrouter.ai/api',
               api_key = 'OPENROUTER_API_KEY',
-              chat_url = '/v1/chat/completions',
             },
             schema = {
               model = {
                 default = 'deepseek/deepseek-chat-v3-0324',
-              },
-            },
-          })
-        end,
-        deepseek = function()
-          return require('codecompanion.adapters').extend('deepseek', {
-            schema = {
-              model = {
-                default = 'deepseek-chat',
-              },
-              temperature = {
-                default = 0.0,
-              },
-              top_p = {
-                default = nil,
               },
             },
           })
