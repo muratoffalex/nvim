@@ -1,6 +1,5 @@
 return {
   'stevearc/oil.nvim',
-  enabled = false,
   opts = {
     -- delete when fixed https://github.com/stevearc/oil.nvim/issues/483
     default_file_explorer = false,

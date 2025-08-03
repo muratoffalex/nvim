@@ -7,9 +7,10 @@ return {
     'nvim-lua/plenary.nvim',
     'echasnovski/mini.icons', -- not strictly required, but recommended
     'MunifTanjim/nui.nvim',
-    -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    'folke/snacks.nvim', -- image support
   },
-  lazy = true,
+  lazy = false,
+  event = 'VeryLazy',
   cmd = { 'Neotree' },
   keys = {
     { '<leader>e', '<cmd>Neotree toggle<cr>', desc = 'Neotree toggle' },
@@ -32,7 +33,9 @@ return {
           ['P'] = {
             'toggle_preview',
             config = {
-              use_float = false,
+              use_float = true,
+              title = 'Preview',
+              use_snacks_image = true,
             },
           },
         },
@@ -42,6 +45,8 @@ return {
           enabled = true,
           leave_dirs_open = false,
         },
+        hijack_netrw_behavior = 'open_current',
+        group_empty_dirs = true,
       },
       default_component_configs = {
         git_status = {
