@@ -5,6 +5,8 @@ local slash_default_opts = {
 }
 
 local main_adapter = 'openrouter'
+local default_model = 'deepseek/deepseek-chat-v3-0324'
+local inline_model = 'google/gemini-2.5-flash-lite'
 
 return {
   'olimorris/codecompanion.nvim',
@@ -81,7 +83,7 @@ return {
             },
             schema = {
               model = {
-                default = 'deepseek/deepseek-chat-v3-0324',
+                default = default_model,
               },
             },
           })
@@ -99,7 +101,10 @@ return {
           tools = tools,
         },
         inline = {
-          adapter = main_adapter,
+          adapter = {
+            name = main_adapter,
+            model = inline_model,
+          },
         },
         cmd = {
           adapter = main_adapter,
