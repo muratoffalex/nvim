@@ -5,7 +5,7 @@ return {
       conceallevel = { default = 0, rendered = 3 },
     },
     completions = { lsp = { enabled = true } },
-    file_types = { 'markdown', 'copilot-chat', 'codecompanion' },
+    file_types = { 'markdown', 'codecompanion' },
     checkbox = {
       checked = {
         highlight = 'Comment',

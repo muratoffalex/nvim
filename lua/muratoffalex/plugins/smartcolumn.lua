@@ -12,7 +12,6 @@ return {
       'dbui',
       'mason',
       'lazy',
-      'copilot-chat',
       'codecompanion',
       'mcphub',
       'snipe-menu',
