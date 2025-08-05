@@ -4,7 +4,6 @@ return {
     dependencies = {
       'rafamadriz/friendly-snippets',
       'xzbdmw/colorful-menu.nvim',
-      'Kaiser-Yang/blink-cmp-avante',
       'obsidian-nvim/obsidian.nvim'
     },
 
@@ -134,7 +133,6 @@ return {
           'buffer',
           'dadbod',
           'cmdline',
-          'avante',
           'codecompanion',
           'obsidian',
           'obsidian_new',
@@ -159,11 +157,6 @@ return {
             max_items = 10,
           },
           dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
-          -- obsidian = { name = 'Obsidian', module = 'obsidian.completion.sources.blink.refs' },
-          avante = {
-            module = 'blink-cmp-avante',
-            name = 'Avante',
-          },
         },
       },
     },

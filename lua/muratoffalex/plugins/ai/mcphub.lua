@@ -11,7 +11,6 @@ return {
   opts = {
     auto_approve = false,
     extensions = {
-      avante = {},
       codecompanion = {
         -- Show the mcp tool result in the chat buffer
         show_result_in_chat = true,

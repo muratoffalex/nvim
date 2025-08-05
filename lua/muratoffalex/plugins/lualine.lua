@@ -25,17 +25,6 @@ local mode = {
   end,
 }
 
-local function avante_provider_name()
-  return ' ' .. require('avante.config').provider
-end
-
-local function avante_model_name()
-  local Providers = require 'avante.providers'
-  local provider = require('avante.config').provider
-
-  return Providers[provider].model
-end
-
 return {
   'nvim-lualine/lualine.nvim',
   event = 'VeryLazy',
@@ -164,28 +153,6 @@ return {
         'mason',
         'symbols-outline',
         'quickfix',
-        {
-          filetypes = { 'AvanteInput' },
-          sections = {
-            lualine_a = { mode },
-            lualine_b = { avante_provider_name },
-            lualine_c = { avante_model_name },
-            lualine_x = { mcp },
-            lualine_y = { 'progress' },
-            lualine_z = { 'location' },
-          },
-        },
-        {
-          filetypes = { 'Avante', 'AvanteSelectedFiles' },
-          sections = {
-            lualine_a = { mode },
-            lualine_b = {},
-            lualine_c = {},
-            lualine_x = {},
-            lualine_y = { 'progress' },
-            lualine_z = { 'location' },
-          },
-        },
         {
           filetypes = { 'codecompanion' },
           sections = {
