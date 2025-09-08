@@ -1,5 +1,5 @@
 return {
-  'echasnovski/mini.surround',
+  'mini-nvim/mini.surround',
   version = false,
   opts = {
     mappings = {
