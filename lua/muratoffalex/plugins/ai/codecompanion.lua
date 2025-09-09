@@ -70,24 +70,26 @@ return {
         },
       },
       adapters = {
-        opts = {
-          show_defaults = false,
-          show_model_choices = true,
-        },
-        openrouter = function()
-          return require('codecompanion.adapters').extend('openai_compatible', {
-            name = 'openrouter',
-            env = {
-              url = 'https://openrouter.ai/api',
-              api_key = 'OPENROUTER_API_KEY',
-            },
-            schema = {
-              model = {
-                default = default_model,
+        http = {
+          opts = {
+            show_defaults = false,
+            show_model_choices = true,
+          },
+          openrouter = function()
+            return require('codecompanion.adapters').extend('openai_compatible', {
+              name = 'openrouter',
+              env = {
+                url = 'https://openrouter.ai/api',
+                api_key = 'OPENROUTER_API_KEY',
               },
-            },
-          })
-        end,
+              schema = {
+                model = {
+                  default = default_model,
+                },
+              },
+            })
+          end,
+        },
       },
       strategies = {
         chat = {
