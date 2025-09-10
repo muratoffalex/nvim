@@ -5,7 +5,7 @@ return {
   branch = 'v3.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'echasnovski/mini.icons', -- not strictly required, but recommended
+    'nvim-mini/mini.icons', -- not strictly required, but recommended
     'MunifTanjim/nui.nvim',
     'folke/snacks.nvim', -- image support
   },

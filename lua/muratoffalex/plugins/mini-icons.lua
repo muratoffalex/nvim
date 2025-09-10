@@ -1,6 +1,6 @@
 -- ref: https://github.com/LazyVim/LazyVim/blob/b574f01af7ab5eaccdef16db60c1fdd94e8ff12d/lua/lazyvim/plugins/ui.lua#L244
 return {
-  'mini-nvim/mini.icons',
+  'nvim-mini/mini.icons',
   lazy = true,
   opts = {
     file = {

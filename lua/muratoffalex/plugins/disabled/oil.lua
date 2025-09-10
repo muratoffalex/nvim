@@ -15,7 +15,7 @@ return {
       end,
     },
   },
-  dependencies = { 'echasnovski/mini.icons' },
+  dependencies = { 'nvim-mini/mini.icons' },
   config = function(_, opts)
     local oil = require 'oil'
     oil.setup(opts)

@@ -1,6 +1,6 @@
 return {
   'folke/trouble.nvim',
-  dependencies = { 'echasnovski/mini.icons' },
+  dependencies = { 'nvim-mini/mini.icons' },
   cmd = 'Trouble',
   keys = {
     { '<leader>tg', '<cmd>Trouble toggle<CR>', desc = 'Trouble toggle' },

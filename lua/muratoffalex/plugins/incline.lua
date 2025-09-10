@@ -3,7 +3,7 @@ return {
   enabled = true,
   event = 'VeryLazy',
   dependencies = {
-    'echasnovski/mini.icons',
+    'nvim-mini/mini.icons',
   },
   config = function()
     local devicons = require 'nvim-web-devicons'
