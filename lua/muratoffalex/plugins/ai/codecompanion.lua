@@ -5,7 +5,7 @@ local slash_default_opts = {
 }
 
 local main_adapter = 'openrouter'
-local default_model = 'deepseek/deepseek-v3.1-terminus'
+local default_model = 'deepseek/deepseek-v3.2-exp'
 local inline_model = 'google/gemini-2.5-flash-lite'
 
 return {
