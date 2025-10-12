@@ -89,6 +89,16 @@ return {
               },
             })
           end,
+          deepseek = function()
+            return require('codecompanion.adapters').extend('deepseek', {
+              name = 'deepseek',
+              schema = {
+                model = {
+                  default = "deepseek-reasoner",
+                },
+              },
+            })
+          end,
         },
       },
       strategies = {
