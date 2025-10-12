@@ -46,7 +46,6 @@ return {
           leave_dirs_open = false,
         },
         hijack_netrw_behavior = 'open_current',
-        group_empty_dirs = true,
       },
       default_component_configs = {
         git_status = {
