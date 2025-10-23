@@ -71,7 +71,13 @@ o.completeopt = 'menuone,noselect'
 o.wrap = false -- display long lines with wrap
 
 o.list = true
-o.listchars = { tab = '>-', trail = '·' }
+o.listchars = {
+    tab = '>-',
+    trail = '·',
+    nbsp = '␣',
+    extends = '›',
+    precedes = '‹',
+}
 
 -- Default indent size
 o.shiftwidth = 2
