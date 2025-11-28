@@ -11,6 +11,7 @@ local inline_model = 'google/gemini-2.5-flash-lite'
 return {
   'olimorris/codecompanion.nvim',
   event = 'VeryLazy',
+  version = 'v17.33.0',
   cmd = {
     'CodeCompanion',
     'CodeCompanionActions',
