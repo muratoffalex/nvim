@@ -15,4 +15,5 @@ return {
   CLANGD = 'clangd',
   KULALA_LS = 'kulala_ls',
   NIX_LS = 'nil_ls',
+  PROTOBUF_LS = 'protobuf-language-server',
 }

@@ -249,6 +249,12 @@ M.lsp_servers = {
       },
     },
   },
+  [LSP.PROTOBUF_LS] = {
+    config = {
+      filetypes = { 'proto', 'cpp' },
+      cmd = { 'protobuf-language-server' },
+    },
+  }
 }
 
 ---@return table<string, LspServerConfig>
