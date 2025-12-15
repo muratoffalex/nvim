@@ -5,13 +5,12 @@ local slash_default_opts = {
 }
 
 local main_adapter = 'openrouter'
-local default_model = 'deepseek/deepseek-v3.2-exp'
+local default_model = 'deepseek/deepseek-v3.2'
 local inline_model = 'google/gemini-2.5-flash-lite'
 
 return {
   'olimorris/codecompanion.nvim',
   event = 'VeryLazy',
-  version = 'v17.33.0',
   cmd = {
     'CodeCompanion',
     'CodeCompanionActions',
@@ -83,6 +82,9 @@ return {
                 url = 'https://openrouter.ai/api',
                 api_key = 'OPENROUTER_API_KEY',
               },
+              opts = {
+                stream = false,
+              },
               schema = {
                 model = {
                   default = default_model,
@@ -93,16 +95,19 @@ return {
           deepseek = function()
             return require('codecompanion.adapters').extend('deepseek', {
               name = 'deepseek',
+              opts = {
+                stream = false,
+              },
               schema = {
                 model = {
-                  default = "deepseek-reasoner",
+                  default = 'deepseek-reasoner',
                 },
               },
             })
           end,
         },
       },
-      strategies = {
+      interactions = {
         chat = {
           slash_commands = {
             ['file'] = slash_default_opts,
@@ -126,7 +131,7 @@ return {
       prompt_library = {
         -- https://github.com/olimorris/codecompanion.nvim/blob/main/doc/RECIPES.md
         ['Code review'] = {
-          strategy = 'chat',
+          interaction = 'chat',
           description = 'Code review',
           prompts = {
             {
