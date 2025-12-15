@@ -61,7 +61,7 @@ function M.create_progress_message(request)
     client_id = 'client ' .. id,
     client = ' ' .. M.llm_role_title(request.data.adapter),
     id = id,
-    title = 'Awaiting response (' .. request.data.strategy .. ')',
+    title = 'Awaiting response (' .. request.data.interaction .. ')',
   }
   return msg
 end
