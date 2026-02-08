@@ -7,6 +7,7 @@ local slash_default_opts = {
 local main_adapter = 'openrouter'
 local default_model = 'deepseek/deepseek-v3.2'
 local inline_model = 'google/gemini-2.5-flash-lite'
+local streaming = true
 
 return {
   'olimorris/codecompanion.nvim',
@@ -83,7 +84,7 @@ return {
                 api_key = 'OPENROUTER_API_KEY',
               },
               opts = {
-                stream = false,
+                stream = streaming,
               },
               schema = {
                 model = {
@@ -96,7 +97,7 @@ return {
             return require('codecompanion.adapters').extend('deepseek', {
               name = 'deepseek',
               opts = {
-                stream = false,
+                stream = streaming,
               },
               schema = {
                 model = {
@@ -187,7 +188,7 @@ Format findings as markdown and with:
             },
             {
               role = 'user',
-              content = 'Please review provided code.\n' .. '#buffer #lsp',
+              content = 'Please review provided code.\n' .. '#{buffer} #{lsp}',
             },
           },
         },

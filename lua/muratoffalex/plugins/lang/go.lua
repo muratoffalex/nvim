@@ -43,10 +43,13 @@ return {
 
       keymap('lgr', '<cmd>GoRun<cr>', 'Run')
       keymap('lgd', '<cmd>GoDebug<cr>', 'Debug')
+      keymap('lgl', '<cmd>GoLint<cr>', 'Run linter')
       keymap('lga', '<cmd>GoAlt!<cr>', 'Open test/file')
       keymap('lgA', '<cmd>GoAltV!<cr>', 'Open test/file in vsplit')
-      keymap('lgt', '<cmd>GoTest<cr>', 'Run tests')
-      keymap('lgT', ':GoTest', 'Run tests with args')
+      keymap('lgta', '<cmd>GoTest<cr>', 'Run all tests')
+      keymap('lgtf', '<cmd>GoTestFile<cr>', 'Run file tests')
+      keymap('lgtp', '<cmd>GoTestPkg<cr>', 'Run package tests')
+      keymap('lgtF', '<cmd>GoTestFunc<cr>', 'Run func tests')
       keymap('lgT', '<cmd>GoBreakToggle<cr>', 'Toggle breakpoint')
 
       local format_sync_grp = vim.api.nvim_create_augroup('goimports', {})
