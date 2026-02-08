@@ -15,6 +15,9 @@ return {
       enabled = true,
     },
   },
+  keys = {
+    { 'lr', '<cmd>LspRestart<cr>', desc = 'Restart LSP servers' },
+  },
   config = function()
     local config = require 'muratoffalex.plugins.lsp.config'
 
