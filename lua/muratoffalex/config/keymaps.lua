@@ -45,6 +45,9 @@ map.set('n', 'dd', function()
   return 'dd'
 end, { expr = true, desc = 'Only yank text with dd from non-empty lines' })
 
+map.set('n', '<leader>cc', '<cmd>cclose<cr>', { desc = "Close quickfix list" })
+map.set('n', '<leader>co', '<cmd>copen<cr>', { desc = "Open quickfix list" })
+
 -- Move lines
 map.set('n', '<S-Up>', '<cmd>m-2<cr>', { desc = 'Move line up' })
 map.set('n', '<S-Down>', '<cmd>m+<cr>', { desc = 'Move line down' })

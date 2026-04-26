@@ -5,6 +5,11 @@ return {
       'ray-x/guihua.lua',
       'neovim/nvim-lspconfig',
       'nvim-treesitter/nvim-treesitter',
+      {
+        'syz51/go-mod.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        config = true,
+      },
     },
     ft = { 'go', 'gomod' },
     opts = {

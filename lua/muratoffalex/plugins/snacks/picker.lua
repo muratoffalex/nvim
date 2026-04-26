@@ -41,6 +41,7 @@ return {
     { "<leader>fo", function() Snacks.picker.recent() end, desc = "Recently opened" },
     { "<leader>fr", function() Snacks.picker.resume() end, desc = "Resume" },
     { "<leader>fw", function() Snacks.picker.grep() end, desc = "Grep" },
+    { "<leader>fa", function() Snacks.picker.grep({hidden = true, ignored = true}) end, desc = "Grep, include hidden and ignored" },
     { "<leader>fW", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
     -- git
     { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },

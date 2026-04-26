@@ -94,7 +94,7 @@ return {
     local function codecompanion_adapter_name()
       local chat = codecompanion.buf_get_chat(vim.api.nvim_get_current_buf())
       if not chat then
-        return nil
+        return ""
       end
 
       return ' ' .. chat.adapter.name
@@ -103,10 +103,14 @@ return {
     local function codecompanion_current_model_name()
       local chat = codecompanion.buf_get_chat(vim.api.nvim_get_current_buf())
       if not chat then
-        return nil
+        return ""
       end
 
-      return chat.settings.model
+      if chat.adapter.type == 'acp' then
+        return chat.adapter.model or ""
+      end
+
+      return chat.settings.model or ""
     end
 
     require('lualine').setup {

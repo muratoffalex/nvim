@@ -34,6 +34,16 @@ return {
         WinBarDiffAdded = { fg = theme.vcs.added },
         WinBarDiffRemoved = { fg = theme.vcs.removed },
         WinBarDiffChanged = { fg = theme.vcs.changed },
+
+        OilGitAdded = { fg = theme.vcs.added },
+        OilGitModifiedStaged = { fg = theme.syn.string },
+        OilGitModifiedUnstaged = { fg = theme.syn.identifier },
+        OilGitRenamed = { fg = theme.syn.number },
+        OilGitDeleted = { fg = theme.vcs.removed },
+        OilGitCopied = { fg = theme.syn.number },
+        OilGitConflict = { fg = theme.syn.special2 },
+        OilGitUntracked = { fg = theme.syn.special1 },
+        OilGitIgnored = { fg = theme.syn.comment },
       }
     end,
   },

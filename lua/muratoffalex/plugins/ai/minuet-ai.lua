@@ -10,7 +10,7 @@ return {
         openai_compatible = {
           api_key = 'OPENROUTER_API_KEY',
           end_point = 'https://openrouter.ai/api/v1/chat/completions',
-          model = 'google/gemini-2.5-flash-lite',
+          model = 'openai/gpt-5.4-nano',
           name = 'Openrouter',
           optional = {
             provider = {

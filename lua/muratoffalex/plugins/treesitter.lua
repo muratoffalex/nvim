@@ -2,37 +2,58 @@ return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
-    'nvim-treesitter/nvim-treesitter-textobjects',
+    {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      branch = 'main',
+    },
     'windwp/nvim-ts-autotag',
     'gbprod/php-enhanced-treesitter.nvim',
   },
   event = { 'BufReadPre', 'BufWritePost', 'BufNewFile' },
   build = ':TSUpdate',
+  branch = 'main',
+  init = function()
+    local ensureInstalled = {
+      'go',
+      'lua',
+      'python',
+      'rust',
+      'vue',
+      'tsx',
+      'javascript',
+      'typescript',
+      'vimdoc',
+      'vim',
+      'bash',
+      'php',
+      'html',
+      'css',
+      'markdown',
+      'markdown_inline',
+      'regex',
+    }
+    local alreadyInstalled = require('nvim-treesitter.config').get_installed()
+    local parsersToInstall = vim
+      .iter(ensureInstalled)
+      :filter(function(parser)
+        return not vim.tbl_contains(alreadyInstalled, parser)
+      end)
+      :totable()
+    require('nvim-treesitter').install(parsersToInstall)
+
+    vim.api.nvim_create_autocmd('FileType', {
+      callback = function()
+        -- Enable treesitter highlighting and disable regex syntax
+        pcall(vim.treesitter.start)
+        -- Enable treesitter-based indentation
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
+    })
+  end,
   config = function()
     -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
     vim.defer_fn(function()
-      require('nvim-treesitter.configs').setup {
-        -- Add languages to be installed here that you want installed for treesitter
-        ensure_installed = {
-          'go',
-          'lua',
-          'python',
-          'rust',
-          'vue',
-          'tsx',
-          'javascript',
-          'typescript',
-          'vimdoc',
-          'vim',
-          'bash',
-          'php',
-          'html',
-          'css',
-          'markdown',
-          'markdown_inline',
-          'regex',
-        },
-
+      require('nvim-treesitter').setup {
         -- Autoinstall languages that are not installed. Defaults to false
         auto_install = true,
         modules = {},
@@ -65,24 +86,6 @@ return {
         },
 
         textobjects = {
-          select = {
-            enable = false,
-            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ['aa'] = '@parameter.outer',
-              ['ia'] = '@parameter.inner',
-              ['af'] = '@function.outer',
-              ['if'] = '@function.inner',
-              ['ac'] = '@class.outer',
-              ['ic'] = '@class.inner',
-              ['ii'] = '@conditional.inner',
-              ['ai'] = '@conditional.outer',
-              ['il'] = '@loop.inner',
-              ['al'] = '@loop.outer',
-              ['at'] = '@comment.outer',
-            },
-          },
           move = {
             enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist

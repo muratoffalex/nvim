@@ -13,7 +13,7 @@ return {
   event = 'VeryLazy',
   cmd = { 'Neotree' },
   keys = {
-    { '<leader>e', '<cmd>Neotree toggle<cr>', desc = 'Neotree toggle' },
+    { '<leader>E', '<cmd>Neotree toggle<cr>', desc = 'Neotree toggle' },
   },
   opts = function(_, opts)
     -- Snacks rename

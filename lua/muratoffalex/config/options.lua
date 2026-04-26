@@ -5,6 +5,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = vim.api.nvim_replace_termcodes('<BS>', false, false, true)
 vim.g.startup_message = false
 
+vim.deprecate = function() end 
+
 local o = vim.opt
 
 local config = require 'muratoffalex.config'
@@ -88,3 +90,5 @@ o.autoindent = true
 
 o.termguicolors = true
 o.smoothscroll = true
+
+o.inccommand = "split"

@@ -7,13 +7,13 @@ return {
       autocmd = { enabled = true },
       sign = { enabled = false },
       float = { enabled = false },
-      virtual_text = { enabled = false },
+      virtual_text = { enabled = true },
       status_text = { enabled = false },
       number = {
-        enabled = true,
+        enabled = false,
         -- Highlight group to highlight the number column if there is a lightbulb.
-        hl = "LightBulbNumber",
-    },
+        hl = 'LightBulbNumber',
+      },
     }
   end,
 }

@@ -5,7 +5,7 @@ local slash_default_opts = {
 }
 
 local main_adapter = 'openrouter'
-local default_model = 'deepseek/deepseek-v3.2'
+local default_model = 'deepseek/deepseek-v4-flash'
 local inline_model = 'google/gemini-2.5-flash-lite'
 local streaming = true
 
@@ -56,11 +56,18 @@ return {
           enabled = true,
           opts = {
             picker = 'snacks',
+            title_generation_opts = {
+              adapter = main_adapter,
+              model = inline_model,
+            },
           },
         },
       },
       opts = {
         language = 'Russian',
+      },
+      title_generation_opts = {
+        adapter = main_adapter,
       },
       display = {
         chat = {
@@ -71,9 +78,35 @@ return {
         },
       },
       adapters = {
+        acp = {
+          opts = {
+            show_presets = false,
+          },
+          claude_code = function()
+            return require('codecompanion.adapters').extend('claude_code', {
+              opts = {
+                stream = streaming,
+              },
+            })
+          end,
+          kimi_cli = function()
+            return require('codecompanion.adapters').extend('kimi_cli', {
+              opts = {
+                stream = streaming,
+              },
+            })
+          end,
+          opencode = function()
+            return require('codecompanion.adapters').extend('opencode', {
+              opts = {
+                stream = streaming,
+              },
+            })
+          end,
+        },
         http = {
           opts = {
-            show_defaults = false,
+            show_presets = false,
             show_model_choices = true,
           },
           openrouter = function()

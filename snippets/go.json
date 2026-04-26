@@ -6,5 +6,21 @@
       "\t${2:body}",
       "}"
     ]
+  },
+  "Err handling": {
+    "prefix": "ife",
+    "body": [
+      "if err != nil {",
+      "\treturn err",
+      "}"
+    ]
+  },
+  "Err handling nil err": {
+    "prefix": "iferrnil",
+    "body": [
+      "if err != nil {",
+      "\treturn nil, err",
+      "}"
+    ]
   }
 }
