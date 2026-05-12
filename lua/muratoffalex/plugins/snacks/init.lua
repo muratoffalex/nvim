@@ -8,7 +8,6 @@ return {
     lazy = false,
     keys = {
       { 'gb', function() Snacks.gitbrowse() end, desc = 'Git browse', mode = { 'n', 'v' } },
-      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
       { '<leader>nh', function() Snacks.notifier.show_history() end, desc = 'Show notifications history' },
       { '<leader>mm', function ()
         Snacks.zen.zoom()

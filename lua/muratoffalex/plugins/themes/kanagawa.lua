@@ -44,6 +44,11 @@ return {
         OilGitConflict = { fg = theme.syn.special2 },
         OilGitUntracked = { fg = theme.syn.special1 },
         OilGitIgnored = { fg = theme.syn.comment },
+
+        -- for cmdline commands
+        -- Problem: commands I enter in uppercase have a red color, which is confusing.
+        -- Solution: change the color to blue.
+        ['@function.macro.vim'] = { fg = theme.syn.fun },
       }
     end,
   },

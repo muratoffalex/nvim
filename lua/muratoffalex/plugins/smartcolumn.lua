@@ -13,7 +13,6 @@ return {
       'mason',
       'lazy',
       'codecompanion',
-      'mcphub',
       'snipe-menu',
       'markdown'
     },

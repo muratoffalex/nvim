@@ -11,7 +11,7 @@ return {
     filetypes = { 'go', 'php', 'lua', 'js', 'sh', 'ts' },
     filetype_details = {
       go = {
-        requireDir = true,
+        subdir = true,
         filename = 'main.go',
         content = { 'package main', '', 'func main() {', '  ', '}' },
         cursor = {

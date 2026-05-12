@@ -11,6 +11,9 @@ return {
     cmdline = {
       enabled = true,
       view = 'cmdline',
+      format = {
+        cmdline = { lang = "vim" },
+      },
     },
     lsp = {
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**

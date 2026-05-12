@@ -1,74 +1,73 @@
 return {
   {
     'saghen/blink.cmp',
+    event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = {
       'rafamadriz/friendly-snippets',
       'xzbdmw/colorful-menu.nvim',
-      'obsidian-nvim/obsidian.nvim'
+      'obsidian-nvim/obsidian.nvim',
     },
-
-    -- use a release tag to download pre-built binaries
     version = '*',
-    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
-    -- If you use nix, you can build from source using latest nightly rust with:
-    -- build = 'nix run .#build-plugin',
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      snippets = {
+        preset = 'default',
+      },
+
       keymap = {
         preset = 'enter',
         ['<C-r>'] = { 'show', 'fallback' },
-        ['<C-y>'] = { 'select_and_accept' },
+        ['<C-g>'] = { 'select_and_accept' },
         ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
-        ['<A-1>'] = {
+        ['<F1>'] = {
           function(cmp)
             cmp.accept { index = 1 }
           end,
         },
-        ['<A-2>'] = {
+        ['<F2>'] = {
           function(cmp)
             cmp.accept { index = 2 }
           end,
         },
-        ['<A-3>'] = {
+        ['<F3>'] = {
           function(cmp)
             cmp.accept { index = 3 }
           end,
         },
-        ['<A-4>'] = {
+        ['<F4>'] = {
           function(cmp)
             cmp.accept { index = 4 }
           end,
         },
-        ['<A-5>'] = {
+        ['<F5>'] = {
           function(cmp)
             cmp.accept { index = 5 }
           end,
         },
-        ['<A-6>'] = {
+        ['<F6>'] = {
           function(cmp)
             cmp.accept { index = 6 }
           end,
         },
-        ['<A-7>'] = {
+        ['<F7>'] = {
           function(cmp)
             cmp.accept { index = 7 }
           end,
         },
-        ['<A-8>'] = {
+        ['<F8>'] = {
           function(cmp)
             cmp.accept { index = 8 }
           end,
         },
-        ['<A-9>'] = {
+        ['<F9>'] = {
           function(cmp)
             cmp.accept { index = 9 }
           end,
         },
-        ['<A-0>'] = {
+        ['<F10>'] = {
           function(cmp)
             cmp.accept { index = 10 }
           end,
@@ -76,26 +75,34 @@ return {
       },
 
       appearance = {
-        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-        -- Useful for when your theme doesn't support blink.cmp
-        -- Will be removed in a future release
         use_nvim_cmp_as_default = false,
         -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
         -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = 'normal',
       },
 
-      completion = {
-        list = {
-          selection = {
-            preselect = function(ctx)
-              return ctx.mode ~= 'cmdline'
-            end,
-            auto_insert = function(ctx)
-              return ctx.mode == 'cmdline'
-            end,
-          },
+      cmdline = {
+        enabled = true,
+        keymap = {
+          preset = 'cmdline',
+          ['<Right>'] = false,
+          ['<Left>'] = false,
         },
+        completion = {
+          list = { selection = { preselect = false } },
+          menu = {
+            auto_show = function(_)
+              return vim.fn.getcmdtype() == ':'
+            end,
+            draw = {
+              columns = { { 'kind_icon' }, { 'label', gap = 1 } },
+            },
+          },
+          ghost_text = { enabled = true },
+        },
+      },
+
+      completion = {
         accept = {
           auto_brackets = {
             enabled = true,
@@ -104,9 +111,19 @@ return {
         menu = {
           draw = {
             -- We don't need label_description now because label and label_description are already
-            -- conbined together in label by colorful-menu.nvim.
-            columns = { { 'kind_icon' }, { 'label', gap = 1 } },
+            -- combined together in label by colorful-menu.nvim.
+            columns = { { 'item_idx' }, { 'kind_icon' }, { 'label', gap = 1 } },
             components = {
+              item_idx = {
+                text = function(ctx)
+                  if ctx.idx <= 10 then
+                    return tostring(ctx.idx)
+                  end
+
+                  return '  '
+                end,
+                highlight = 'Comment',
+              },
               label = {
                 text = require('colorful-menu').blink_components_text,
                 highlight = require('colorful-menu').blink_components_highlight,
@@ -134,9 +151,6 @@ return {
           'dadbod',
           'cmdline',
           'codecompanion',
-          'obsidian',
-          'obsidian_new',
-          'obsidian_tags',
         },
         providers = {
           lsp = {
@@ -154,6 +168,7 @@ return {
             max_items = 5,
           },
           cmdline = {
+            min_keyword_length = 2,
             max_items = 10,
           },
           dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
@@ -162,6 +177,14 @@ return {
     },
     signature = { enabled = true },
     opts_extend = { 'sources.default' },
+  },
+  {
+    'saghen/blink.cmp',
+    opts = function(_, opts)
+      local conf = require 'muratoffalex.config'
+      opts.appearance = opts.appearance or {}
+      opts.appearance.kind_icons = vim.tbl_extend('force', opts.appearance.kind_icons or {}, conf.icons.kinds)
+    end,
   },
   {
     'saghen/blink.cmp',

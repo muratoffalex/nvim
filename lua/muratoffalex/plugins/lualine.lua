@@ -29,7 +29,6 @@ return {
   'nvim-lualine/lualine.nvim',
   event = 'VeryLazy',
   dependencies = {
-    'AndreM222/copilot-lualine',
     'bwpge/lualine-pretty-path',
   },
   config = function()
@@ -47,32 +46,6 @@ return {
       return utils.dump(clients_list, '·')
     end
 
-    local copilot = {
-      'copilot',
-      symbols = {
-        status = {
-          icons = {
-            enabled = ' ',
-            sleep = ' ',
-            disabled = ' ',
-            warning = ' ',
-            unknown = ' ',
-          },
-          hl = {
-            enabled = '#AEB7D0',
-            sleep = '#41BC9C',
-            disabled = '#6272A4',
-            warning = '#FFB86C',
-            unknown = '#FF5555',
-          },
-        },
-        spinners = require('copilot-lualine.spinners').dots,
-        spinner_color = '#6272A4',
-      },
-      show_colors = true,
-      show_loading = true,
-    }
-
     local function isRecording()
       local reg = vim.fn.reg_recording()
       if reg == '' then
@@ -88,13 +61,12 @@ return {
       return tostring(lines) .. 'L:' .. tostring(fn.wordcount().visual_chars) .. 'C'
     end
 
-    local mcp = require 'muratoffalex.plugins.extensions.lualine.mcphub-status'
     local codecompanion = require 'codecompanion'
 
     local function codecompanion_adapter_name()
       local chat = codecompanion.buf_get_chat(vim.api.nvim_get_current_buf())
       if not chat then
-        return ""
+        return ''
       end
 
       return ' ' .. chat.adapter.name
@@ -103,14 +75,14 @@ return {
     local function codecompanion_current_model_name()
       local chat = codecompanion.buf_get_chat(vim.api.nvim_get_current_buf())
       if not chat then
-        return ""
+        return ''
       end
 
       if chat.adapter.type == 'acp' then
-        return chat.adapter.model or ""
+        return chat.adapter.model or ''
       end
 
-      return chat.settings.model or ""
+      return chat.settings.model or ''
     end
 
     require('lualine').setup {
@@ -129,8 +101,19 @@ return {
           'pretty_path',
         },
         lualine_x = {
+          {
+            function()
+              return require('noice').api.status.command.get()
+            end,
+            cond = function()
+              return package.loaded['noice'] and require('noice').api.status.command.has()
+            end,
+            color = function()
+              return { fg = Snacks.util.color 'Statement' }
+            end,
+          },
           isRecording,
-          -- copilot,
+          require('wtf').get_status,
           {
             lsp_clients,
             cond = function()
@@ -163,7 +146,7 @@ return {
             lualine_a = { mode },
             lualine_b = { codecompanion_adapter_name },
             lualine_c = { codecompanion_current_model_name },
-            lualine_x = { mcp },
+            lualine_x = {},
             lualine_y = { 'progress' },
             lualine_z = { 'location' },
           },
